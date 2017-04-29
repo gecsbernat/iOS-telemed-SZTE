@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zIi-VH-dPb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zIi-VH-dPb">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -26,7 +27,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1391.2" y="607.64617691154433"/>
+            <point key="canvasLocation" x="2330.4000000000001" y="607.64617691154433"/>
         </scene>
         <!--Gyógyszerek-->
         <scene sceneID="eBT-me-8kB">
@@ -49,7 +50,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WEp-kH-Xny" id="7Jl-rb-JgZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -64,12 +65,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QDc-Qd-wYx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-31" y="608"/>
+            <point key="canvasLocation" x="908" y="607.64617691154433"/>
         </scene>
         <!--Napló-->
         <scene sceneID="Z2T-nJ-ohs">
             <objects>
-                <viewController id="oAM-Kj-ZA8" sceneMemberID="viewController">
+                <viewController id="oAM-Kj-ZA8" customClass="NaploViewController" customModule="ios_telemed" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cKz-y6-tQX"/>
                         <viewControllerLayoutGuide type="bottom" id="NTR-yh-B4c"/>
@@ -77,13 +78,73 @@
                     <view key="view" contentMode="scaleToFill" id="fu9-Tt-Vn0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k8Z-fM-IRg">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="naploTableCell" textLabel="TYw-oz-KzC" detailTextLabel="aZA-Xk-UiV" style="IBUITableViewCellStyleSubtitle" id="CUg-Jw-FhI">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CUg-Jw-FhI" id="GKG-S6-mpZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TYw-oz-KzC">
+                                                    <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aZA-Xk-UiV">
+                                                    <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Napló" id="jS5-VJ-tvI"/>
+                    <navigationItem key="navigationItem" title="Napló" id="pqH-wg-q7a">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="K4K-7O-tuG">
+                                <connections>
+                                    <segue destination="Ype-rM-poy" kind="show" id="Gk1-uX-IxT"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="action" id="nUj-fm-GRe"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RGy-o1-ko8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1863" y="573"/>
+            <point key="canvasLocation" x="-924" y="572.56371814092961"/>
+        </scene>
+        <!--Új napló-->
+        <scene sceneID="C77-ym-ham">
+            <objects>
+                <viewController title="Új napló" id="Ype-rM-poy" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uBl-wj-7RR"/>
+                        <viewControllerLayoutGuide type="bottom" id="qVh-Mq-FpG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fyl-Ou-qeq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CsH-Ho-uWS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-922" y="1324"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="W9T-hG-JNA">
@@ -95,7 +156,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="oAM-Kj-ZA8" kind="relationship" relationship="viewControllers" id="siO-Ap-Wdg"/>
+                        <segue destination="cTL-Y5-Vrr" kind="relationship" relationship="viewControllers" id="siO-Ap-Wdg"/>
                         <segue destination="qRj-OH-Rst" kind="relationship" relationship="viewControllers" id="vbI-UI-7ao"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="Mwm-ze-idv"/>
                     </connections>
@@ -121,7 +182,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tGM-8c-8ei" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-806" y="608"/>
+            <point key="canvasLocation" x="132" y="607.64617691154433"/>
+        </scene>
+        <!--Napló-->
+        <scene sceneID="06d-Zw-vTa">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cTL-Y5-Vrr" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Napló" id="jS5-VJ-tvI"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="X3e-Ng-4Uh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="oAM-Kj-ZA8" kind="relationship" relationship="rootViewController" id="84c-aW-hKq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cJf-1F-0af" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1863.2" y="572.56371814092961"/>
         </scene>
     </scenes>
 </document>
