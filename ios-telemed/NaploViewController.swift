@@ -39,7 +39,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         let cell = naploTable.dequeueReusableCell(withIdentifier: "naploTableCell")
         let bejegyzes = naplo[indexPath.row]
         cell?.textLabel?.text = bejegyzes.event
-        cell?.detailTextLabel?.text = "Dátum: \(String(describing: bejegyzes.date!))  diammHg: \(bejegyzes.dia)  sysmmHg: \(bejegyzes.sys) \n"
+        cell?.detailTextLabel?.text = "Dátum: \(String(describing: bejegyzes.date!))  DIA.mmHg: \(bejegyzes.dia)  SYS.mmHg: \(bejegyzes.sys) \n"
         return cell!
     }
     
