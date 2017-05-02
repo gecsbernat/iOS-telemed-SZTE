@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="GyogyszerEntity" representedClassName="GyogyszerEntity" syncable="YES" codeGenerationType="class">
         <attribute name="mennyiseg" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="mennyisegTipus" optional="YES" attributeType="String" syncable="YES"/>
@@ -7,10 +7,15 @@
         <attribute name="nev" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="IdopontEntity" representedClassName="IdopontEntity" syncable="YES" codeGenerationType="class"/>
-    <entity name="NaploEntity" representedClassName="NaploEntity" syncable="YES" codeGenerationType="class"/>
+    <entity name="NaploEntity" representedClassName="NaploEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="dia" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="event" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sys" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="GyogyszerEntity" positionX="-63" positionY="-18" width="128" height="30"/>
-        <element name="IdopontEntity" positionX="-54" positionY="-9" width="128" height="30"/>
-        <element name="NaploEntity" positionX="-45" positionY="0" width="128" height="30"/>
+        <element name="GyogyszerEntity" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="IdopontEntity" positionX="-54" positionY="-9" width="128" height="45"/>
+        <element name="NaploEntity" positionX="-54" positionY="-18" width="128" height="105"/>
     </elements>
 </model>

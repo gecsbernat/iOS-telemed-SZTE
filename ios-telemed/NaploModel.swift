@@ -7,7 +7,8 @@
 //
 
 import Foundation
+import CoreData
 
 class Naplo {
-    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 }
