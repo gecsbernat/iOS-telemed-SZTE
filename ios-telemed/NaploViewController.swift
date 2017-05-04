@@ -12,6 +12,7 @@ import CoreData
 class NaploViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var naploTable: UITableView!
+    @IBOutlet weak var atlagText: UILabel!
 
     var naplo : [NaploEntity] = [] //ebben taroljuk a coredata adatot
     
@@ -25,6 +26,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     //betoltes
     override func viewWillAppear(_ animated: Bool) {
         getData()
+        atlag()
         naploTable.reloadData()
     }
     
@@ -35,11 +37,21 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     //cella beallitasa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       // let cell = UITableViewCell()
         let cell = naploTable.dequeueReusableCell(withIdentifier: "naploTableCell")
         let bejegyzes = naplo[indexPath.row]
+        var datum = String(describing: bejegyzes.date!)
+        let index = datum.index(datum.startIndex, offsetBy: 19)
+        datum = datum.substring(to: index)
+        let SYS = bejegyzes.sys
+        let DIA = bejegyzes.dia
         cell?.textLabel?.text = bejegyzes.event
-        cell?.detailTextLabel?.text = "Dátum: \(String(describing: bejegyzes.date!))  DIA.mmHg: \(bejegyzes.dia)  SYS.mmHg: \(bejegyzes.sys) \n"
+        
+        if(SYS != 0.0 && DIA != 0.0){
+            cell?.detailTextLabel?.text = "Dátum: \(datum), SYS.mmHg: \(SYS), DIA.mmHg: \(DIA)"
+        }else{
+            cell?.detailTextLabel?.text = "Dátum: \(datum)"
+        }
+        
         return cell!
     }
     
@@ -60,6 +72,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
                 print("error")
             }
         }
+        atlag()
         naploTable.reloadData()
     }
     
@@ -72,6 +85,29 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         catch{
             print("error")
         }
+    }
+    
+    //atlagertekek szamitasa
+    func atlag(){
+        var atlagDIA = 0.0
+        var atlagSYS = 0.0
+        var atlagPul = 0.0
+        var cnt = 0.0
+        var db = 0
+        
+        for ertek in naplo {
+            if(ertek.value(forKey: "dia")as! Double != 0.0 && ertek.value(forKey: "sys") as! Double != 0.0){
+                atlagDIA += ertek.value(forKey: "dia") as! Double
+                atlagSYS += ertek.value(forKey: "sys") as! Double
+                cnt += 1.0
+            }
+        }
+        
+        atlagDIA = (cnt != 0) ? atlagDIA / cnt : 0.0
+        atlagSYS = (cnt != 0) ? atlagSYS / cnt : 0.0
+        atlagPul = atlagSYS - atlagDIA
+        db = Int(cnt)
+        atlagText.text = String("Átlagértékek \(db) db minta alapján: SYS:\(atlagSYS.rounded()), DIA:\(atlagDIA.rounded()), pulzusnyomás:\(atlagPul.rounded())")
     }
     
     override func didReceiveMemoryWarning() {

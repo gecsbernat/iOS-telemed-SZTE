@@ -14,6 +14,7 @@ class UjBejegyzesViewController: UIViewController {
     @IBOutlet weak var dateTextField: UITextField! //date text
     @IBOutlet weak var diaText: UITextField! //dia text
     @IBOutlet weak var sysText: UITextField! //sys text
+    var date = NSDate() //date valtozo
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,35 +37,38 @@ class UjBejegyzesViewController: UIViewController {
         dateFormatter.dateStyle = DateFormatter.Style.medium
         dateFormatter.timeStyle = DateFormatter.Style.medium
         dateTextField.text = dateFormatter.string(from: sender.date)
-        
-    }
-    //«« datepicker eddig tart
+        date = sender.date as NSDate
+    }//«« datepicker eddig tart
     
     //adatok mentese core data-ba
     @IBAction func addEvent(_ sender: UIButton) {
         
-        //if(!eventText.text!.isEmpty){
-        //    print("asd")
-      //  }
-       
-        //print("\(String(describing: dateTextField.text!))") //debug
-        
-        //let dateFormatter = DateFormatter()
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let naplo = NaploEntity(context: context)
-        
-        naplo.event = eventText.text ?? "Ismeretlen"
-        
-        //ezek nem mukodnek?????
-        //let date = dateTextField.text!
-        //naplo.date = dateFormatter.date(from: date)! as NSDate
-        
-        naplo.date = NSDate()
-        naplo.dia = Double(diaText.text!) ?? 0.0
-        naplo.sys = Double(sysText.text!) ?? 0.0
-        
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        navigationController?.popViewController(animated: true)
+        if(eventText.text!.isEmpty){
+            let alert = UIAlertController(title: "Hiba!", message: "Üres az esemény mező.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }else if(diaText.text!.isEmpty){
+            let alert = UIAlertController(title: "Hiba!", message: "Üres a DIA.mmHG mező.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }else if(sysText.text!.isEmpty){
+            let alert = UIAlertController(title: "Hiba!", message: "Üres a SYS.mmHg mező.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }else{
+            
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let naplo = NaploEntity(context: context)
+            
+            naplo.event = eventText.text ?? "Ismeretlen"
+            naplo.date = date
+            naplo.dia = Double(diaText.text!) ?? 0.0
+            naplo.sys = Double(sysText.text!) ?? 0.0
+            
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            navigationController?.popViewController(animated: true)
+        }
+
     }
 
 }
