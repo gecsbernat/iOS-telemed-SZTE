@@ -98,14 +98,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TYw-oz-KzC">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TYw-oz-KzC">
                                                     <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aZA-Xk-UiV">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="clip" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aZA-Xk-UiV">
                                                     <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -175,73 +175,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Esemény megnevezése" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jaz-pZ-Msh">
-                                <rect key="frame" x="16" y="105" width="343" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="hYG-hu-jHc"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Dátum" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VEv-Z9-JR3">
-                                <rect key="frame" x="16" y="143" width="343" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="y5v-v5-tM5"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                                <connections>
-                                    <action selector="datePicker:" destination="Ype-rM-poy" eventType="editingDidEnd" id="tvd-RO-Caq"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="SYS.mmHg" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Io0-8O-ebL">
-                                <rect key="frame" x="16" y="181" width="343" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="KU4-EO-CER"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKY-q5-XgF">
-                                <rect key="frame" x="248" y="257" width="111" height="39"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="111" id="rCe-ZB-2f5"/>
-                                </constraints>
-                                <state key="normal" title="Mentés"/>
-                                <connections>
-                                    <action selector="addEvent:" destination="Ype-rM-poy" eventType="touchUpInside" id="jjo-Zz-bzV"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="DIA.mmHg" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s6Z-7i-smU">
-                                <rect key="frame" x="16" y="219" width="343" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="7xd-XT-OAZ"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad"/>
-                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="huA-7l-AZE">
+                                <rect key="frame" x="17" y="72" width="341" height="170"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Esemény megnevezése" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jaz-pZ-Msh">
+                                        <rect key="frame" x="0.0" y="0.0" width="341" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Dátum" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VEv-Z9-JR3">
+                                        <rect key="frame" x="0.0" y="35" width="341" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="datePicker:" destination="Ype-rM-poy" eventType="editingDidEnd" id="tvd-RO-Caq"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="SYS.mmHg" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Io0-8O-ebL">
+                                        <rect key="frame" x="0.0" y="70" width="341" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="DIA.mmHg" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s6Z-7i-smU">
+                                        <rect key="frame" x="0.0" y="105" width="341" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKY-q5-XgF">
+                                        <rect key="frame" x="0.0" y="140" width="341" height="30"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Mentés">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addEvent:" destination="Ype-rM-poy" eventType="touchUpInside" id="jjo-Zz-bzV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="kKY-q5-XgF" firstAttribute="top" secondItem="s6Z-7i-smU" secondAttribute="bottom" constant="8" symbolic="YES" id="28h-J1-0Bv"/>
-                            <constraint firstItem="Io0-8O-ebL" firstAttribute="top" secondItem="VEv-Z9-JR3" secondAttribute="bottom" constant="8" symbolic="YES" id="6V7-UG-oiV"/>
-                            <constraint firstItem="jaz-pZ-Msh" firstAttribute="trailing" secondItem="fyl-Ou-qeq" secondAttribute="trailingMargin" id="7Wc-zc-G8f"/>
-                            <constraint firstItem="jaz-pZ-Msh" firstAttribute="leading" secondItem="VEv-Z9-JR3" secondAttribute="leading" id="7j7-cO-zoF"/>
-                            <constraint firstItem="jaz-pZ-Msh" firstAttribute="trailing" secondItem="VEv-Z9-JR3" secondAttribute="trailing" id="7qZ-aK-Oxi"/>
-                            <constraint firstItem="Io0-8O-ebL" firstAttribute="trailing" secondItem="s6Z-7i-smU" secondAttribute="trailing" id="Dws-lB-f6D"/>
-                            <constraint firstItem="Io0-8O-ebL" firstAttribute="leading" secondItem="s6Z-7i-smU" secondAttribute="leading" id="FfS-bI-OQe"/>
-                            <constraint firstItem="s6Z-7i-smU" firstAttribute="trailing" secondItem="kKY-q5-XgF" secondAttribute="trailing" id="KUp-Pr-xWG"/>
-                            <constraint firstItem="VEv-Z9-JR3" firstAttribute="leading" secondItem="Io0-8O-ebL" secondAttribute="leading" id="KhZ-hc-9gC"/>
-                            <constraint firstItem="s6Z-7i-smU" firstAttribute="top" secondItem="Io0-8O-ebL" secondAttribute="bottom" constant="8" symbolic="YES" id="M8P-qs-muv"/>
-                            <constraint firstItem="VEv-Z9-JR3" firstAttribute="top" secondItem="jaz-pZ-Msh" secondAttribute="bottom" constant="8" symbolic="YES" id="V7X-yj-yTa"/>
-                            <constraint firstItem="jaz-pZ-Msh" firstAttribute="top" secondItem="uBl-wj-7RR" secondAttribute="bottom" constant="41" id="VY1-7B-1Dz"/>
-                            <constraint firstItem="VEv-Z9-JR3" firstAttribute="trailing" secondItem="Io0-8O-ebL" secondAttribute="trailing" id="hyc-9j-0To"/>
-                            <constraint firstItem="qVh-Mq-FpG" firstAttribute="top" secondItem="kKY-q5-XgF" secondAttribute="bottom" constant="322" id="pNt-Ja-cRs"/>
-                            <constraint firstItem="jaz-pZ-Msh" firstAttribute="leading" secondItem="fyl-Ou-qeq" secondAttribute="leadingMargin" id="tbA-G9-wl3"/>
+                            <constraint firstItem="huA-7l-AZE" firstAttribute="leading" secondItem="fyl-Ou-qeq" secondAttribute="leadingMargin" constant="1" id="abh-4N-L2e"/>
+                            <constraint firstItem="huA-7l-AZE" firstAttribute="top" secondItem="uBl-wj-7RR" secondAttribute="bottom" constant="8" symbolic="YES" id="ehA-Lr-WRI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="huA-7l-AZE" secondAttribute="trailing" constant="1" id="gQp-uC-Dqz"/>
                         </constraints>
                     </view>
                     <connections>
@@ -280,7 +261,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qRj-OH-Rst" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Gyógyszerek" image="medicine" id="l3b-MK-iV0"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xwU-R4-yed">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xwU-R4-yed">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -299,7 +280,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cTL-Y5-Vrr" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Napló" image="history" id="jS5-VJ-tvI"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="X3e-Ng-4Uh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="X3e-Ng-4Uh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -318,7 +299,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5iz-a5-Ehu" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Időpontok" image="calendar" id="mp5-8O-WHM"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="S8l-LE-H43">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="S8l-LE-H43">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

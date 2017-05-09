@@ -18,6 +18,27 @@ class UjBejegyzesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //datepicker stuff »»»»
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: self.view.frame.size.height/6, width: self.view.frame.size.width, height: 35.0))
+        toolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.tintColor = UIColor.white
+        toolBar.backgroundColor = UIColor.black
+        
+        let todayBtn = UIBarButtonItem(title: "Most", style: UIBarButtonItemStyle.plain, target: self, action: #selector(UjBejegyzesViewController.tappedToolBarBtn))
+        let okBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(UjBejegyzesViewController.donePressed))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width / 3, height: self.view.frame.size.height))
+        label.font = UIFont(name: "Helvetica", size: 12)
+        label.backgroundColor = UIColor.clear
+        label.textColor = UIColor.blue
+        label.text = " "
+        label.textAlignment = NSTextAlignment.center
+        let textBtn = UIBarButtonItem(customView: label)
+        toolBar.setItems([todayBtn,flexSpace,textBtn,flexSpace,okBarBtn], animated: true)
+        dateTextField.inputAccessoryView = toolBar
+        //««« datepicker stuff
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,11 +55,26 @@ class UjBejegyzesViewController: UIViewController {
     
     func datePickerValueChanged(sender:UIDatePicker) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.medium
-        dateFormatter.timeStyle = DateFormatter.Style.medium
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateTextField.text = dateFormatter.string(from: sender.date)
         date = sender.date as NSDate
-    }//«« datepicker eddig tart
+    }
+    
+    func donePressed(_ sender: UIBarButtonItem) {
+        dateTextField.resignFirstResponder()
+    }
+    
+    func tappedToolBarBtn(_ sender: UIBarButtonItem) {
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateTextField.text = dateformatter.string(from: Date())
+        date = Date() as NSDate
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    //«« datepicker eddig tart
     
     //adatok mentese core data-ba
     @IBAction func addEvent(_ sender: UIButton) {

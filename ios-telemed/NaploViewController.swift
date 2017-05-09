@@ -14,10 +14,9 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var naploTable: UITableView!
     @IBOutlet weak var atlagText: UILabel!
     
+    //export gomb
     @IBAction func exportButton(_ sender: UIBarButtonItem) {
-       let shareVC = UIActivityViewController(activityItems: ["asd"], applicationActivities: nil)
-        shareVC.popoverPresentationController?.sourceView = self.view
-        self.present(shareVC, animated: true, completion: nil)
+        exportDatabase()
     }
 
     var naplo : [NaploEntity] = [] //ebben taroljuk a coredata adatot
@@ -54,7 +53,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         if(SYS != 0.0 && DIA != 0.0){
             let pulse = SYS - DIA
-            cell?.detailTextLabel?.text = "Dátum: \(datum)\nSYS.mmHg: \(SYS), DIA.mmHg: \(DIA), pulzusnyomás: \(pulse)"
+            cell?.detailTextLabel?.text = "Dátum: \(datum)\nVérnyomás: \(SYS)/\(DIA), pulzusnyomás: \(pulse)"
         }else{
             cell?.detailTextLabel?.text = "Dátum: \(datum)"
         }
@@ -87,7 +86,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
             naplo = try context.fetch(fetchRequest)
         }
         catch{
-            print("error")
+            print("Error fetching data.")
         }
     }
     
@@ -100,7 +99,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         var db = 0
         
         for ertek in naplo {
-            if(ertek.value(forKey: "dia")as! Double != 0.0 && ertek.value(forKey: "sys") as! Double != 0.0){
+            if(ertek.value(forKey: "dia") as! Double != 0.0 && ertek.value(forKey: "sys") as! Double != 0.0){
                 atlagDIA += ertek.value(forKey: "dia") as! Double
                 atlagSYS += ertek.value(forKey: "sys") as! Double
                 cnt += 1.0
@@ -111,7 +110,59 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         atlagSYS = (cnt != 0) ? atlagSYS / cnt : 0.0
         atlagPul = atlagSYS - atlagDIA
         db = Int(cnt)
-        atlagText.text = String("\(db) db minta átlaga: SYS:\(atlagSYS.rounded()), DIA:\(atlagDIA.rounded()), pulzusnyomás:\(atlagPul.rounded())")
+        atlagText.text = String("\(db) minta átlaga: \(atlagSYS.rounded())/\(atlagDIA.rounded()), pulzusnyomás: \(atlagPul.rounded())")
+    }
+    
+    //export begin
+    func exportDatabase() {
+        let exportString = createExportString()
+        saveAndExport(exportString: exportString)
+    }
+    
+    //tempfile letrehozas
+    func saveAndExport(exportString: String) {
+        let date: String = String(describing: Date())
+        let exportFilePath = NSTemporaryDirectory() + "naploexport"+date+".csv"
+        let exportFileURL = NSURL(fileURLWithPath: exportFilePath)
+        FileManager.default.createFile(atPath: exportFilePath, contents: NSData() as Data, attributes: nil)
+
+        var fileHandle: FileHandle? = nil
+        do {
+            fileHandle = try FileHandle(forWritingTo: exportFileURL as URL)
+        } catch {
+            print("Error with fileHandle")
+        }
+        
+        if fileHandle != nil {
+            fileHandle!.seekToEndOfFile()
+            let csvData = exportString.data(using: String.Encoding.utf8, allowLossyConversion: false)
+            fileHandle!.write(csvData!)
+            
+            fileHandle!.closeFile()
+            
+            let firstActivityItem = NSURL(fileURLWithPath: exportFilePath)
+            let activityViewController : UIActivityViewController = UIActivityViewController(activityItems: [firstActivityItem], applicationActivities: nil)
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+    }
+    
+    //csv string
+    func createExportString() -> String {
+        var date: NSDate?
+        var DIA: Double?
+        var SYS: Double?
+        var event: String?
+        
+        var export: String = NSLocalizedString("Date,Event,SYS,DIA\n", comment: "")
+        for ertek in naplo {
+            date = ertek.value(forKey: "date") as? NSDate!
+            DIA = ertek.value(forKey: "dia") as? Double!
+            SYS = ertek.value(forKey: "sys") as? Double!
+            event = ertek.value(forKey: "event") as? String!
+            export += "\(date!),\(String(describing: event!)),\(String(describing: SYS!)),\(String(describing: DIA!))\n"
+        }
+        //print("This is what the app will export: \(export)") //debug
+        return export
     }
     
     override func didReceiveMemoryWarning() {
