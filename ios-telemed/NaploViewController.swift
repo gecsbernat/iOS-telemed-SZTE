@@ -25,7 +25,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         naploTable.dataSource = self
         naploTable.delegate = self
-        self.naploTable.rowHeight = 80
+        naploTable.rowHeight = 80
     }
     
     //betoltes

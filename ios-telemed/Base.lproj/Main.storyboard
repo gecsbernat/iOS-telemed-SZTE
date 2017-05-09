@@ -28,7 +28,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="cRS-uY-G2I" detailTextLabel="UHo-QF-2d9" style="IBUITableViewCellStyleValue1" id="9pO-tm-zC3">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="idopontCell" textLabel="cRS-uY-G2I" detailTextLabel="UHo-QF-2d9" style="IBUITableViewCellStyleValue1" id="9pO-tm-zC3">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9pO-tm-zC3" id="sgq-Bz-eOG">
@@ -61,7 +61,16 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Időpontok" id="DUb-Cy-XMI"/>
+                    <navigationItem key="navigationItem" title="Időpontok" id="DUb-Cy-XMI">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Ig7-az-tnw">
+                            <connections>
+                                <action selector="ujIdopont:" destination="BYZ-38-t0r" id="9IN-UO-VpQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="idopontokTable" destination="1P5-NQ-BIf" id="4yh-cm-zuW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

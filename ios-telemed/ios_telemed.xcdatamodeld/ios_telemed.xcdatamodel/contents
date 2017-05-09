@@ -6,7 +6,10 @@
         <attribute name="mikor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nev" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="IdopontEntity" representedClassName="IdopontEntity" syncable="YES" codeGenerationType="class"/>
+    <entity name="IdopontEntity" representedClassName="IdopontEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="NaploEntity" representedClassName="NaploEntity" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="dia" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -15,7 +18,7 @@
     </entity>
     <elements>
         <element name="GyogyszerEntity" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="IdopontEntity" positionX="-54" positionY="-9" width="128" height="45"/>
+        <element name="IdopontEntity" positionX="-54" positionY="-9" width="128" height="75"/>
         <element name="NaploEntity" positionX="-54" positionY="-18" width="128" height="105"/>
     </elements>
 </model>
