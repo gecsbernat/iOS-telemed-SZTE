@@ -87,7 +87,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k8Z-fM-IRg">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k8Z-fM-IRg">
                                 <rect key="frame" x="0.0" y="20" width="375" height="560"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -118,10 +118,12 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-" textAlignment="center" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXf-sT-p3w">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXf-sT-p3w">
                                 <rect key="frame" x="0.0" y="580" width="375" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="Nhc-HQ-VLd"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -129,10 +131,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="k8Z-fM-IRg" secondAttribute="trailing" id="EjE-Kt-42B"/>
-                            <constraint firstItem="k8Z-fM-IRg" firstAttribute="leading" secondItem="fu9-Tt-Vn0" secondAttribute="leading" id="JNn-5Q-vH4"/>
-                            <constraint firstItem="k8Z-fM-IRg" firstAttribute="bottom" secondItem="NTR-yh-B4c" secondAttribute="top" id="MMR-mw-16r"/>
-                            <constraint firstItem="k8Z-fM-IRg" firstAttribute="top" secondItem="fu9-Tt-Vn0" secondAttribute="top" constant="20" symbolic="YES" id="heJ-yb-Q7d"/>
+                            <constraint firstItem="k8Z-fM-IRg" firstAttribute="leading" secondItem="fu9-Tt-Vn0" secondAttribute="leading" id="2lR-I4-l63"/>
+                            <constraint firstItem="pXf-sT-p3w" firstAttribute="top" secondItem="k8Z-fM-IRg" secondAttribute="bottom" id="9Uh-FN-9ef"/>
+                            <constraint firstItem="k8Z-fM-IRg" firstAttribute="top" secondItem="fu9-Tt-Vn0" secondAttribute="top" constant="20" symbolic="YES" id="JNX-gC-OPO"/>
+                            <constraint firstAttribute="trailing" secondItem="k8Z-fM-IRg" secondAttribute="trailing" id="Jd7-HU-2Dd"/>
+                            <constraint firstItem="k8Z-fM-IRg" firstAttribute="trailing" secondItem="pXf-sT-p3w" secondAttribute="trailing" id="Med-c6-y1q"/>
+                            <constraint firstItem="k8Z-fM-IRg" firstAttribute="leading" secondItem="pXf-sT-p3w" secondAttribute="leading" id="c5D-1w-phk"/>
+                            <constraint firstItem="pXf-sT-p3w" firstAttribute="bottom" secondItem="NTR-yh-B4c" secondAttribute="top" id="uhD-Zk-6Li"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Napló" id="pqH-wg-q7a">
@@ -142,7 +147,11 @@
                                     <segue destination="Ype-rM-poy" kind="show" id="Gk1-uX-IxT"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="action" id="nUj-fm-GRe"/>
+                            <barButtonItem systemItem="action" id="nUj-fm-GRe">
+                                <connections>
+                                    <action selector="exportButton:" destination="oAM-Kj-ZA8" id="TFC-Cd-AdS"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -271,7 +280,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qRj-OH-Rst" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Gyógyszerek" image="medicine" id="l3b-MK-iV0"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xwU-R4-yed">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xwU-R4-yed">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -290,7 +299,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cTL-Y5-Vrr" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Napló" image="history" id="jS5-VJ-tvI"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="X3e-Ng-4Uh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="X3e-Ng-4Uh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -309,7 +318,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5iz-a5-Ehu" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Időpontok" image="calendar" id="mp5-8O-WHM"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="S8l-LE-H43">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="S8l-LE-H43">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

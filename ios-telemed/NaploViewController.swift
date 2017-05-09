@@ -13,6 +13,12 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     @IBOutlet weak var naploTable: UITableView!
     @IBOutlet weak var atlagText: UILabel!
+    
+    @IBAction func exportButton(_ sender: UIBarButtonItem) {
+       let shareVC = UIActivityViewController(activityItems: ["asd"], applicationActivities: nil)
+        shareVC.popoverPresentationController?.sourceView = self.view
+        self.present(shareVC, animated: true, completion: nil)
+    }
 
     var naplo : [NaploEntity] = [] //ebben taroljuk a coredata adatot
     
@@ -47,7 +53,8 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell?.textLabel?.text = bejegyzes.event
         
         if(SYS != 0.0 && DIA != 0.0){
-            cell?.detailTextLabel?.text = "Dátum: \(datum), SYS.mmHg: \(SYS), DIA.mmHg: \(DIA)"
+            let pulse = SYS - DIA
+            cell?.detailTextLabel?.text = "Dátum: \(datum)\nSYS.mmHg: \(SYS), DIA.mmHg: \(DIA), pulzusnyomás: \(pulse)"
         }else{
             cell?.detailTextLabel?.text = "Dátum: \(datum)"
         }
@@ -64,23 +71,20 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
             context.delete(bejegyzes)
             
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
-            
-            do{
-                naplo = try context.fetch(NaploEntity.fetchRequest())
-            }
-            catch{
-                print("error")
-            }
+            getData()
         }
         atlag()
         naploTable.reloadData()
     }
     
-    //adatnyeres a coredata-bol
+    //adatnyeres a coredata-bol, datum szerint rendezve: legutobbi elol.
     func getData(){
        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<NaploEntity> = NaploEntity.fetchRequest()
+        let sort = NSSortDescriptor(key: "date", ascending: false)
+        fetchRequest.sortDescriptors = [sort]
         do{
-        naplo = try context.fetch(NaploEntity.fetchRequest())
+            naplo = try context.fetch(fetchRequest)
         }
         catch{
             print("error")
@@ -107,7 +111,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         atlagSYS = (cnt != 0) ? atlagSYS / cnt : 0.0
         atlagPul = atlagSYS - atlagDIA
         db = Int(cnt)
-        atlagText.text = String("Átlagértékek \(db) db minta alapján: SYS:\(atlagSYS.rounded()), DIA:\(atlagDIA.rounded()), pulzusnyomás:\(atlagPul.rounded())")
+        atlagText.text = String("\(db) db minta átlaga: SYS:\(atlagSYS.rounded()), DIA:\(atlagDIA.rounded()), pulzusnyomás:\(atlagPul.rounded())")
     }
     
     override func didReceiveMemoryWarning() {
