@@ -20,6 +20,7 @@ class IdopontokViewController: UIViewController, UITableViewDelegate, UITableVie
         idopontokTable.dataSource = self
         idopontokTable.delegate = self
         idopontokTable.reloadData()
+        idopontokTable.rowHeight = 50
     }
     
     //betoltes
@@ -40,7 +41,7 @@ class IdopontokViewController: UIViewController, UITableViewDelegate, UITableVie
         var datum = String(describing: bejegyzes.datum!)
         let index = datum.index(datum.startIndex, offsetBy: 16)
         datum = datum.substring(to: index)
-        cell?.textLabel?.text = bejegyzes.orvosneve! + " @ " + bejegyzes.helyszin!
+        cell?.textLabel?.text = bejegyzes.orvosneve! + ", " + bejegyzes.helyszin!
         cell?.detailTextLabel?.text = datum
         return cell!
     }
