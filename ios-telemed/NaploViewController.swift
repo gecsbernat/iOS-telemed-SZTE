@@ -51,7 +51,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         let DIA = bejegyzes.dia
         cell?.textLabel?.text = bejegyzes.event
         
-        if(SYS != 0.0 && DIA != 0.0){
+        if(SYS != 0 && DIA != 0){
             let pulse = SYS - DIA
             cell?.detailTextLabel?.text = "Dátum: \(datum)\nVérnyomás: \(SYS)/\(DIA), pulzusnyomás: \(pulse)"
         }else{
@@ -92,25 +92,25 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     //atlagertekek szamitasa
     func atlag(){
-        var atlagDIA = 0.0
-        var atlagSYS = 0.0
-        var atlagPul = 0.0
-        var cnt = 0.0
+        var atlagDIA = 0
+        var atlagSYS = 0
+        var atlagPul = 0
+        var cnt = 0
         var db = 0
         
         for ertek in naplo {
-            if(ertek.value(forKey: "dia") as! Double != 0.0 && ertek.value(forKey: "sys") as! Double != 0.0){
-                atlagDIA += ertek.value(forKey: "dia") as! Double
-                atlagSYS += ertek.value(forKey: "sys") as! Double
-                cnt += 1.0
+            if(ertek.value(forKey: "dia") as! Int != 0 && ertek.value(forKey: "sys") as! Int != 0){
+                atlagDIA += ertek.value(forKey: "dia") as! Int
+                atlagSYS += ertek.value(forKey: "sys") as! Int
+                cnt += 1
             }
         }
         
-        atlagDIA = (cnt != 0) ? atlagDIA / cnt : 0.0
-        atlagSYS = (cnt != 0) ? atlagSYS / cnt : 0.0
+        atlagDIA = (cnt != 0) ? atlagDIA / cnt : 0
+        atlagSYS = (cnt != 0) ? atlagSYS / cnt : 0
         atlagPul = atlagSYS - atlagDIA
         db = Int(cnt)
-        atlagText.text = String("\(db) minta átlaga: \(atlagSYS.rounded())/\(atlagDIA.rounded()), pulzusnyomás: \(atlagPul.rounded())")
+        atlagText.text = String("\(db) minta átlaga: \(atlagSYS)/\(atlagDIA), pulzusnyomás: \(atlagPul)")
     }
     
     //export begin
@@ -149,15 +149,15 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     //csv string
     func createExportString() -> String {
         var date: NSDate?
-        var DIA: Double?
-        var SYS: Double?
+        var DIA: Int?
+        var SYS: Int?
         var event: String?
         
         var export: String = NSLocalizedString("Date,Event,SYS,DIA\n", comment: "")
         for ertek in naplo {
             date = ertek.value(forKey: "date") as? NSDate!
-            DIA = ertek.value(forKey: "dia") as? Double!
-            SYS = ertek.value(forKey: "sys") as? Double!
+            DIA = ertek.value(forKey: "dia") as? Int!
+            SYS = ertek.value(forKey: "sys") as? Int!
             event = ertek.value(forKey: "event") as? String!
             export += "\(date!),\(String(describing: event!)),\(String(describing: SYS!)),\(String(describing: DIA!))\n"
         }
