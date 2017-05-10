@@ -44,12 +44,12 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = naploTable.dequeueReusableCell(withIdentifier: "naploTableCell")
         let bejegyzes = naplo[indexPath.row]
-        var datum = String(describing: bejegyzes.date!)
+        var datum = String(describing: bejegyzes.datum!)
         let index = datum.index(datum.startIndex, offsetBy: 19)
         datum = datum.substring(to: index)
         let SYS = bejegyzes.sys
         let DIA = bejegyzes.dia
-        cell?.textLabel?.text = bejegyzes.event
+        cell?.textLabel?.text = bejegyzes.esemeny
         
         if(SYS != 0 && DIA != 0){
             let pulse = SYS - DIA
@@ -80,7 +80,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     func getData(){
        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<NaploEntity> = NaploEntity.fetchRequest()
-        let sort = NSSortDescriptor(key: "date", ascending: false)
+        let sort = NSSortDescriptor(key: "datum", ascending: false)
         fetchRequest.sortDescriptors = [sort]
         do{
             naplo = try context.fetch(fetchRequest)
@@ -153,15 +153,15 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         var SYS: Int?
         var event: String?
         
-        var export: String = NSLocalizedString("Date,Event,SYS,DIA\n", comment: "")
+        var export: String = NSLocalizedString("Dátum,Esemény,SYS,DIA\n", comment: "")
         for ertek in naplo {
-            date = ertek.value(forKey: "date") as? NSDate!
+            date = ertek.value(forKey: "datum") as? NSDate!
             DIA = ertek.value(forKey: "dia") as? Int!
             SYS = ertek.value(forKey: "sys") as? Int!
-            event = ertek.value(forKey: "event") as? String!
+            event = ertek.value(forKey: "esemeny") as? String!
             export += "\(date!),\(String(describing: event!)),\(String(describing: SYS!)),\(String(describing: DIA!))\n"
         }
-        //print("This is what the app will export: \(export)") //debug
+       // print("This is what the app will export: \(export)") //debug
         return export
     }
     

@@ -47,7 +47,7 @@ class UjBejegyzesViewController: UIViewController {
             let alert = UIAlertController(title: "Hiba!", message: "Üres a DIA.Hgmm mező.", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
-        }else if(Int16(sysText.text!)! > 200){
+        }else if(Int16(sysText.text!)! > 300){
             let alert = UIAlertController(title: "Hiba!", message: "Túl magas SYS.Hgmm érték!", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -55,7 +55,7 @@ class UjBejegyzesViewController: UIViewController {
             let alert = UIAlertController(title: "Hiba!", message: "Túl alacsony SYS.Hgmm érték!", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
-        }else if(Int16(diaText.text!)! > 200){
+        }else if(Int16(diaText.text!)! > 300){
             let alert = UIAlertController(title: "Hiba!", message: "Túl magas DIA.Hgmm érték!", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -68,8 +68,8 @@ class UjBejegyzesViewController: UIViewController {
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             let naplo = NaploEntity(context: context)
             
-            naplo.event = eventText.text ?? "Ismeretlen"
-            naplo.date = date
+            naplo.esemeny = eventText.text ?? "Ismeretlen"
+            naplo.datum = date
             naplo.dia = Int16(diaText.text!) ?? 0
             naplo.sys = Int16(sysText.text!) ?? 0
             

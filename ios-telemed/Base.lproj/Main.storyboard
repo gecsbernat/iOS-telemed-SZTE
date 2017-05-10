@@ -64,7 +64,7 @@
                     <navigationItem key="navigationItem" title="Időpontok" id="DUb-Cy-XMI">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Ig7-az-tnw">
                             <connections>
-                                <action selector="ujIdopont:" destination="BYZ-38-t0r" id="9IN-UO-VpQ"/>
+                                <segue destination="72T-28-IDp" kind="show" id="YeE-mX-npR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -74,7 +74,76 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2821.5999999999999" y="572.56371814092961"/>
+            <point key="canvasLocation" x="2647" y="573"/>
+        </scene>
+        <!--Új időpont-->
+        <scene sceneID="dlE-Kf-uO7">
+            <objects>
+                <viewController title="Új időpont" id="uI0-xg-imO" customClass="UjIdopontViewController" customModule="ios_telemed" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gpw-Z6-hEr"/>
+                        <viewControllerLayoutGuide type="bottom" id="P7a-3w-9nD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6vc-5N-kCW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Orvos neve" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8b5-zg-Cal">
+                                <rect key="frame" x="16" y="72" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Helyszín" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9nF-q5-mym">
+                                <rect key="frame" x="16" y="110" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Időpont" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yst-1l-ICO">
+                                <rect key="frame" x="16" y="148" width="343" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="tqr-iJ-p0n">
+                                <rect key="frame" x="0.0" y="180" width="375" height="166"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="516099653.20326698">
+                                    <!--2017-05-10 09:00:53 +0000-->
+                                </date>
+                                <locale key="locale" localeIdentifier="hu_HU"/>
+                                <connections>
+                                    <action selector="datePicker:" destination="uI0-xg-imO" eventType="valueChanged" id="rEu-rO-ZxB"/>
+                                </connections>
+                            </datePicker>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Új időpont" id="29h-PF-LNN">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="246-ew-eTP">
+                            <connections>
+                                <action selector="cancelAction:" destination="uI0-xg-imO" id="EDJ-au-G6n"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="nHZ-kV-ljP">
+                            <connections>
+                                <action selector="saveAction:" destination="uI0-xg-imO" id="Xe6-Qg-Jtl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="helyszinText" destination="9nF-q5-mym" id="p57-SP-SJj"/>
+                        <outlet property="idopontText" destination="yst-1l-ICO" id="Ytm-Qg-sgk"/>
+                        <outlet property="orvosneveText" destination="8b5-zg-Cal" id="mqU-aO-Evs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qu4-pZ-va8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2646" y="2113"/>
         </scene>
         <!--Gyógyszerek-->
         <scene sceneID="eBT-me-8kB">
@@ -119,7 +188,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QDc-Qd-wYx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="982" y="573"/>
+            <point key="canvasLocation" x="759" y="573"/>
         </scene>
         <!--Napló-->
         <scene sceneID="Z2T-nJ-ohs">
@@ -353,7 +422,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tGM-8c-8ei" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="573"/>
+            <point key="canvasLocation" x="-58" y="573"/>
         </scene>
         <!--Napló-->
         <scene sceneID="06d-Zw-vTa">
@@ -391,7 +460,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KMD-wP-F0F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1940" y="573"/>
+            <point key="canvasLocation" x="1794" y="573"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kes-kd-96d">
@@ -410,6 +479,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TZ2-5N-NrL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1079" y="1346"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MUX-sW-aTl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="72T-28-IDp" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tSz-Rr-7Sv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="uI0-xg-imO" kind="relationship" relationship="rootViewController" id="10K-YP-Qmy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="59r-rv-YU6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2645.5999999999999" y="1304.7976011994003"/>
         </scene>
     </scenes>
     <resources>
