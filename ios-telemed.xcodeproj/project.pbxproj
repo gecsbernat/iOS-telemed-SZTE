@@ -312,7 +312,7 @@
 				DEVELOPMENT_TEAM = PJ36P93S8P;
 				INFOPLIST_FILE = "ios-telemed/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "ios2017.ios-telemed";
+				PRODUCT_BUNDLE_IDENTIFIER = hu.sed.healthteam.swiftcourse.terapia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -326,7 +326,7 @@
 				DEVELOPMENT_TEAM = PJ36P93S8P;
 				INFOPLIST_FILE = "ios-telemed/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "ios2017.ios-telemed";
+				PRODUCT_BUNDLE_IDENTIFIER = hu.sed.healthteam.swiftcourse.terapia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
