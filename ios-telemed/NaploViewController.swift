@@ -8,15 +8,23 @@
 
 import UIKit
 import CoreData
+import HealthKit
 
 class NaploViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var naploTable: UITableView!
     @IBOutlet weak var atlagText: UILabel!
+    var healthstore: HKHealthStore? = nil
+    var readdata:NSSet? = nil
+    var writedata:NSSet? = nil
     
     //export gomb
     @IBAction func exportButton(_ sender: UIBarButtonItem) {
         exportDatabase()
+    }
+    
+    @IBAction func refreshData(_ sender: UIBarButtonItem) {
+        fetchHealthkit()
     }
 
     var naplo : [NaploEntity] = [] //ebben taroljuk a coredata adatot
@@ -26,6 +34,18 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         naploTable.dataSource = self
         naploTable.delegate = self
         naploTable.rowHeight = 80
+        
+        if HKHealthStore.isHealthDataAvailable() {
+            healthstore = HKHealthStore()
+            let systolic = HKQuantityType.quantityType(forIdentifier: .bloodPressureSystolic)
+            let diastolic = HKQuantityType.quantityType(forIdentifier: .bloodPressureDiastolic)
+            readdata = NSSet(objects: systolic!, diastolic!)
+            writedata = NSSet(objects: systolic!,diastolic!)
+            healthstore?.requestAuthorization(toShare: writedata as? Set<HKSampleType>, read: readdata as? Set<HKObjectType>, completion: {
+                (success, error) in
+                //
+            })
+        }
     }
     
     //betoltes
@@ -111,6 +131,38 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         atlagPul = atlagSYS - atlagDIA
         db = Int(cnt)
         atlagText.text = String("\(db) minta átlaga: \(atlagSYS)/\(atlagDIA), pulzusnyomás: \(atlagPul)")
+    }
+    
+    func fetchHealthkit(){
+            let past = NSDate.distantPast as NSDate
+            let now   = NSDate()
+            let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: true)
+            let type = HKQuantityType.correlationType(forIdentifier: HKCorrelationTypeIdentifier.bloodPressure)
+            let sampleQuery = HKSampleQuery(sampleType: type!, predicate: nil, limit: 0, sortDescriptors: [sortDescriptor])
+            { (sampleQuery, results, error ) -> Void in
+                
+                let dataLst = results as? [HKCorrelation];
+                
+                for index in 0 ..< dataLst!.count
+                {
+                    
+                    let data1 = (dataLst![index].objects(for: HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureSystolic)!)).first as? HKQuantitySample
+                    let data2 = dataLst![index].objects(for: HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureDiastolic)!).first as? HKQuantitySample
+                    
+                    print(data1)
+                    print(data2)
+                    /*if let value1 = data1!.quantity.doubleValue(for: HKUnit.millimeterOfMercury()){
+                        print(value1)
+                        
+                    }
+                    if let value2 = data2!.quantity.doubleValue(for: HKUnit.millimeterOfMercury()) {
+                        print(value2)
+                    }
+ */
+                }
+                
+            }
+            self.healthstore?.execute(sampleQuery)
     }
     
     //export begin

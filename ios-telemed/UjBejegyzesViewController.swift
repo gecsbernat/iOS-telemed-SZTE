@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import HealthKit
 
 class UjBejegyzesViewController: UIViewController {
 
@@ -14,11 +15,85 @@ class UjBejegyzesViewController: UIViewController {
     @IBOutlet weak var diaText: UITextField! //dia text
     @IBOutlet weak var sysText: UITextField! //sys text
     @IBOutlet weak var idopontText: UILabel! //idopont text
+    @IBOutlet weak var saveHealthBTN: UISwitch! //healthkit
+    
+    /*@IBAction func useHealthKit(_ sender: UIButton) {
+        let healthstore = HKHealthStore()
+        let unit  = HKUnit.millimeterOfMercury()
+        let start = Date()
+        let end   = start
+        let sQuantity = HKQuantity(unit: unit, doubleValue: 120)
+        let sType     = HKQuantityType.quantityType(forIdentifier: .bloodPressureSystolic)!
+        let sSample   = HKQuantitySample(
+            type: sType,
+            quantity: sQuantity,
+            start: start,
+            end: end
+        )
+        
+        let dQuantity = HKQuantity(unit: unit, doubleValue: 80)
+        let dType     = HKQuantityType.quantityType(forIdentifier: .bloodPressureDiastolic)!
+        let dSample   = HKQuantitySample(
+            type: dType,
+            quantity: dQuantity,
+            start: start,
+            end: end
+        )
+        
+        let objects: Set<HKSample> = [ sSample, dSample ]
+        
+        let bpType = HKCorrelationType.correlationType(forIdentifier: .bloodPressure)!
+        
+        let bloodPressure = HKCorrelation(
+            type: bpType,
+            start: start,
+            end: end,
+            objects: objects
+        )
+        let writedata: Set<HKObjectType> = [HKObjectType.correlationType(forIdentifier: .bloodPressure)!]
+        let readdata: Set<HKObjectType> = [HKObjectType.correlationType(forIdentifier: .bloodPressure)!]
+        healthstore.requestAuthorization(toShare: writedata as? Set<HKSampleType>, read: readdata, completion: {
+            (success, error) in
+            //
+        })
+       // healthStore.save(bloodPressure) { success, error in
+            // Called after save completed
+       // }
+    }
+    
+    func saveBloodPressure(systolic systolicValue: Double, diastolic diastolicValue: Double, completion completionBlock: @escaping (Bool, Error?) -> Void) {
+        let unit = HKUnit.millimeterOfMercury()
+        
+        let systolicQuantity = HKQuantity(unit: unit, doubleValue: systolicValue)
+        let diastolicQuantity = HKQuantity(unit: unit, doubleValue: diastolicValue)
+        
+        let systolicType = HKQuantityType.quantityType(forIdentifier: .bloodPressureSystolic)!
+        let diastolicType = HKQuantityType.quantityType(forIdentifier: .bloodPressureDiastolic)!
+        
+        let nowDate = Date()
+        let systolicSample = HKQuantitySample(type: systolicType, quantity: systolicQuantity, start: nowDate, end: nowDate)
+        let diastolicSample = HKQuantitySample(type: diastolicType, quantity: diastolicQuantity, start: nowDate, end: nowDate)
+        
+        let objects: Set<HKSample> = [systolicSample, diastolicSample]
+        let type = HKObjectType.correlationType(forIdentifier: .bloodPressure)!
+        let correlation = HKCorrelation(type: type, start: nowDate, end: nowDate, objects: objects)
+        
+        healthstore.save(correlation) { (success, error) -> Void in
+            if !success {
+                print("An error occured saving the Blood pressure sample \(systolicSample). In your app, try to handle this gracefully. The error was: \(String(describing: error)).")
+            }
+            completionBlock(success, error)
+        }
+    }
+    */
     
     var date = NSDate() //date valtozo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if HKHealthStore.isHealthDataAvailable() {
+            //saveHealthBTN.isEnabled = true
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -35,6 +35,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSHealthShareUsageDescription</key>
+	<string>HKCorrelationTypeIdentifierBloodPressure</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>HKCorrelationTypeIdentifierBloodPressure</string>
+	<key>HKCorrelationTypeIdentifierBloodPressure</key>
+	<string>YES</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

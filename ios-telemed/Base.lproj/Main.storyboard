@@ -287,6 +287,11 @@
                                     <segue destination="1qH-Jc-bgB" kind="show" id="Gk1-uX-IxT"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem systemItem="refresh" id="njl-6L-JK2">
+                                <connections>
+                                    <action selector="refreshData:" destination="oAM-Kj-ZA8" id="QcQ-6F-MGy"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem systemItem="action" id="nUj-fm-GRe">
                                 <connections>
                                     <action selector="exportButton:" destination="oAM-Kj-ZA8" id="TFC-Cd-AdS"/>
@@ -364,9 +369,20 @@
                                     <action selector="datePicker:" destination="Ype-rM-poy" eventType="valueChanged" id="8Kk-eF-m0Q"/>
                                 </connections>
                             </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adatok mentése HealthKitbe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBK-jk-uvL">
+                                <rect key="frame" x="0.0" y="359" width="375" height="39"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="b4k-gB-8g2">
+                                <rect key="frame" x="310" y="363" width="51" height="31"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="tBK-jk-uvL" firstAttribute="trailing" secondItem="0Ch-tM-FPG" secondAttribute="trailing" id="3g6-tq-GyF"/>
                             <constraint firstItem="W9w-Th-Ez1" firstAttribute="leading" secondItem="S0R-7f-uei" secondAttribute="leading" id="6tO-h0-QJM"/>
                             <constraint firstItem="S0R-7f-uei" firstAttribute="centerY" secondItem="0eh-56-Pb7" secondAttribute="centerY" id="CAZ-gs-twx"/>
                             <constraint firstItem="Geb-Kh-uzd" firstAttribute="leading" secondItem="W9w-Th-Ez1" secondAttribute="leading" id="F8O-iB-138"/>
@@ -375,13 +391,18 @@
                             <constraint firstItem="S0R-7f-uei" firstAttribute="baseline" secondItem="HRK-cy-gYx" secondAttribute="baseline" id="LNi-nV-PFt"/>
                             <constraint firstItem="W9w-Th-Ez1" firstAttribute="trailing" secondItem="HRK-cy-gYx" secondAttribute="trailing" id="NX1-N2-3y7"/>
                             <constraint firstAttribute="trailing" secondItem="0Ch-tM-FPG" secondAttribute="trailing" id="OVy-Pv-v6s"/>
+                            <constraint firstItem="tBK-jk-uvL" firstAttribute="centerY" secondItem="b4k-gB-8g2" secondAttribute="centerY" id="VBj-W4-T2u"/>
                             <constraint firstItem="W9w-Th-Ez1" firstAttribute="centerX" secondItem="0Ch-tM-FPG" secondAttribute="centerX" id="ZkX-VD-uY3"/>
+                            <constraint firstItem="tBK-jk-uvL" firstAttribute="top" secondItem="S0R-7f-uei" secondAttribute="bottom" constant="8" symbolic="YES" id="aVX-MY-j0m"/>
+                            <constraint firstItem="b4k-gB-8g2" firstAttribute="trailing" secondItem="HRK-cy-gYx" secondAttribute="trailing" id="dJa-96-X2X"/>
                             <constraint firstItem="W9w-Th-Ez1" firstAttribute="top" secondItem="Geb-Kh-uzd" secondAttribute="bottom" constant="8" symbolic="YES" id="fxD-N8-RXn"/>
+                            <constraint firstItem="b4k-gB-8g2" firstAttribute="top" secondItem="HRK-cy-gYx" secondAttribute="bottom" constant="12" id="h4A-GL-nsZ"/>
                             <constraint firstItem="0Ch-tM-FPG" firstAttribute="leading" secondItem="fyl-Ou-qeq" secondAttribute="leading" id="lL7-AT-tss"/>
                             <constraint firstItem="0eh-56-Pb7" firstAttribute="leading" secondItem="S0R-7f-uei" secondAttribute="trailing" constant="8" symbolic="YES" id="lMT-bO-MPR"/>
                             <constraint firstItem="qVh-Mq-FpG" firstAttribute="top" secondItem="S0R-7f-uei" secondAttribute="bottom" constant="267" id="lgh-Dk-RzL"/>
                             <constraint firstItem="0Ch-tM-FPG" firstAttribute="centerX" secondItem="0eh-56-Pb7" secondAttribute="centerX" id="oF2-MQ-Zmv"/>
                             <constraint firstItem="S0R-7f-uei" firstAttribute="bottom" secondItem="HRK-cy-gYx" secondAttribute="bottom" id="qzk-c9-Q81"/>
+                            <constraint firstItem="tBK-jk-uvL" firstAttribute="leading" secondItem="0Ch-tM-FPG" secondAttribute="leading" id="rcU-a3-xzQ"/>
                             <constraint firstItem="Geb-Kh-uzd" firstAttribute="top" secondItem="uBl-wj-7RR" secondAttribute="bottom" constant="8" symbolic="YES" id="rxk-5z-EOU"/>
                             <constraint firstItem="0Ch-tM-FPG" firstAttribute="top" secondItem="W9w-Th-Ez1" secondAttribute="bottom" constant="8" symbolic="YES" id="tYc-PJ-2pA"/>
                             <constraint firstItem="Geb-Kh-uzd" firstAttribute="leading" secondItem="fyl-Ou-qeq" secondAttribute="leadingMargin" id="usC-7Q-0w8"/>
@@ -404,12 +425,13 @@
                         <outlet property="diaText" destination="HRK-cy-gYx" id="9bC-01-hbg"/>
                         <outlet property="eventText" destination="Geb-Kh-uzd" id="lew-se-B4Q"/>
                         <outlet property="idopontText" destination="W9w-Th-Ez1" id="qdB-t4-hlW"/>
+                        <outlet property="saveHealthBTN" destination="b4k-gB-8g2" id="adK-pr-ecf"/>
                         <outlet property="sysText" destination="S0R-7f-uei" id="am4-KR-EWG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CsH-Ho-uWS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1079" y="2113"/>
+            <point key="canvasLocation" x="-1079.2" y="2112.5937031484259"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="W9T-hG-JNA">
