@@ -161,11 +161,14 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
                     bejegyzes.esemeny = "Vérnyomás mérés"
                     bejegyzes.dia = Int16(diastolic!)
                     bejegyzes.sys = Int16(systolic!)
-                    (UIApplication.shared.delegate as! AppDelegate).saveContext()
-                    self.getData()
-                    self.atlag()
-                    self.naploTable.reloadData()
-
+                    
+                    //ez fura
+                    if(self.naplo.contains(bejegyzes) == false){
+                        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+                        self.getData()
+                        self.atlag()
+                        self.naploTable.reloadData()
+                    }
                 }
                 
             }
