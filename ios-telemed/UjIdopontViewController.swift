@@ -8,11 +8,13 @@
 
 import UIKit
 import CoreData
+import EventKit
 
 class UjIdopontViewController: UIViewController {
     @IBOutlet weak var orvosneveText: UITextField!
     @IBOutlet weak var helyszinText: UITextField!
     @IBOutlet weak var idopontText: UILabel!
+    @IBOutlet weak var saveCalendar: UISwitch!
     var date = NSDate()
 
     @IBAction func datePicker(_ sender: UIDatePicker) {
@@ -40,8 +42,38 @@ class UjIdopontViewController: UIViewController {
             bejegyzes.datum = date
         
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            
+            if(saveCalendar.isOn){
+                addEventToCalendar(title: orvosneveText.text!, description: helyszinText.text!, startDate: date as Date, endDate: date as Date)
+            }
             dismiss(animated: true, completion: nil)
         }
+    }
+    
+    //esemeny mentese a naptarba
+    func addEventToCalendar(title: String, description: String?, startDate: Date, endDate: Date, completion: ((_ success: Bool, _ error: NSError?) -> Void)? = nil) {
+        let eventStore = EKEventStore()
+        
+        eventStore.requestAccess(to: .event, completion: { (granted, error) in
+            if (granted) && (error == nil) {
+                let event = EKEvent(eventStore: eventStore)
+                event.title = "Orvosi időpont"
+                event.startDate = startDate
+                event.endDate = endDate
+                event.notes = "Orvos neve: \(title)"
+                event.location = description
+                event.calendar = eventStore.defaultCalendarForNewEvents
+                do {
+                    try eventStore.save(event, span: .thisEvent)
+                } catch let e as NSError {
+                    completion?(false, e)
+                    return
+                }
+                completion?(true, nil)
+            } else {
+                completion?(false, error as NSError?)
+            }
+        })
     }
     
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {

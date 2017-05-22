@@ -130,21 +130,37 @@
                                     <action selector="datePicker:" destination="uI0-xg-imO" eventType="valueChanged" id="rEu-rO-ZxB"/>
                                 </connections>
                             </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mentés a naptárba" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8o-9q-nxz">
+                                <rect key="frame" x="0.0" y="354" width="375" height="39"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H4y-Lu-qgu">
+                                <rect key="frame" x="310" y="358" width="51" height="31"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Z8o-9q-nxz" firstAttribute="leading" secondItem="tqr-iJ-p0n" secondAttribute="leading" id="1Ti-5e-Q2b"/>
                             <constraint firstItem="yst-1l-ICO" firstAttribute="top" secondItem="9nF-q5-mym" secondAttribute="bottom" constant="8" symbolic="YES" id="2C9-77-exg"/>
                             <constraint firstItem="9nF-q5-mym" firstAttribute="leading" secondItem="yst-1l-ICO" secondAttribute="leading" id="2GB-Oy-UUK"/>
                             <constraint firstItem="8b5-zg-Cal" firstAttribute="trailing" secondItem="9nF-q5-mym" secondAttribute="trailing" id="5ak-gz-CwL"/>
                             <constraint firstAttribute="trailing" secondItem="tqr-iJ-p0n" secondAttribute="trailing" id="EYC-z4-ICP"/>
+                            <constraint firstItem="H4y-Lu-qgu" firstAttribute="top" secondItem="tqr-iJ-p0n" secondAttribute="bottom" constant="12" id="Hik-ed-0eo"/>
                             <constraint firstItem="yst-1l-ICO" firstAttribute="centerX" secondItem="tqr-iJ-p0n" secondAttribute="centerX" id="HsG-zA-v6I"/>
                             <constraint firstItem="9nF-q5-mym" firstAttribute="top" secondItem="8b5-zg-Cal" secondAttribute="bottom" constant="8" symbolic="YES" id="KVr-wY-cOO"/>
+                            <constraint firstItem="Z8o-9q-nxz" firstAttribute="trailing" secondItem="tqr-iJ-p0n" secondAttribute="trailing" id="KZJ-zo-Nv0"/>
                             <constraint firstItem="8b5-zg-Cal" firstAttribute="leading" secondItem="9nF-q5-mym" secondAttribute="leading" id="LuU-XR-9J6"/>
+                            <constraint firstItem="H4y-Lu-qgu" firstAttribute="trailing" secondItem="yst-1l-ICO" secondAttribute="trailing" id="UjD-fR-Psh"/>
                             <constraint firstItem="P7a-3w-9nD" firstAttribute="top" secondItem="tqr-iJ-p0n" secondAttribute="bottom" constant="272" id="l2M-nL-B8F"/>
                             <constraint firstItem="tqr-iJ-p0n" firstAttribute="top" secondItem="yst-1l-ICO" secondAttribute="bottom" constant="8" symbolic="YES" id="l4L-db-lDy"/>
                             <constraint firstItem="8b5-zg-Cal" firstAttribute="top" secondItem="gpw-Z6-hEr" secondAttribute="bottom" constant="8" symbolic="YES" id="lu7-7D-wCQ"/>
                             <constraint firstItem="8b5-zg-Cal" firstAttribute="leading" secondItem="6vc-5N-kCW" secondAttribute="leadingMargin" id="nyq-Zg-gAV"/>
                             <constraint firstItem="tqr-iJ-p0n" firstAttribute="leading" secondItem="6vc-5N-kCW" secondAttribute="leading" id="r7X-BK-phh"/>
+                            <constraint firstItem="Z8o-9q-nxz" firstAttribute="top" secondItem="tqr-iJ-p0n" secondAttribute="bottom" constant="8" symbolic="YES" id="sAc-nX-kfZ"/>
+                            <constraint firstItem="Z8o-9q-nxz" firstAttribute="centerY" secondItem="H4y-Lu-qgu" secondAttribute="centerY" id="tHl-MD-wRt"/>
                             <constraint firstItem="9nF-q5-mym" firstAttribute="trailing" secondItem="yst-1l-ICO" secondAttribute="trailing" id="tz0-af-qI1"/>
                         </constraints>
                     </view>
@@ -164,6 +180,7 @@
                         <outlet property="helyszinText" destination="9nF-q5-mym" id="p57-SP-SJj"/>
                         <outlet property="idopontText" destination="yst-1l-ICO" id="Ytm-Qg-sgk"/>
                         <outlet property="orvosneveText" destination="8b5-zg-Cal" id="mqU-aO-Evs"/>
+                        <outlet property="saveCalendar" destination="H4y-Lu-qgu" id="bYL-aS-KB8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qu4-pZ-va8" userLabel="First Responder" sceneMemberID="firstResponder"/>

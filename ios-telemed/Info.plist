@@ -36,11 +36,13 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSHealthShareUsageDescription</key>
-	<string>HKCorrelationTypeIdentifierBloodPressure</string>
+	<string>Blood pressure</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>HKCorrelationTypeIdentifierBloodPressure</string>
+	<string>Blood pressue</string>
 	<key>HKCorrelationTypeIdentifierBloodPressure</key>
 	<string>YES</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Calendar</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
