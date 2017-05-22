@@ -14,6 +14,8 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     @IBOutlet weak var naploTable: UITableView!
     @IBOutlet weak var atlagText: UILabel!
+    @IBOutlet weak var refreshBTN: UIBarButtonItem!
+    
     var healthstore: HKHealthStore? = nil
     var readdata:NSSet? = nil
     var writedata:NSSet? = nil
@@ -36,6 +38,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         naploTable.rowHeight = 80
         
         if HKHealthStore.isHealthDataAvailable() {
+            refreshBTN.isEnabled = true
             healthstore = HKHealthStore()
             let systolic = HKQuantityType.quantityType(forIdentifier: .bloodPressureSystolic)
             let diastolic = HKQuantityType.quantityType(forIdentifier: .bloodPressureDiastolic)
@@ -133,9 +136,8 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         atlagText.text = String("\(db) minta átlaga: \(atlagSYS)/\(atlagDIA), pulzusnyomás: \(atlagPul)")
     }
     
+    //adatkinyerés healthkitből
     func fetchHealthkit(){
-            let past = NSDate.distantPast as NSDate
-            let now   = NSDate()
             let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: true)
             let type = HKQuantityType.correlationType(forIdentifier: HKCorrelationTypeIdentifier.bloodPressure)
             let sampleQuery = HKSampleQuery(sampleType: type!, predicate: nil, limit: 0, sortDescriptors: [sortDescriptor])
@@ -149,16 +151,21 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
                     let data1 = (dataLst![index].objects(for: HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureSystolic)!)).first as? HKQuantitySample
                     let data2 = dataLst![index].objects(for: HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureDiastolic)!).first as? HKQuantitySample
                     
-                    print(data1)
-                    print(data2)
-                    /*if let value1 = data1!.quantity.doubleValue(for: HKUnit.millimeterOfMercury()){
-                        print(value1)
-                        
-                    }
-                    if let value2 = data2!.quantity.doubleValue(for: HKUnit.millimeterOfMercury()) {
-                        print(value2)
-                    }
- */
+                    let date = data1?.startDate
+                    let systolic = data1?.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
+                    let diastolic = data2?.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
+                    
+                    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+                    let bejegyzes = NaploEntity(context: context)
+                    bejegyzes.datum = date! as NSDate?
+                    bejegyzes.esemeny = "Vérnyomás mérés"
+                    bejegyzes.dia = Int16(diastolic!)
+                    bejegyzes.sys = Int16(systolic!)
+                    (UIApplication.shared.delegate as! AppDelegate).saveContext()
+                    self.getData()
+                    self.atlag()
+                    self.naploTable.reloadData()
+
                 }
                 
             }
