@@ -33,7 +33,11 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
             let diastolic = HKQuantityType.quantityType(forIdentifier: .bloodPressureDiastolic)
             readdata = NSSet(objects: systolic!, diastolic!)
             writedata = NSSet(objects: systolic!,diastolic!)
-            healthstore?.requestAuthorization(toShare: writedata as? Set<HKSampleType>, read: readdata as? Set<HKObjectType>, completion: {(success, error) in })
+            healthstore?.requestAuthorization(toShare: writedata as? Set<HKSampleType>, read: readdata as? Set<HKObjectType>, completion: {(success, error) in
+                if(!success){
+                    self.refreshBTN.isEnabled = false
+                }
+            })
         }else{
             refreshBTN.isEnabled = false
         }
@@ -117,6 +121,8 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
                     bejegyzes.dia = Int16(diastolic!)
                     bejegyzes.sys = Int16(systolic!)
                     (UIApplication.shared.delegate as! AppDelegate).saveContext()
+                    self.getData()
+                    self.naploTable.reloadData()
                 }
             }
         self.healthstore?.execute(sampleQuery)
@@ -205,7 +211,6 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     //refresh gomb
     @IBAction func refreshData(_ sender: UIBarButtonItem) {
         fetchHealthkit()
-        getData()
         atlag()
         naploTable.reloadData()
     }

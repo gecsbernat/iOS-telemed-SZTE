@@ -32,10 +32,7 @@ class UjBejegyzesViewController: UIViewController {
             let diastolic = HKQuantityType.quantityType(forIdentifier: .bloodPressureDiastolic)
             readdata = NSSet(objects: systolic!, diastolic!)
             writedata = NSSet(objects: systolic!,diastolic!)
-            healthstore?.requestAuthorization(toShare: writedata as? Set<HKSampleType>, read: readdata as? Set<HKObjectType>, completion: {
-                (success, error) in
-                //
-            })
+            healthstore?.requestAuthorization(toShare: writedata as? Set<HKSampleType>, read: readdata as? Set<HKObjectType>, completion: {(success, error) in})
         }
     }
 

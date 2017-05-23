@@ -2,7 +2,7 @@
 //  UjIdopontViewController.swift
 //  ios-telemed
 //
-//  Created by Rita Sumegi on 2017. 05. 10..
+//  Created by Gecs Bernat on 2017. 05. 10..
 //  Copyright © 2017. ios2017. All rights reserved.
 //
 
