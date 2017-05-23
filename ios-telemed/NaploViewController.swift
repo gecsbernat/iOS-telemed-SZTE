@@ -15,21 +15,10 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var naploTable: UITableView!
     @IBOutlet weak var atlagText: UILabel!
     @IBOutlet weak var refreshBTN: UIBarButtonItem!
-    
+    var naplo : [NaploEntity] = [] //ebben taroljuk a coredata adatot
     var healthstore: HKHealthStore? = nil
     var readdata:NSSet? = nil
     var writedata:NSSet? = nil
-    
-    //export gomb
-    @IBAction func exportButton(_ sender: UIBarButtonItem) {
-        exportDatabase()
-    }
-    
-    @IBAction func refreshData(_ sender: UIBarButtonItem) {
-        fetchHealthkit()
-    }
-
-    var naplo : [NaploEntity] = [] //ebben taroljuk a coredata adatot
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,18 +33,10 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
             let diastolic = HKQuantityType.quantityType(forIdentifier: .bloodPressureDiastolic)
             readdata = NSSet(objects: systolic!, diastolic!)
             writedata = NSSet(objects: systolic!,diastolic!)
-            healthstore?.requestAuthorization(toShare: writedata as? Set<HKSampleType>, read: readdata as? Set<HKObjectType>, completion: {
-                (success, error) in
-                //
-            })
+            healthstore?.requestAuthorization(toShare: writedata as? Set<HKSampleType>, read: readdata as? Set<HKObjectType>, completion: {(success, error) in })
+        }else{
+            refreshBTN.isEnabled = false
         }
-    }
-    
-    //betoltes
-    override func viewWillAppear(_ animated: Bool) {
-        getData()
-        atlag()
-        naploTable.reloadData()
     }
     
     //mennyi sorbol all a table
@@ -95,6 +76,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
             getData()
         }
+        
         atlag()
         naploTable.reloadData()
     }
@@ -113,66 +95,31 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
-    //atlagertekek szamitasa
-    func atlag(){
-        var atlagDIA = 0
-        var atlagSYS = 0
-        var atlagPul = 0
-        var cnt = 0
-        var db = 0
-        
-        for ertek in naplo {
-            if(ertek.value(forKey: "dia") as! Int != 0 && ertek.value(forKey: "sys") as! Int != 0){
-                atlagDIA += ertek.value(forKey: "dia") as! Int
-                atlagSYS += ertek.value(forKey: "sys") as! Int
-                cnt += 1
-            }
-        }
-        
-        atlagDIA = (cnt != 0) ? atlagDIA / cnt : 0
-        atlagSYS = (cnt != 0) ? atlagSYS / cnt : 0
-        atlagPul = atlagSYS - atlagDIA
-        db = Int(cnt)
-        atlagText.text = String("\(db) minta átlaga: \(atlagSYS)/\(atlagDIA), pulzusnyomás: \(atlagPul)")
-    }
-    
     //adatkinyerés healthkitből
     func fetchHealthkit(){
-            let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: true)
-            let type = HKQuantityType.correlationType(forIdentifier: HKCorrelationTypeIdentifier.bloodPressure)
-            let sampleQuery = HKSampleQuery(sampleType: type!, predicate: nil, limit: 0, sortDescriptors: [sortDescriptor])
-            { (sampleQuery, results, error ) -> Void in
-                
-                let dataLst = results as? [HKCorrelation];
-                
-                for index in 0 ..< dataLst!.count
-                {
-                    
+        let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: true)
+        let type = HKQuantityType.correlationType(forIdentifier: HKCorrelationTypeIdentifier.bloodPressure)
+        
+        let sampleQuery = HKSampleQuery(sampleType: type!, predicate: nil, limit: 0, sortDescriptors: [sortDescriptor]){ (sampleQuery, results, error ) -> Void in
+            let dataLst = results as? [HKCorrelation];
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+                for index in 0 ..< dataLst!.count {
                     let data1 = (dataLst![index].objects(for: HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureSystolic)!)).first as? HKQuantitySample
-                    let data2 = dataLst![index].objects(for: HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureDiastolic)!).first as? HKQuantitySample
+                    let data2 = (dataLst![index].objects(for: HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureDiastolic)!)).first as? HKQuantitySample
                     
                     let date = data1?.startDate
                     let systolic = data1?.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
                     let diastolic = data2?.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
                     
-                    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
                     let bejegyzes = NaploEntity(context: context)
                     bejegyzes.datum = date! as NSDate?
                     bejegyzes.esemeny = "Vérnyomás mérés"
                     bejegyzes.dia = Int16(diastolic!)
                     bejegyzes.sys = Int16(systolic!)
-                    
-                    //ez fura
-                    if(self.naplo.contains(bejegyzes) == false){
-                        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-                        self.getData()
-                        self.atlag()
-                        self.naploTable.reloadData()
-                    }
+                    (UIApplication.shared.delegate as! AppDelegate).saveContext()
                 }
-                
             }
-            self.healthstore?.execute(sampleQuery)
+        self.healthstore?.execute(sampleQuery)
     }
     
     //export begin
@@ -184,7 +131,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     //tempfile letrehozas
     func saveAndExport(exportString: String) {
         let date: String = String(describing: Date())
-        let exportFilePath = NSTemporaryDirectory() + "naploexport"+date+".csv"
+        let exportFilePath = NSTemporaryDirectory() + "naploexport-"+date+".csv"
         let exportFileURL = NSURL(fileURLWithPath: exportFilePath)
         FileManager.default.createFile(atPath: exportFilePath, contents: NSData() as Data, attributes: nil)
 
@@ -215,7 +162,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         var SYS: Int?
         var event: String?
         
-        var export: String = NSLocalizedString("Dátum,Esemény,SYS,DIA\n", comment: "")
+        var export: String = NSLocalizedString("Datum,Esemeny,SYS,DIA\n", comment: "")
         for ertek in naplo {
             date = ertek.value(forKey: "datum") as? NSDate!
             DIA = ertek.value(forKey: "dia") as? Int!
@@ -225,6 +172,49 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
        // print("This is what the app will export: \(export)") //debug
         return export
+    }
+    
+    //atlagertekek szamitasa
+    func atlag(){
+        var atlagDIA = 0
+        var atlagSYS = 0
+        var atlagPul = 0
+        var cnt = 0
+        var db = 0
+        
+        for ertek in naplo {
+            if(ertek.value(forKey: "dia") as! Int != 0 && ertek.value(forKey: "sys") as! Int != 0){
+                atlagDIA += ertek.value(forKey: "dia") as! Int
+                atlagSYS += ertek.value(forKey: "sys") as! Int
+                cnt += 1
+            }
+        }
+        
+        atlagDIA = (cnt != 0) ? atlagDIA / cnt : 0
+        atlagSYS = (cnt != 0) ? atlagSYS / cnt : 0
+        atlagPul = atlagSYS - atlagDIA
+        db = Int(cnt)
+        atlagText.text = String("\(db) minta átlaga: \(atlagSYS)/\(atlagDIA), pulzusnyomás: \(atlagPul)")
+    }
+    
+    //export gomb
+    @IBAction func exportButton(_ sender: UIBarButtonItem) {
+        exportDatabase()
+    }
+    
+    //refresh gomb
+    @IBAction func refreshData(_ sender: UIBarButtonItem) {
+        fetchHealthkit()
+        getData()
+        atlag()
+        naploTable.reloadData()
+    }
+    
+    //betoltes
+    override func viewWillAppear(_ animated: Bool) {
+        getData()
+        atlag()
+        naploTable.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
