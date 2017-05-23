@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="GyogyszerEntity" representedClassName="GyogyszerEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="datum" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="mennyiseg" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="mennyisegTipus" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mikor" optional="YES" attributeType="String" syncable="YES"/>
@@ -18,7 +19,7 @@
         <attribute name="sys" optional="YES" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="GyogyszerEntity" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="GyogyszerEntity" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="IdopontEntity" positionX="-54" positionY="-9" width="128" height="90"/>
         <element name="NaploEntity" positionX="-54" positionY="-18" width="128" height="105"/>
     </elements>

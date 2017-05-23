@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zIi-VH-dPb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zIi-VH-dPb">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -199,7 +199,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CQe-Sa-2Va">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CQe-Sa-2Va" userLabel="GyogyszerTable">
                                 <rect key="frame" x="0.0" y="20" width="375" height="598"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -208,7 +208,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WEp-kH-Xny" id="7Jl-rb-JgZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -221,11 +221,13 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="eB8-Sv-1u6">
                             <connections>
                                 <action selector="addItem:" destination="Ifb-Xc-vjg" id="jOj-nX-E80"/>
+                                <segue destination="qkH-P5-F6E" kind="show" id="OIl-DW-wlS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="eB8-Sv-1u6" id="WZp-Rj-C2Z"/>
+                        <outlet property="medTable" destination="CQe-Sa-2Va" id="q86-fR-IiI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QDc-Qd-wYx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -508,6 +510,69 @@
             </objects>
             <point key="canvasLocation" x="-162.40000000000001" y="1405.5472263868066"/>
         </scene>
+        <!--Uj Gyogyszer View Controller-->
+        <scene sceneID="ArI-Ur-sUE">
+            <objects>
+                <viewController id="4IM-cF-QtK" customClass="UjGyogyszerViewController" customModule="ios_telemed" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="J8x-ti-cgQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="1Sn-jp-OqD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fAo-AU-WZ1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Gyogyszer neve" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bZ5-as-3iw">
+                                <rect key="frame" x="16" y="82" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mennyiseg" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FVu-Cr-KCF">
+                                <rect key="frame" x="16" y="120" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="437-v0-Z1A">
+                                <rect key="frame" x="0.0" y="158" width="375" height="138"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dCe-76-B20">
+                                <rect key="frame" x="0.0" y="303" width="375" height="175"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="517252209.76763999">
+                                    <!--2017-05-23 17:10:09 +0000-->
+                                </date>
+                            </datePicker>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="QcI-0b-z8h">
+                        <barButtonItem key="leftBarButtonItem" title="Mégse" id="dAl-wW-78b">
+                            <connections>
+                                <action selector="cancelAction:" destination="4IM-cF-QtK" id="fVD-qh-YQ8"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Mentés" id="jmU-le-15G">
+                            <connections>
+                                <action selector="saveAction:" destination="4IM-cF-QtK" id="YUf-RZ-y8L"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="datePicker" destination="dCe-76-B20" id="bIC-iI-Bi8"/>
+                        <outlet property="medAmount" destination="FVu-Cr-KCF" id="wKP-ny-TH8"/>
+                        <outlet property="medAmountType" destination="437-v0-Z1A" id="Iaj-Hs-VVn"/>
+                        <outlet property="medName" destination="bZ5-as-3iw" id="vJp-GQ-4Lf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EZD-5w-ba5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1792.8" y="1399.2503748125939"/>
+        </scene>
         <!--Gyógyszerek-->
         <scene sceneID="ktb-3q-vgp">
             <objects>
@@ -599,7 +664,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="59r-rv-YU6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2645.5999999999999" y="1304.7976011994003"/>
+            <point key="canvasLocation" x="3584.8000000000002" y="1304.7976011994003"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qQ9-JD-edY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qkH-P5-F6E" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ue3-F4-aBE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4IM-cF-QtK" kind="relationship" relationship="rootViewController" id="QFT-6L-CUo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Si-2k-E5m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="853.60000000000002" y="1399.2503748125939"/>
         </scene>
     </scenes>
     <resources>

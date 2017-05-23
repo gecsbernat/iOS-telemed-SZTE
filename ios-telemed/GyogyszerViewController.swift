@@ -6,58 +6,85 @@
 //  Copyright © 2017 ios2017. All rights reserved.
 //
 import UIKit
+import CoreData
 
-class GyogyszerViewController: UIViewController {
+class GyogyszerViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
     
     
     @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet weak var medTable: UITableView!
+    var meds: [GyogyszerEntity] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-    }
-    @IBAction func addItem(_ sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title: "Új gyógyszer", message: "", preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "Hozzáadás", style: .default, handler: ({
-            (_) in
-           //TODO
-        }))
-        let cancelAction = UIAlertAction(title: "Mégse", style: .cancel, handler: nil)
-        alertController.addTextField(configurationHandler: {
-            (textField) in
-            
-            textField.placeholder = "Gyógyszer neve"
-        })
-        /*Placeholderek, ide picker félék kellenek, de nemtom hogy*/
-        alertController.addTextField(configurationHandler: {
-            (textField) in
-            
-            textField.placeholder = "Mennyiség típusa"
-        })
-        alertController.addTextField(configurationHandler: {
-            (textField) in
-            
-            textField.placeholder = "Mennyiség"
-        })
-        alertController.addTextField(configurationHandler: {
-            (textField) in
-            
-            textField.placeholder = "Mikor"
-        })
-
-        alertController.addAction(confirmAction)
-        alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion: nil)
-        
+        medTable.dataSource = self
+        medTable.delegate = self
+        medTable.reloadData()
     }
     
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning(){
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        getMeds()
+        medTable.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return meds.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = medTable.dequeueReusableCell(withIdentifier: "MedCell")
+        let record = meds[indexPath.row]
+        var datum = String(describing: record.datum!)
+        let index = datum.index(datum.startIndex, offsetBy: 16)
+        datum = datum.substring(to: index)
+        cell?.textLabel?.text = record.nev! + ", " + String(describing: record.mennyiseg) + ", " + record.mennyisegTipus! + ", " + record.mikor!
+        cell?.detailTextLabel?.text = datum
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        if editingStyle == .delete {
+            let record = meds[indexPath.row]
+            context.delete(record)
+            
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            getMeds()
+            medTable.reloadData()
+        }
+        
+    }
+    
+    func getMeds(){
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<GyogyszerEntity> = GyogyszerEntity.fetchRequest()
+        let sort = NSSortDescriptor(key: "datum", ascending: false)
+        fetchRequest.sortDescriptors = [sort]
+        do{
+            meds = try context.fetch(fetchRequest)
+        }
+        catch{
+            print("Hiba az adatkinyeres soran!")
+        }
 
+    }
+    
+    func saveMeds(nev: String, mennyiseg: Int16, mennyisegTipus: String, mikor: String, date: String){
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let med = GyogyszerEntity(context: context)
+        med.datum = NSDate()
+        med.mennyiseg = mennyiseg
+        med.mennyisegTipus = mennyisegTipus
+        med.mikor = mikor
+        med.nev = nev
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        meds.insert(med, at: 0)
+    }
     /*
      // MARK: - Navigation
      

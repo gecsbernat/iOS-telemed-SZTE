@@ -20,9 +20,8 @@
 		71D06CDD1ED46FC60054951C /* BarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D06CDC1ED46FC60054951C /* BarChartViewController.swift */; };
 		71F8E4BB1EC21C6500E8C234 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71F8E4BA1EC21C6500E8C234 /* HealthKit.framework */; };
 		71F8E4BD1EC21E2700E8C234 /* IdopontokViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F8E4BC1EC21E2700E8C234 /* IdopontokViewController.swift */; };
-		B2649D6D1EB791DD00FF2D8F /* GyogyszerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2649D6C1EB791DD00FF2D8F /* GyogyszerModel.swift */; };
 		B2649D6F1EB7952000FF2D8F /* GyogyszerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2649D6E1EB7952000FF2D8F /* GyogyszerViewController.swift */; };
-		B2649D711EB79E0B00FF2D8F /* StringsHU.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2649D701EB79E0B00FF2D8F /* StringsHU.strings */; };
+		B2A95ED71ED4A10300B3BEAA /* UjGyogyszerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A95ED61ED4A10300B3BEAA /* UjGyogyszerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,9 +85,8 @@
 		71F8E4B81EC21C6500E8C234 /* ios-telemed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ios-telemed.entitlements"; sourceTree = "<group>"; };
 		71F8E4BA1EC21C6500E8C234 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		71F8E4BC1EC21E2700E8C234 /* IdopontokViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IdopontokViewController.swift; path = ../IdopontokViewController.swift; sourceTree = "<group>"; };
-		B2649D6C1EB791DD00FF2D8F /* GyogyszerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GyogyszerModel.swift; sourceTree = "<group>"; };
 		B2649D6E1EB7952000FF2D8F /* GyogyszerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GyogyszerViewController.swift; sourceTree = "<group>"; };
-		B2649D701EB79E0B00FF2D8F /* StringsHU.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = StringsHU.strings; sourceTree = "<group>"; };
+		B2A95ED61ED4A10300B3BEAA /* UjGyogyszerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UjGyogyszerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,13 +130,12 @@
 				B2649D6E1EB7952000FF2D8F /* GyogyszerViewController.swift */,
 				71F8E4BC1EC21E2700E8C234 /* IdopontokViewController.swift */,
 				71A9407D1EC30F3A001718AD /* UjIdopontViewController.swift */,
-				B2649D6C1EB791DD00FF2D8F /* GyogyszerModel.swift */,
 				3F60D9381EB1E5FA00B27E42 /* Main.storyboard */,
 				3F60D93E1EB1E5FA00B27E42 /* Assets.xcassets */,
 				3F60D9401EB1E5FA00B27E42 /* LaunchScreen.storyboard */,
 				3F60D9431EB1E5FA00B27E42 /* Info.plist */,
 				3F60D93B1EB1E5FA00B27E42 /* ios_telemed.xcdatamodeld */,
-				B2649D701EB79E0B00FF2D8F /* StringsHU.strings */,
+				B2A95ED61ED4A10300B3BEAA /* UjGyogyszerViewController.swift */,
 			);
 			path = "ios-telemed";
 			sourceTree = "<group>";
@@ -262,7 +259,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2649D711EB79E0B00FF2D8F /* StringsHU.strings in Resources */,
 				3F60D9421EB1E5FA00B27E42 /* LaunchScreen.storyboard in Resources */,
 				3F60D93F1EB1E5FA00B27E42 /* Assets.xcassets in Resources */,
 				3F60D93A1EB1E5FA00B27E42 /* Main.storyboard in Resources */,
@@ -276,9 +272,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2649D6D1EB791DD00FF2D8F /* GyogyszerModel.swift in Sources */,
 				3F28DEB61EB1ED1F00483B29 /* NaploViewController.swift in Sources */,
 				71D06CDD1ED46FC60054951C /* BarChartViewController.swift in Sources */,
+				B2A95ED71ED4A10300B3BEAA /* UjGyogyszerViewController.swift in Sources */,
 				7117BFAD1EB8FDDE000A7AC9 /* UjBejegyzesViewController.swift in Sources */,
 				71A9407E1EC30F3A001718AD /* UjIdopontViewController.swift in Sources */,
 				3F60D93D1EB1E5FA00B27E42 /* ios_telemed.xcdatamodeld in Sources */,
