@@ -15,12 +15,60 @@
 		3F60D9421EB1E5FA00B27E42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F60D9401EB1E5FA00B27E42 /* LaunchScreen.storyboard */; };
 		7117BFAD1EB8FDDE000A7AC9 /* UjBejegyzesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7117BFAC1EB8FDDE000A7AC9 /* UjBejegyzesViewController.swift */; };
 		71A9407E1EC30F3A001718AD /* UjIdopontViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A9407D1EC30F3A001718AD /* UjIdopontViewController.swift */; };
+		71D06CD71ED469FE0054951C /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71D06CD21ED469C20054951C /* Charts.framework */; };
+		71D06CD81ED469FE0054951C /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 71D06CD21ED469C20054951C /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		71D06CDD1ED46FC60054951C /* BarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D06CDC1ED46FC60054951C /* BarChartViewController.swift */; };
 		71F8E4BB1EC21C6500E8C234 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71F8E4BA1EC21C6500E8C234 /* HealthKit.framework */; };
 		71F8E4BD1EC21E2700E8C234 /* IdopontokViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F8E4BC1EC21E2700E8C234 /* IdopontokViewController.swift */; };
 		B2649D6D1EB791DD00FF2D8F /* GyogyszerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2649D6C1EB791DD00FF2D8F /* GyogyszerModel.swift */; };
 		B2649D6F1EB7952000FF2D8F /* GyogyszerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2649D6E1EB7952000FF2D8F /* GyogyszerViewController.swift */; };
 		B2649D711EB79E0B00FF2D8F /* StringsHU.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2649D701EB79E0B00FF2D8F /* StringsHU.strings */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		71D06CD11ED469C20054951C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71D06CCB1ED469C10054951C /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06165F241D8110E600722320;
+			remoteInfo = Charts;
+		};
+		71D06CD31ED469C20054951C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71D06CCB1ED469C10054951C /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06B120D51D811E6200D14B02;
+			remoteInfo = ChartsRealm;
+		};
+		71D06CD51ED469C20054951C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71D06CCB1ED469C10054951C /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06165F2E1D8110E600722320;
+			remoteInfo = ChartsTests;
+		};
+		71D06CD91ED469FE0054951C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71D06CCB1ED469C10054951C /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 06165F231D8110E600722320;
+			remoteInfo = Charts;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		71D06CDB1ED469FE0054951C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				71D06CD81ED469FE0054951C /* Charts.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3F28DEB51EB1ED1F00483B29 /* NaploViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NaploViewController.swift; sourceTree = "<group>"; };
@@ -33,6 +81,8 @@
 		3F60D9431EB1E5FA00B27E42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7117BFAC1EB8FDDE000A7AC9 /* UjBejegyzesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UjBejegyzesViewController.swift; sourceTree = "<group>"; };
 		71A9407D1EC30F3A001718AD /* UjIdopontViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UjIdopontViewController.swift; sourceTree = "<group>"; };
+		71D06CCB1ED469C10054951C /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "ios-telemed/Charts/Charts.xcodeproj"; sourceTree = "<group>"; };
+		71D06CDC1ED46FC60054951C /* BarChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChartViewController.swift; sourceTree = "<group>"; };
 		71F8E4B81EC21C6500E8C234 /* ios-telemed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ios-telemed.entitlements"; sourceTree = "<group>"; };
 		71F8E4BA1EC21C6500E8C234 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		71F8E4BC1EC21E2700E8C234 /* IdopontokViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IdopontokViewController.swift; path = ../IdopontokViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +97,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71F8E4BB1EC21C6500E8C234 /* HealthKit.framework in Frameworks */,
+				71D06CD71ED469FE0054951C /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +126,7 @@
 			children = (
 				71F8E4B81EC21C6500E8C234 /* ios-telemed.entitlements */,
 				3F60D9341EB1E5FA00B27E42 /* AppDelegate.swift */,
+				71D06CDC1ED46FC60054951C /* BarChartViewController.swift */,
 				3F28DEB51EB1ED1F00483B29 /* NaploViewController.swift */,
 				7117BFAC1EB8FDDE000A7AC9 /* UjBejegyzesViewController.swift */,
 				B2649D6E1EB7952000FF2D8F /* GyogyszerViewController.swift */,
@@ -91,9 +143,20 @@
 			path = "ios-telemed";
 			sourceTree = "<group>";
 		};
+		71D06CCC1ED469C10054951C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				71D06CD21ED469C20054951C /* Charts.framework */,
+				71D06CD41ED469C20054951C /* ChartsRealm.framework */,
+				71D06CD61ED469C20054951C /* ChartsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		71F8E4B91EC21C6500E8C234 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				71D06CCB1ED469C10054951C /* Charts.xcodeproj */,
 				71F8E4BA1EC21C6500E8C234 /* HealthKit.framework */,
 			);
 			name = Frameworks;
@@ -109,10 +172,12 @@
 				3F60D92D1EB1E5FA00B27E42 /* Sources */,
 				3F60D92E1EB1E5FA00B27E42 /* Frameworks */,
 				3F60D92F1EB1E5FA00B27E42 /* Resources */,
+				71D06CDB1ED469FE0054951C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				71D06CDA1ED469FE0054951C /* PBXTargetDependency */,
 			);
 			name = "ios-telemed";
 			productName = "ios-telemed";
@@ -155,12 +220,42 @@
 			mainGroup = 3F60D9281EB1E5FA00B27E42;
 			productRefGroup = 3F60D9321EB1E5FA00B27E42 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 71D06CCC1ED469C10054951C /* Products */;
+					ProjectRef = 71D06CCB1ED469C10054951C /* Charts.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3F60D9301EB1E5FA00B27E42 /* ios-telemed */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		71D06CD21ED469C20054951C /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = 71D06CD11ED469C20054951C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		71D06CD41ED469C20054951C /* ChartsRealm.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ChartsRealm.framework;
+			remoteRef = 71D06CD31ED469C20054951C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		71D06CD61ED469C20054951C /* ChartsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ChartsTests.xctest;
+			remoteRef = 71D06CD51ED469C20054951C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3F60D92F1EB1E5FA00B27E42 /* Resources */ = {
@@ -183,6 +278,7 @@
 			files = (
 				B2649D6D1EB791DD00FF2D8F /* GyogyszerModel.swift in Sources */,
 				3F28DEB61EB1ED1F00483B29 /* NaploViewController.swift in Sources */,
+				71D06CDD1ED46FC60054951C /* BarChartViewController.swift in Sources */,
 				7117BFAD1EB8FDDE000A7AC9 /* UjBejegyzesViewController.swift in Sources */,
 				71A9407E1EC30F3A001718AD /* UjIdopontViewController.swift in Sources */,
 				3F60D93D1EB1E5FA00B27E42 /* ios_telemed.xcdatamodeld in Sources */,
@@ -193,6 +289,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		71D06CDA1ED469FE0054951C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Charts;
+			targetProxy = 71D06CD91ED469FE0054951C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3F60D9381EB1E5FA00B27E42 /* Main.storyboard */ = {
@@ -310,6 +414,7 @@
 		3F60D9471EB1E5FA00B27E42 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "ios-telemed/ios-telemed.entitlements";
 				DEVELOPMENT_TEAM = PJ36P93S8P;
@@ -325,6 +430,7 @@
 		3F60D9481EB1E5FA00B27E42 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "ios-telemed/ios-telemed.entitlements";
 				DEVELOPMENT_TEAM = PJ36P93S8P;

@@ -298,6 +298,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Napló" id="pqH-wg-q7a">
+                        <barButtonItem key="leftBarButtonItem" title="Grafikon" id="jrk-sl-CZo">
+                            <connections>
+                                <segue destination="wO8-wR-thB" kind="show" id="aq9-h3-bhY"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="K4K-7O-tuG">
                                 <connections>
@@ -469,6 +474,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ObD-Di-8dk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-57" y="-224"/>
+        </scene>
+        <!--Grafikon-->
+        <scene sceneID="wnf-E7-B0T">
+            <objects>
+                <viewController title="Grafikon" id="wO8-wR-thB" customClass="BarChartViewController" customModule="ios_telemed" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Z60-JE-FEf"/>
+                        <viewControllerLayoutGuide type="bottom" id="NQx-kT-H0l"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Y2R-LF-Rmk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lEn-Bp-GJr" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lEn-Bp-GJr" firstAttribute="bottom" secondItem="NQx-kT-H0l" secondAttribute="top" id="G6H-XH-efe"/>
+                            <constraint firstAttribute="trailing" secondItem="lEn-Bp-GJr" secondAttribute="trailing" id="PUm-CH-QQ1"/>
+                            <constraint firstItem="lEn-Bp-GJr" firstAttribute="top" secondItem="Z60-JE-FEf" secondAttribute="bottom" id="erD-4c-hI8"/>
+                            <constraint firstItem="lEn-Bp-GJr" firstAttribute="leading" secondItem="Y2R-LF-Rmk" secondAttribute="leading" id="pFQ-Hp-r0Q"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="linechart" destination="lEn-Bp-GJr" id="i0H-Go-i2L"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ipe-Sr-WS4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-162.40000000000001" y="1405.5472263868066"/>
         </scene>
         <!--Gyógyszerek-->
         <scene sceneID="ktb-3q-vgp">
