@@ -34,7 +34,11 @@ class BarChartViewController: UIViewController {
     
     func convertdata(){
         for ertek in naplo {
-            idopontok.append(String(describing: ertek.value(forKey: "datum")))
+            var datum = String(describing: ertek.value(forKey: "datum")!)
+            let index = datum.index(datum.startIndex, offsetBy: 10)
+            let index2 = datum.index(datum.startIndex, offsetBy: 6)
+            datum = datum.substring(to: index) + "\n" + datum.substring(from: index).substring(to: index2)
+            idopontok.append(datum)
             systolic.append(ertek.value(forKey: "sys") as! Double)
             diastolic.append(ertek.value(forKey: "dia") as! Double)
         }
@@ -71,6 +75,8 @@ class BarChartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getData()
+        convertdata()
         linechart.noDataText = "Nincs adat."
         linechart.chartDescription?.text = "Vérnyomás adatok"
         linechart.legend.enabled = true
@@ -79,8 +85,8 @@ class BarChartViewController: UIViewController {
         linechart.scaleYEnabled = false
         linechart.doubleTapToZoomEnabled = false
         
-        getData()
-        convertdata()
+        linechart.xAxis.valueFormatter = IndexAxisValueFormatter(values: idopontok)
+        linechart.xAxis.granularity = 1
         
         if(!naplo.isEmpty){
             setChart(dataPoints: idopontok, systolic: systolic, diastolic: diastolic)

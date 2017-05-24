@@ -43,6 +43,7 @@ class UjBejegyzesViewController: UIViewController {
     @IBAction func datePicker(_ sender: UIDatePicker) {
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
+        dateformatter.timeZone = TimeZone.current
         date = sender.date as NSDate
         idopontText.text = dateformatter.string(from: sender.date)
     }

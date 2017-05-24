@@ -199,9 +199,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CQe-Sa-2Va" userLabel="GyogyszerTable">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CQe-Sa-2Va" userLabel="GyogyszerTable">
                                 <rect key="frame" x="0.0" y="20" width="375" height="598"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MedCell" textLabel="B4A-Mr-AiR" detailTextLabel="WBX-NM-hf6" style="IBUITableViewCellStyleSubtitle" id="WEp-kH-Xny">
@@ -232,6 +231,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="CQe-Sa-2Va" secondAttribute="trailing" id="EQU-7O-VRK"/>
+                            <constraint firstItem="CQe-Sa-2Va" firstAttribute="bottom" secondItem="IFJ-sj-1Rv" secondAttribute="top" id="F8A-cJ-Sg3"/>
+                            <constraint firstItem="CQe-Sa-2Va" firstAttribute="top" secondItem="lhg-c3-hoC" secondAttribute="top" constant="20" symbolic="YES" id="uLk-NI-92A"/>
+                            <constraint firstItem="CQe-Sa-2Va" firstAttribute="leading" secondItem="lhg-c3-hoC" secondAttribute="leading" id="ywi-go-KfM"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Gyógyszerek" id="Wxv-Ef-Zmk">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="eB8-Sv-1u6">
@@ -506,16 +511,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lEn-Bp-GJr" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="16" y="72" width="343" height="538"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="lEn-Bp-GJr" firstAttribute="bottom" secondItem="NQx-kT-H0l" secondAttribute="top" id="G6H-XH-efe"/>
-                            <constraint firstAttribute="trailing" secondItem="lEn-Bp-GJr" secondAttribute="trailing" id="PUm-CH-QQ1"/>
-                            <constraint firstItem="lEn-Bp-GJr" firstAttribute="top" secondItem="Z60-JE-FEf" secondAttribute="bottom" id="erD-4c-hI8"/>
-                            <constraint firstItem="lEn-Bp-GJr" firstAttribute="leading" secondItem="Y2R-LF-Rmk" secondAttribute="leading" id="pFQ-Hp-r0Q"/>
+                            <constraint firstItem="lEn-Bp-GJr" firstAttribute="bottom" secondItem="NQx-kT-H0l" secondAttribute="top" constant="-8" id="G6H-XH-efe"/>
+                            <constraint firstAttribute="trailing" secondItem="lEn-Bp-GJr" secondAttribute="trailing" constant="16" id="PUm-CH-QQ1"/>
+                            <constraint firstItem="lEn-Bp-GJr" firstAttribute="top" secondItem="Z60-JE-FEf" secondAttribute="bottom" constant="8" id="erD-4c-hI8"/>
+                            <constraint firstItem="lEn-Bp-GJr" firstAttribute="leading" secondItem="Y2R-LF-Rmk" secondAttribute="leading" constant="16" id="pFQ-Hp-r0Q"/>
                         </constraints>
                     </view>
                     <connections>
