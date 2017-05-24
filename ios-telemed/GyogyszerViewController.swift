@@ -41,7 +41,7 @@ class GyogyszerViewController: UIViewController,UITableViewDataSource, UITableVi
         var datum = String(describing: record.datum!)
         let index = datum.index(datum.startIndex, offsetBy: 16)
         datum = datum.substring(to: index)
-        cell?.textLabel?.text = record.nev! + ", " + String(describing: record.mennyiseg) + ", " + record.mennyisegTipus! + ", " + record.mikor!
+        cell?.textLabel?.text = record.nev! + ", " + String(describing: record.mennyiseg) + " " + record.mennyisegTipus! + ", " + record.mikor!
         cell?.detailTextLabel?.text = datum
         return cell!
     }

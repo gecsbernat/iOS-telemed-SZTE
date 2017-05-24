@@ -84,7 +84,7 @@ class UjGyogyszerViewController: UIViewController, UIPickerViewDataSource, UIPic
             }
             record.mennyisegTipus = selectedType
             record.mikor = selectedWhen
-            record.datum = NSDate()
+            record.datum = Date() as NSDate
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
             dismiss(animated: true, completion: nil)
 

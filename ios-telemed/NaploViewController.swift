@@ -182,6 +182,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     //atlagertekek szamitasa
     func atlag(){
+    
         var atlagDIA = 0
         var atlagSYS = 0
         var atlagPul = 0
@@ -201,6 +202,83 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         atlagPul = atlagSYS - atlagDIA
         db = Int(cnt)
         atlagText.text = String("\(db) minta átlaga: \(atlagSYS)/\(atlagDIA), pulzusnyomás: \(atlagPul)")
+        
+        //Mozgó(?) átlag, 1st take DISCLAIMER!!: Jelenleg 7 mérésenként bontja szét, nem nap, majd átalakítom
+        let sections = naplo.count / 7
+        let last = naplo.count % 7
+        
+        //Ezekre majd entity+data
+        let refSys = 120
+        let refDia = 80
+        let offsetProblemSys = 40
+        let offsetProblemDia = 30
+        
+        let lastSys = naplo[0].value(forKey: "sys") as! Int
+        let lastDia = naplo[0].value(forKey: "dia") as! Int
+        var avgSys : [Int] = []
+        var avgDia : [Int] = []
+        
+        for var i in 0..<sections
+        {
+            avgSys.append(0)
+            avgDia.append(0)
+        }
+        
+        for var i in 0..<sections
+        {
+            for var j in 1...8
+            {
+                if(naplo[j + i].value(forKey: "dia") as! Int != 0 && naplo[j + i].value(forKey: "sys") as! Int != 0){
+                    avgSys[i] += naplo[j + i].value(forKey: "sys") as! Int
+                    avgDia[i] += naplo[j + i].value(forKey: "dia") as! Int
+                }
+            }
+        }
+        for var i in 0..<sections
+        {
+            avgSys[i] /= 7
+            avgDia[i] /= 7
+        }
+        if ( last > 0 ){
+            avgSys.append(0)
+            avgDia.append(0)
+            for var i in 0..<last
+            {
+                avgSys[sections] += naplo[naplo.count - last + i].value(forKey: "sys") as! Int
+                avgDia[sections] += naplo[naplo.count - last + i].value(forKey: "dia") as! Int
+            }
+            avgSys[sections] /= last
+            avgDia[sections] /= last
+            for var i in 0...sections
+            {
+                print("\(avgSys[i])/\(avgDia[i])")
+            }
+        } else {
+            for var i in 0..<sections
+            {
+                print("\(avgSys[i])/\(avgDia[i])")
+            }
+        }
+        if (lastSys >= refSys + offsetProblemSys && lastDia >= refDia + offsetProblemDia){
+            print("Mindkét vérnyomásmérték jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!")
+        } else if (lastSys < refSys + offsetProblemSys && lastDia >= refDia + offsetProblemDia){
+            print("A diasztolés jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!")
+        } else if (lastSys >= refSys + offsetProblemSys && lastDia < refDia + offsetProblemDia){
+            print("A szisztolés jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!")
+        } else {
+            print("Nincs a korlátot átlépő kiugró érték")
+        }
+        
+        if (lastSys >= avgSys[0] + offsetProblemSys && lastDia >= avgDia[0] + offsetProblemDia){
+            print("Mindkét vérnyomásmérték jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
+        } else if (lastSys < avgSys[0] + offsetProblemSys && lastDia >= avgDia[0] + offsetProblemDia){
+            print("A diasztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
+        } else if (lastSys >= avgSys[0] + offsetProblemSys && lastDia < avgDia[0] + offsetProblemDia){
+            print("A szisztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
+        } else {
+            print("Nincs a korlátot átlépő kiugró érték")
+        }
+        
     }
     
     //export gomb
