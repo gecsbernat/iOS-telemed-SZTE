@@ -203,6 +203,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         db = Int(cnt)
         atlagText.text = String("\(db) minta átlaga: \(atlagSYS)/\(atlagDIA), pulzusnyomás: \(atlagPul)")
         
+        if(naplo.count > 0){
         //Mozgó(?) átlag, 1st take DISCLAIMER!!: Jelenleg 7 mérésenként bontja szét, nem nap, majd átalakítom
         let sections = naplo.count / 7
         let last = naplo.count % 7
@@ -278,7 +279,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         } else {
             print("Nincs a korlátot átlépő kiugró érték")
         }
-        
+        }
     }
     
     //export gomb
