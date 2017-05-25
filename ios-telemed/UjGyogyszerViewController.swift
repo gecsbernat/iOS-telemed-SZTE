@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-import EventKit
+import UserNotifications
 
 class UjGyogyszerViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
@@ -18,6 +18,13 @@ class UjGyogyszerViewController: UIViewController, UIPickerViewDataSource, UIPic
 
     @IBOutlet weak var medAmountType: UIPickerView!
     @IBOutlet weak var datePicker: UIDatePicker!
+    
+    var time = NSDate()
+    
+    @IBAction func timepicker(_ sender: UIDatePicker) {
+        time = sender.date as NSDate
+    }
+    
     
     var selectedType : String?
     var selectedWhen : String?
@@ -84,7 +91,28 @@ class UjGyogyszerViewController: UIViewController, UIPickerViewDataSource, UIPic
             }
             record.mennyisegTipus = selectedType
             record.mikor = selectedWhen
-            record.datum = Date() as NSDate
+            record.datum = time
+            
+            //notification
+            let center = UNUserNotificationCenter.current()
+            let content = UNMutableNotificationContent()
+            content.title = "Gyógyszerbevétel időpontja"
+            content.subtitle = "Kérem vegye be \(String(describing: medName.text!)) nevű gyógyszerét!"
+            content.body = "\(record.mennyiseg) \(String(describing: selectedType!)) \(String(describing: selectedWhen!))"
+            content.sound = UNNotificationSound.default()
+            content.badge = 1
+            let triggerDaily = Calendar.current.dateComponents([.hour,.minute], from: time as Date)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
+            let identifier = "\(String(describing: medName.text!))"
+            let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+            center.add(request, withCompletionHandler: { (error) in
+                if error != nil {
+                    print(error!)
+                }else{
+                    print(request)
+                }
+            })
+            
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
             dismiss(animated: true, completion: nil)
 
