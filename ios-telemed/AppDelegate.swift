@@ -33,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Notifications not allowed.")
             }
         }
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
         return true
     }
 

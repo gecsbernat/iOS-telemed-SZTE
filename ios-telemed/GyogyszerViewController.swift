@@ -7,6 +7,7 @@
 //
 import UIKit
 import CoreData
+import UserNotifications
 
 class GyogyszerViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
     
@@ -14,12 +15,17 @@ class GyogyszerViewController: UIViewController,UITableViewDataSource, UITableVi
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var medTable: UITableView!
     var meds: [GyogyszerEntity] = []
+    let center = UNUserNotificationCenter.current()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         medTable.dataSource = self
         medTable.delegate = self
         medTable.reloadData()
+        if(meds.count == 0){
+            center.removeAllDeliveredNotifications()
+            center.removeAllPendingNotificationRequests()
+        }
     }
     
     override func didReceiveMemoryWarning(){
@@ -51,9 +57,11 @@ class GyogyszerViewController: UIViewController,UITableViewDataSource, UITableVi
         
         if editingStyle == .delete {
             let record = meds[indexPath.row]
+            let id = record.nev
             context.delete(record)
             
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            center.removePendingNotificationRequests(withIdentifiers: [id!])
             getMeds()
             medTable.reloadData()
         }
