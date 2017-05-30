@@ -203,82 +203,142 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         db = Int(cnt)
         atlagText.text = String("\(db) minta átlaga: \(atlagSYS)/\(atlagDIA), pulzusnyomás: \(atlagPul)")
         
-        if(naplo.count > 0){
-        //Mozgó(?) átlag, 1st take DISCLAIMER!!: Jelenleg 7 mérésenként bontja szét, nem nap, majd átalakítom
-        let sections = naplo.count / 7
-        let last = naplo.count % 7
+        if(naplo.count > 1){
+            
+            //Referenciák, ezekre majd entity+data
+            let refSys = 120
+            let refDia = 80
+            let offsetProblemSys = 20
+            let offsetProblemDia = 20
+            let sectionSize = 5
+            
+            //Napok kigyűjtése
+            var days = 0
+            var dayCounter = 0
+            
+            //Előző nap, ciklusban kell
+            var prevDay = naplo[0].value(forKey: "datum") as! NSDate
         
-        //Ezekre majd entity+data
-        let refSys = 120
-        let refDia = 80
-        let offsetProblemSys = 40
-        let offsetProblemDia = 30
-        
-        let lastSys = naplo[0].value(forKey: "sys") as! Int
-        let lastDia = naplo[0].value(forKey: "dia") as! Int
-        var avgSys : [Int] = []
-        var avgDia : [Int] = []
-        
-        for var i in 0..<sections
-        {
-            avgSys.append(0)
-            avgDia.append(0)
-        }
-        
-        for var i in 0..<sections
-        {
-            for var j in 1...8
+            //Utolsó felvett adat, nem tartozik az átlaghoz
+            let lastSys = naplo[0].value(forKey: "sys") as! Int
+            let lastDia = naplo[0].value(forKey: "dia") as! Int
+            
+            //Munkatömbök
+            var avgSys : [Int] = []
+            var avgDia : [Int] = []
+            var dailySys : [Int] = []
+            var dailyDia : [Int] = []
+            var dailyCount : [Int] = []
+
+            //Megszámoljuk a napokat
+            for i in 1..<naplo.count
             {
-                if(naplo[j + i].value(forKey: "dia") as! Int != 0 && naplo[j + i].value(forKey: "sys") as! Int != 0){
-                    avgSys[i] += naplo[j + i].value(forKey: "sys") as! Int
-                    avgDia[i] += naplo[j + i].value(forKey: "dia") as! Int
+                let order = NSCalendar.current.compare(prevDay as Date, to: (naplo[i].value(forKey: "datum") as! NSDate) as Date,
+                                                       toGranularity: .day)
+                if((order != .orderedSame) || (i == 1 && order == .orderedSame)){
+                    days += 1
+                }
+                prevDay = naplo[i].value(forKey: "datum") as! NSDate
+            }
+            //Ujrainicializálás
+            prevDay = naplo[1].value(forKey: "datum") as! NSDate
+            let sections = days / sectionSize
+            //let last = days % sectionSize
+            
+            //0-kal való feltöltés
+            for _ in 0..<days
+            {
+                dailySys.append(0)
+                dailyDia.append(0)
+                dailyCount.append(0)
+            }
+            
+            //Kigyűjtöm tömbökbe a napra lebontott mérések összegét
+            for i in 1..<naplo.count
+            {
+                let order = NSCalendar.current.compare(prevDay as Date, to: (naplo[i].value(forKey: "datum") as! NSDate) as Date,
+                                                       toGranularity: .day)
+                if(order != .orderedSame && i != 1){
+                    dayCounter += 1
+                }
+                dailySys[dayCounter] += naplo[i].value(forKey: "sys") as! Int
+                dailyDia[dayCounter] += naplo[i].value(forKey: "dia") as! Int
+                dailyCount[dayCounter] += 1
+
+                prevDay = naplo[i].value(forKey: "datum") as! NSDate
+            }
+            
+            //Itt átlagolom
+            for i in 0..<dayCounter
+            {
+                dailySys[i] /= dailyCount[i]
+                dailyDia[i] /= dailyCount[i]
+            }
+            
+            //A végleges tömb feltöltése
+            for _ in 0..<sections
+            {
+                avgSys.append(0)
+                avgDia.append(0)
+            }
+        
+            //Hány napra való bontásból számoljunk átlagot?
+            for i in 0..<sections
+            {
+                for j in 0..<sectionSize
+                {
+                    if(dailySys[j + i * sectionSize] != 0 && dailyDia[j + i * sectionSize] != 0){
+                        
+                        avgSys[i] += dailySys[j + i * sectionSize]
+                        avgDia[i] += dailyDia[j + i * sectionSize]
+                    }
                 }
             }
-        }
-        for var i in 0..<sections
-        {
-            avgSys[i] /= 7
-            avgDia[i] /= 7
-        }
-        if ( last > 0 ){
-            avgSys.append(0)
-            avgDia.append(0)
-            for var i in 0..<last
+            //Itt átlagolom a végleges össyegeket
+            for i in 0..<sections
+            {
+                avgSys[i] /= sectionSize
+                avgDia[i] /= sectionSize
+            }
+            /*  if ( last > 0 ){
+                avgSys.append(0)
+                avgDia.append(0)
+            for i in 0..<last
             {
                 avgSys[sections] += naplo[naplo.count - last + i].value(forKey: "sys") as! Int
                 avgDia[sections] += naplo[naplo.count - last + i].value(forKey: "dia") as! Int
             }
             avgSys[sections] /= last
             avgDia[sections] /= last
-            for var i in 0...sections
+            for i in 0...sections
             {
                 print("\(avgSys[i])/\(avgDia[i])")
             }
-        } else {
-            for var i in 0..<sections
+        } else {*/
+            for i in 0..<sections
             {
                 print("\(avgSys[i])/\(avgDia[i])")
             }
-        }
-        if (lastSys >= refSys + offsetProblemSys && lastDia >= refDia + offsetProblemDia){
-            print("Mindkét vérnyomásmérték jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!")
-        } else if (lastSys < refSys + offsetProblemSys && lastDia >= refDia + offsetProblemDia){
-            print("A diasztolés jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!")
-        } else if (lastSys >= refSys + offsetProblemSys && lastDia < refDia + offsetProblemDia){
-            print("A szisztolés jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!")
-        } else {
-            print("Nincs a korlátot átlépő kiugró érték")
-        }
+        //}
+            if (lastSys >= refSys + offsetProblemSys && lastDia >= refDia + offsetProblemDia){
+                print("Mindkét vérnyomásmérték jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!")
+            } else if (lastSys < refSys + offsetProblemSys && lastDia >= refDia + offsetProblemDia){
+                print("A diasztolés jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!")
+            } else if (lastSys >= refSys + offsetProblemSys && lastDia < refDia + offsetProblemDia){
+                print("A szisztolés jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!")
+            } else {
+                print("Nincs a korlátot átlépő kiugró érték")
+            }
         
-        if (lastSys >= avgSys[0] + offsetProblemSys && lastDia >= avgDia[0] + offsetProblemDia){
-            print("Mindkét vérnyomásmérték jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
-        } else if (lastSys < avgSys[0] + offsetProblemSys && lastDia >= avgDia[0] + offsetProblemDia){
-            print("A diasztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
-        } else if (lastSys >= avgSys[0] + offsetProblemSys && lastDia < avgDia[0] + offsetProblemDia){
-            print("A szisztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
-        } else {
-            print("Nincs a korlátot átlépő kiugró érték")
-        }
+            if (lastSys >= avgSys[0] + offsetProblemSys && lastDia >= avgDia[0] + offsetProblemDia){
+                print("Mindkét vérnyomásmérték jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
+            } else if (lastSys < avgSys[0] + offsetProblemSys && lastDia >= avgDia[0] + offsetProblemDia){
+                print("A diasztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
+            } else if (lastSys >= avgSys[0] + offsetProblemSys && lastDia < avgDia[0] + offsetProblemDia){
+                print("A szisztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
+            } else {
+                print("Nincs a korlátot átlépő kiugró érték")
+            }
         }
     }
     
