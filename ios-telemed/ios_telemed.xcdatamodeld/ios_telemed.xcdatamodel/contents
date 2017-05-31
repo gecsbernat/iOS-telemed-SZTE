@@ -18,9 +18,17 @@
         <attribute name="esemeny" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sys" optional="YES" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
+    <entity name="ReferenceEntity" representedClassName="ReferenceEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="diaAlertThreshold" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="refDia" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="refSys" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sectionSize" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sysAlertThreshold" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <elements>
         <element name="GyogyszerEntity" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="IdopontEntity" positionX="-54" positionY="-9" width="128" height="90"/>
         <element name="NaploEntity" positionX="-54" positionY="-18" width="128" height="105"/>
+        <element name="ReferenceEntity" positionX="-54" positionY="27" width="128" height="120"/>
     </elements>
 </model>

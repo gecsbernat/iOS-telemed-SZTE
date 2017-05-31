@@ -185,7 +185,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qu4-pZ-va8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2646" y="2113"/>
+            <point key="canvasLocation" x="3584.8000000000002" y="2112.5937031484259"/>
         </scene>
         <!--Gyógyszerek-->
         <scene sceneID="eBT-me-8kB">
@@ -321,11 +321,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Napló" id="pqH-wg-q7a">
-                        <barButtonItem key="leftBarButtonItem" title="Grafikon" id="jrk-sl-CZo">
-                            <connections>
-                                <segue destination="wO8-wR-thB" kind="show" id="aq9-h3-bhY"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem title="Grafikon" id="jrk-sl-CZo">
+                                <connections>
+                                    <segue destination="wO8-wR-thB" kind="show" id="aq9-h3-bhY"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Beállítások" id="RWG-1r-DuW" userLabel="Beállítások">
+                                <connections>
+                                    <segue destination="WaP-sH-tqz" kind="show" id="jOY-Ym-lLS"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="K4K-7O-tuG">
                                 <connections>
@@ -425,12 +432,24 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="b4k-gB-8g2">
                                 <rect key="frame" x="310" y="363" width="51" height="31"/>
                             </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beállítás új referenciaértékként" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8B-Bm-weN" userLabel="Beállítás új referenciaértékként">
+                                <rect key="frame" x="0.0" y="408" width="375" height="21"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pgJ-l0-xyG">
+                                <rect key="frame" x="310" y="430" width="51" height="31"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="tBK-jk-uvL" firstAttribute="trailing" secondItem="0Ch-tM-FPG" secondAttribute="trailing" id="3g6-tq-GyF"/>
+                            <constraint firstItem="pgJ-l0-xyG" firstAttribute="leading" secondItem="b4k-gB-8g2" secondAttribute="leading" id="5rF-Gn-DVb"/>
                             <constraint firstItem="W9w-Th-Ez1" firstAttribute="leading" secondItem="S0R-7f-uei" secondAttribute="leading" id="6tO-h0-QJM"/>
                             <constraint firstItem="S0R-7f-uei" firstAttribute="centerY" secondItem="0eh-56-Pb7" secondAttribute="centerY" id="CAZ-gs-twx"/>
+                            <constraint firstItem="j8B-Bm-weN" firstAttribute="top" secondItem="tBK-jk-uvL" secondAttribute="bottom" constant="10" id="E34-vr-b1I"/>
                             <constraint firstItem="Geb-Kh-uzd" firstAttribute="leading" secondItem="W9w-Th-Ez1" secondAttribute="leading" id="F8O-iB-138"/>
                             <constraint firstItem="S0R-7f-uei" firstAttribute="top" secondItem="0Ch-tM-FPG" secondAttribute="bottom" constant="8" symbolic="YES" id="GYx-y4-2Rq"/>
                             <constraint firstItem="Geb-Kh-uzd" firstAttribute="trailing" secondItem="W9w-Th-Ez1" secondAttribute="trailing" id="J1O-YB-aME"/>
@@ -438,6 +457,7 @@
                             <constraint firstItem="W9w-Th-Ez1" firstAttribute="trailing" secondItem="HRK-cy-gYx" secondAttribute="trailing" id="NX1-N2-3y7"/>
                             <constraint firstAttribute="trailing" secondItem="0Ch-tM-FPG" secondAttribute="trailing" id="OVy-Pv-v6s"/>
                             <constraint firstItem="tBK-jk-uvL" firstAttribute="centerY" secondItem="b4k-gB-8g2" secondAttribute="centerY" id="VBj-W4-T2u"/>
+                            <constraint firstItem="j8B-Bm-weN" firstAttribute="trailing" secondItem="tBK-jk-uvL" secondAttribute="trailing" id="YiG-zh-hjS"/>
                             <constraint firstItem="W9w-Th-Ez1" firstAttribute="centerX" secondItem="0Ch-tM-FPG" secondAttribute="centerX" id="ZkX-VD-uY3"/>
                             <constraint firstItem="tBK-jk-uvL" firstAttribute="top" secondItem="S0R-7f-uei" secondAttribute="bottom" constant="8" symbolic="YES" id="aVX-MY-j0m"/>
                             <constraint firstItem="b4k-gB-8g2" firstAttribute="trailing" secondItem="HRK-cy-gYx" secondAttribute="trailing" id="dJa-96-X2X"/>
@@ -451,8 +471,10 @@
                             <constraint firstItem="tBK-jk-uvL" firstAttribute="leading" secondItem="0Ch-tM-FPG" secondAttribute="leading" id="rcU-a3-xzQ"/>
                             <constraint firstItem="Geb-Kh-uzd" firstAttribute="top" secondItem="uBl-wj-7RR" secondAttribute="bottom" constant="8" symbolic="YES" id="rxk-5z-EOU"/>
                             <constraint firstItem="0Ch-tM-FPG" firstAttribute="top" secondItem="W9w-Th-Ez1" secondAttribute="bottom" constant="8" symbolic="YES" id="tYc-PJ-2pA"/>
+                            <constraint firstItem="pgJ-l0-xyG" firstAttribute="top" secondItem="b4k-gB-8g2" secondAttribute="bottom" constant="8" symbolic="YES" id="tx2-ri-kj4"/>
                             <constraint firstItem="Geb-Kh-uzd" firstAttribute="leading" secondItem="fyl-Ou-qeq" secondAttribute="leadingMargin" id="usC-7Q-0w8"/>
                             <constraint firstItem="HRK-cy-gYx" firstAttribute="leading" secondItem="0eh-56-Pb7" secondAttribute="trailing" constant="8" symbolic="YES" id="wIa-x9-ABT"/>
+                            <constraint firstItem="j8B-Bm-weN" firstAttribute="leading" secondItem="tBK-jk-uvL" secondAttribute="leading" id="yMO-ph-yHg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Új bejegyzés" id="AiY-lM-4qL">
@@ -472,12 +494,13 @@
                         <outlet property="eventText" destination="Geb-Kh-uzd" id="lew-se-B4Q"/>
                         <outlet property="idopontText" destination="W9w-Th-Ez1" id="qdB-t4-hlW"/>
                         <outlet property="saveHealthBTN" destination="b4k-gB-8g2" id="adK-pr-ecf"/>
+                        <outlet property="saveReferenceSwitch" destination="pgJ-l0-xyG" id="Tud-co-KLs"/>
                         <outlet property="sysText" destination="S0R-7f-uei" id="am4-KR-EWG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CsH-Ho-uWS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1079.2" y="2112.5937031484259"/>
+            <point key="canvasLocation" x="-140" y="2112.5937031484259"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="W9T-hG-JNA">
@@ -529,7 +552,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ipe-Sr-WS4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-162.40000000000001" y="1405.5472263868066"/>
+            <point key="canvasLocation" x="776.79999999999995" y="1405.5472263868066"/>
         </scene>
         <!--Uj Gyogyszer View Controller-->
         <scene sceneID="ArI-Ur-sUE">
@@ -595,7 +618,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EZD-5w-ba5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1792.8" y="1399.2503748125939"/>
+            <point key="canvasLocation" x="2732" y="1399.2503748125939"/>
         </scene>
         <!--Gyógyszerek-->
         <scene sceneID="ktb-3q-vgp">
@@ -654,6 +677,74 @@
             </objects>
             <point key="canvasLocation" x="1794" y="573"/>
         </scene>
+        <!--Settings Controller-->
+        <scene sceneID="aTi-vn-QhB">
+            <objects>
+                <viewController id="Q5C-1y-IX7" customClass="SettingsController" customModule="ios_telemed" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QMz-RE-4St"/>
+                        <viewControllerLayoutGuide type="bottom" id="gES-Jk-e7Q"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4S5-t2-v8i">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Szisztolés kiugrás" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fnB-Co-HxP">
+                                <rect key="frame" x="16" y="78" width="164" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Diasztolés kiugrás" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="swq-2f-Tgy">
+                                <rect key="frame" x="195" y="78" width="164" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hány napos szeletek" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4SV-up-pvZ">
+                                <rect key="frame" x="16" y="127" width="164" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="164" id="qof-ny-Ysm"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4SV-up-pvZ" firstAttribute="leading" secondItem="fnB-Co-HxP" secondAttribute="leading" id="5fa-le-WrO"/>
+                            <constraint firstItem="fnB-Co-HxP" firstAttribute="top" secondItem="QMz-RE-4St" secondAttribute="bottom" constant="14" id="6wu-bb-6G6"/>
+                            <constraint firstItem="swq-2f-Tgy" firstAttribute="trailing" secondItem="4S5-t2-v8i" secondAttribute="trailingMargin" id="7pP-9p-xAS"/>
+                            <constraint firstItem="4SV-up-pvZ" firstAttribute="trailing" secondItem="fnB-Co-HxP" secondAttribute="trailing" id="9bU-E2-afe"/>
+                            <constraint firstItem="swq-2f-Tgy" firstAttribute="baseline" secondItem="fnB-Co-HxP" secondAttribute="baseline" id="Pf5-WR-QHM"/>
+                            <constraint firstItem="swq-2f-Tgy" firstAttribute="leading" secondItem="fnB-Co-HxP" secondAttribute="trailing" constant="15" id="daD-gV-pNj"/>
+                            <constraint firstItem="4SV-up-pvZ" firstAttribute="top" secondItem="fnB-Co-HxP" secondAttribute="bottom" constant="19" id="jIv-1b-FFZ"/>
+                            <constraint firstItem="4SV-up-pvZ" firstAttribute="leading" secondItem="4S5-t2-v8i" secondAttribute="leadingMargin" id="p4g-NO-Akq"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="tgt-b0-5rp">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="r95-wm-ngu">
+                            <connections>
+                                <action selector="cancelAction:" destination="Q5C-1y-IX7" id="bcA-9h-On0"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="sxb-H2-Iqe">
+                            <connections>
+                                <action selector="saveReferences:" destination="Q5C-1y-IX7" id="Xdb-Wg-flW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="sections" destination="4SV-up-pvZ" id="wZn-Cd-cRr"/>
+                        <outlet property="thresholdDia" destination="swq-2f-Tgy" id="n7w-wO-Omq"/>
+                        <outlet property="thresholdSys" destination="fnB-Co-HxP" id="QDc-Wc-oec"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NYt-DT-Cd0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1930.4000000000001" y="2225.9370314842581"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="kes-kd-96d">
             <objects>
@@ -670,7 +761,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TZ2-5N-NrL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1079" y="1346"/>
+            <point key="canvasLocation" x="-1079" y="1374"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MUX-sW-aTl">
@@ -688,7 +779,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="59r-rv-YU6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3584.8000000000002" y="1304.7976011994003"/>
+            <point key="canvasLocation" x="4524" y="1304.7976011994003"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qQ9-JD-edY">
@@ -706,7 +797,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Si-2k-E5m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="853.60000000000002" y="1399.2503748125939"/>
+            <point key="canvasLocation" x="1792.8" y="1399.2503748125939"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Bev-Hx-cAJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WaP-sH-tqz" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r8E-DP-EfO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Q5C-1y-IX7" kind="relationship" relationship="rootViewController" id="TLa-eU-FSD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vyg-pb-u8R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1930" y="1373"/>
         </scene>
     </scenes>
     <resources>

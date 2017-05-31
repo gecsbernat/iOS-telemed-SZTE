@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 import HealthKit
 
 class UjBejegyzesViewController: UIViewController {
@@ -16,6 +17,9 @@ class UjBejegyzesViewController: UIViewController {
     @IBOutlet weak var sysText: UITextField! //sys text
     @IBOutlet weak var idopontText: UILabel! //idopont text
     @IBOutlet weak var saveHealthBTN: UISwitch! //healthkit
+    @IBOutlet weak var saveReferenceSwitch: UISwitch!
+    
+    var reference : [ReferenceEntity] = []
     
     var healthstore: HKHealthStore? = nil
     var readdata:NSSet? = nil
@@ -95,9 +99,27 @@ class UjBejegyzesViewController: UIViewController {
                 saveBloodPressure(systolic: Double(sysText.text!)!, diastolic: Double(diaText.text!)!)
             }
             
+            if(saveReferenceSwitch.isOn){
+                saveReference()
+            }
             dismiss(animated: true, completion: nil)
         }
 
+    }
+    
+    func saveReference(){
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<ReferenceEntity> = ReferenceEntity.fetchRequest()
+        do{
+            reference = try context.fetch(fetchRequest)
+    
+        }
+        catch{
+            print("Error fetching data.")
+        }
+        reference[0].refSys = Int16(sysText.text!)!
+        reference[0].refDia = Int16(diaText.text!)!
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
     //adat mentese healthkitbe

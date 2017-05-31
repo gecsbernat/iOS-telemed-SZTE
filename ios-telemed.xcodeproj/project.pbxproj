@@ -22,6 +22,7 @@
 		71F8E4BD1EC21E2700E8C234 /* IdopontokViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F8E4BC1EC21E2700E8C234 /* IdopontokViewController.swift */; };
 		B2649D6F1EB7952000FF2D8F /* GyogyszerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2649D6E1EB7952000FF2D8F /* GyogyszerViewController.swift */; };
 		B2A95ED71ED4A10300B3BEAA /* UjGyogyszerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A95ED61ED4A10300B3BEAA /* UjGyogyszerViewController.swift */; };
+		B2D6EE731EDF415E006A6E56 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6EE721EDF415E006A6E56 /* SettingsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		71F8E4BC1EC21E2700E8C234 /* IdopontokViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IdopontokViewController.swift; path = ../IdopontokViewController.swift; sourceTree = "<group>"; };
 		B2649D6E1EB7952000FF2D8F /* GyogyszerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GyogyszerViewController.swift; sourceTree = "<group>"; };
 		B2A95ED61ED4A10300B3BEAA /* UjGyogyszerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UjGyogyszerViewController.swift; sourceTree = "<group>"; };
+		B2D6EE721EDF415E006A6E56 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 				3F60D9401EB1E5FA00B27E42 /* LaunchScreen.storyboard */,
 				3F60D9431EB1E5FA00B27E42 /* Info.plist */,
 				3F60D93B1EB1E5FA00B27E42 /* ios_telemed.xcdatamodeld */,
+				B2D6EE721EDF415E006A6E56 /* SettingsController.swift */,
 			);
 			path = "ios-telemed";
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				7117BFAD1EB8FDDE000A7AC9 /* UjBejegyzesViewController.swift in Sources */,
 				71A9407E1EC30F3A001718AD /* UjIdopontViewController.swift in Sources */,
 				3F60D93D1EB1E5FA00B27E42 /* ios_telemed.xcdatamodeld in Sources */,
+				B2D6EE731EDF415E006A6E56 /* SettingsController.swift in Sources */,
 				B2649D6F1EB7952000FF2D8F /* GyogyszerViewController.swift in Sources */,
 				3F60D9351EB1E5FA00B27E42 /* AppDelegate.swift in Sources */,
 				71F8E4BD1EC21E2700E8C234 /* IdopontokViewController.swift in Sources */,

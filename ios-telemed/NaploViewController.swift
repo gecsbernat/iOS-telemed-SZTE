@@ -16,16 +16,22 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var atlagText: UILabel!
     @IBOutlet weak var refreshBTN: UIBarButtonItem!
     var naplo : [NaploEntity] = [] //ebben taroljuk a coredata adatot
+    var reference : [ReferenceEntity] = []
     var healthstore: HKHealthStore? = nil
     var readdata:NSSet? = nil
     var writedata:NSSet? = nil
+    var refSys = 120
+    var refDia = 80
+    var offsetProblemSys = 20
+    var offsetProblemDia = 20
+    var sectionSize = 5
     
     override func viewDidLoad() {
         super.viewDidLoad()
         naploTable.dataSource = self
         naploTable.delegate = self
         naploTable.rowHeight = 80
-        
+
         if HKHealthStore.isHealthDataAvailable() {
             refreshBTN.isEnabled = true
             healthstore = HKHealthStore()
@@ -80,7 +86,6 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
             getData()
         }
-        
         atlag()
         naploTable.reloadData()
     }
@@ -93,6 +98,35 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         fetchRequest.sortDescriptors = [sort]
         do{
             naplo = try context.fetch(fetchRequest)
+        }
+        catch{
+            print("Error fetching data.")
+        }
+        
+        getReferences()
+    }
+    //Referenciaértékek coredata-ból
+    func getReferences(){
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<ReferenceEntity> = ReferenceEntity.fetchRequest()
+        do{
+            reference = try context.fetch(fetchRequest)
+            if (reference == []){
+                let reference = ReferenceEntity(context: context)
+                reference.refSys = Int16(refSys)
+                reference.refDia = Int16(refDia)
+                reference.sysAlertThreshold = Int16(offsetProblemSys)
+                reference.diaAlertThreshold = Int16(offsetProblemDia)
+                reference.sectionSize = Int32(sectionSize)
+                (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            } else {
+                refSys = Int(reference[0].refSys)
+                refDia = Int(reference[0].refDia)
+                offsetProblemSys = Int(reference[0].sysAlertThreshold)
+                offsetProblemDia = Int(reference[0].diaAlertThreshold)
+                sectionSize = Int(reference[0].sectionSize)
+
+            }
         }
         catch{
             print("Error fetching data.")
@@ -182,7 +216,6 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     //atlagertekek szamitasa
     func atlag(){
-    
         var atlagDIA = 0
         var atlagSYS = 0
         var atlagPul = 0
@@ -203,14 +236,9 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         db = Int(cnt)
         atlagText.text = String("\(db) minta átlaga: \(atlagSYS)/\(atlagDIA), pulzusnyomás: \(atlagPul)")
         
-        if(naplo.count > 1){
+        if(naplo.count > sectionSize){
             
-            //Referenciák, ezekre majd entity+data
-            let refSys = 120
-            let refDia = 80
-            let offsetProblemSys = 20
-            let offsetProblemDia = 20
-            let sectionSize = 5
+            print(sectionSize)
             
             //Napok kigyűjtése
             var days = 0
@@ -330,7 +358,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
                 print("Nincs a korlátot átlépő kiugró érték")
             }
             print(avgSys.count)
-        /*
+        
             if (lastSys >= avgSys[0] + offsetProblemSys && lastDia >= avgDia[0] + offsetProblemDia){
                 print("Mindkét vérnyomásmérték jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
             } else if (lastSys < avgSys[0] + offsetProblemSys && lastDia >= avgDia[0] + offsetProblemDia){
@@ -340,7 +368,6 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
             } else {
                 print("Nincs a korlátot átlépő kiugró érték")
             }
- */
         }
     }
     
