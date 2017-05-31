@@ -41,10 +41,13 @@ class UjBejegyzesViewController: UIViewController {
     }
     
     @IBAction func datePicker(_ sender: UIDatePicker) {
+        sender.timeZone = TimeZone.current
+        
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
         dateformatter.timeZone = TimeZone.current
         date = sender.date as NSDate
+        date = date.addingTimeInterval(7200) //fix 2 hour difference
         idopontText.text = dateformatter.string(from: sender.date)
     }
     
@@ -128,5 +131,5 @@ class UjBejegyzesViewController: UIViewController {
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
-
+    
 }

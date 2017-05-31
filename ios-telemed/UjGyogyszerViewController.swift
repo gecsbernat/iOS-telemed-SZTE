@@ -23,6 +23,7 @@ class UjGyogyszerViewController: UIViewController, UIPickerViewDataSource, UIPic
     
     @IBAction func timepicker(_ sender: UIDatePicker) {
         time = sender.date as NSDate
+       // time = time.addingTimeInterval(7200) //fix 2 hour difference
     }
     
     

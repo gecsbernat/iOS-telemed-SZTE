@@ -329,7 +329,8 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
             } else {
                 print("Nincs a korlátot átlépő kiugró érték")
             }
-        
+            print(avgSys.count)
+        /*
             if (lastSys >= avgSys[0] + offsetProblemSys && lastDia >= avgDia[0] + offsetProblemDia){
                 print("Mindkét vérnyomásmérték jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
             } else if (lastSys < avgSys[0] + offsetProblemSys && lastDia >= avgDia[0] + offsetProblemDia){
@@ -339,12 +340,19 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
             } else {
                 print("Nincs a korlátot átlépő kiugró érték")
             }
+ */
         }
     }
     
     //export gomb
     @IBAction func exportButton(_ sender: UIBarButtonItem) {
-        exportDatabase()
+        if(naplo.count != 0){
+            exportDatabase()
+        }else{
+            let alert = UIAlertController(title: "", message: "Üres a napló.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     //refresh gomb

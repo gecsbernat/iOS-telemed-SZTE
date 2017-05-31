@@ -22,7 +22,7 @@ class BarChartViewController: UIViewController {
     func getData(){
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<NaploEntity> = NaploEntity.fetchRequest()
-        let sort = NSSortDescriptor(key: "datum", ascending: false)
+        let sort = NSSortDescriptor(key: "datum", ascending: true)
         fetchRequest.sortDescriptors = [sort]
         do{
             naplo = try context.fetch(fetchRequest)
@@ -38,9 +38,13 @@ class BarChartViewController: UIViewController {
             let index = datum.index(datum.startIndex, offsetBy: 10)
             let index2 = datum.index(datum.startIndex, offsetBy: 6)
             datum = datum.substring(to: index) + "\n" + datum.substring(from: index).substring(to: index2)
-            idopontok.append(datum)
-            systolic.append(ertek.value(forKey: "sys") as! Double)
-            diastolic.append(ertek.value(forKey: "dia") as! Double)
+            let sys = ertek.value(forKey: "sys") as! Double
+            let dia = ertek.value(forKey: "dia") as! Double
+            if(sys != 0.0 && dia != 0.0){
+                idopontok.append(datum)
+                systolic.append(sys)
+                diastolic.append(dia)
+            }
         }
     }
     

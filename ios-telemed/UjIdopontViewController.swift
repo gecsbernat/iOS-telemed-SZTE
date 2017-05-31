@@ -21,6 +21,7 @@ class UjIdopontViewController: UIViewController {
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
         date = sender.date as NSDate
+        date = date.addingTimeInterval(7200) //fix 2 hour difference
         idopontText.text = dateformatter.string(from: sender.date)
     }
     
