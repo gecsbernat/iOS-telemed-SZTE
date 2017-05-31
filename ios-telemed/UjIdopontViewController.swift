@@ -83,6 +83,7 @@ class UjIdopontViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        date = date.addingTimeInterval(7200) //fix 2 hour difference
     }
     
     override func didReceiveMemoryWarning() {
