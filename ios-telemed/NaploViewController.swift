@@ -358,7 +358,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
                 print("Nincs a korlátot átlépő kiugró érték")
             }
             print(avgSys.count)
-        
+        /*
             if (lastSys >= avgSys[0] + offsetProblemSys && lastDia >= avgDia[0] + offsetProblemDia){
                 print("Mindkét vérnyomásmérték jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
             } else if (lastSys < avgSys[0] + offsetProblemSys && lastDia >= avgDia[0] + offsetProblemDia){
@@ -368,6 +368,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
             } else {
                 print("Nincs a korlátot átlépő kiugró érték")
             }
+ */
         }
     }
     

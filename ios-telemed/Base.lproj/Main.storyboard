@@ -322,12 +322,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="Napló" id="pqH-wg-q7a">
                         <leftBarButtonItems>
-                            <barButtonItem title="Grafikon" id="jrk-sl-CZo">
+                            <barButtonItem image="graph" id="jrk-sl-CZo">
                                 <connections>
                                     <segue destination="wO8-wR-thB" kind="show" id="aq9-h3-bhY"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Beállítások" id="RWG-1r-DuW" userLabel="Beállítások">
+                            <barButtonItem image="settings" id="RWG-1r-DuW" userLabel="Beállítások">
                                 <connections>
                                     <segue destination="WaP-sH-tqz" kind="show" id="jOY-Ym-lLS"/>
                                 </connections>
@@ -677,7 +677,7 @@
             </objects>
             <point key="canvasLocation" x="1794" y="573"/>
         </scene>
-        <!--Settings Controller-->
+        <!--Beállítások-->
         <scene sceneID="aTi-vn-QhB">
             <objects>
                 <viewController id="Q5C-1y-IX7" customClass="SettingsController" customModule="ios_telemed" customModuleProvider="target" sceneMemberID="viewController">
@@ -723,7 +723,7 @@
                             <constraint firstItem="4SV-up-pvZ" firstAttribute="leading" secondItem="4S5-t2-v8i" secondAttribute="leadingMargin" id="p4g-NO-Akq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="tgt-b0-5rp">
+                    <navigationItem key="navigationItem" title="Beállítások" id="tgt-b0-5rp">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="r95-wm-ngu">
                             <connections>
                                 <action selector="cancelAction:" destination="Q5C-1y-IX7" id="bcA-9h-On0"/>
@@ -820,7 +820,9 @@
     </scenes>
     <resources>
         <image name="calendar" width="30" height="30"/>
+        <image name="graph" width="30" height="30"/>
         <image name="history" width="30" height="30"/>
         <image name="medicine" width="30" height="30"/>
+        <image name="settings" width="30" height="30"/>
     </resources>
 </document>
