@@ -87,7 +87,7 @@ class UjGyogyszerViewController: UIViewController, UIPickerViewDataSource, UIPic
             record.nev = medName.text!
             do {
                 try record.mennyiseg = convertToInt16()
-            } catch is Error {
+            } catch  {
                 let alert = UIAlertController(title: "Hiba!", message: "A gyogyszer mennyiseg nem szam!", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)

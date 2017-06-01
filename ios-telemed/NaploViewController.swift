@@ -40,8 +40,8 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         naploTable.delegate = self
         naploTable.rowHeight = 80
         
-        alertText.backgroundColor = UIColor.green.withAlphaComponent(0.5)
-        alertText.text = "Minden rendben!"
+        alertText.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+        alertText.text = "Nincs adat."
 
         if HKHealthStore.isHealthDataAvailable() {
             refreshBTN.isEnabled = true
@@ -74,8 +74,16 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         datum = datum.substring(to: index)
         let SYS = bejegyzes.sys
         let DIA = bejegyzes.dia
-        cell?.textLabel?.text = bejegyzes.esemeny
-        
+        if(avgSys.count > 0 && avgDia.count > 0){
+            if(Int16(SYS) >= Int16(avgSys[0] + offsetProblemSys) || Int16(DIA) >= Int16(avgDia[0] + offsetProblemDia)){
+                cell?.textLabel?.text = "❗️" + bejegyzes.esemeny!
+            }else{
+                cell?.textLabel?.text = bejegyzes.esemeny!
+            }
+        }else{
+            cell?.textLabel?.text = bejegyzes.esemeny!
+        }
+
         if(SYS != 0 && DIA != 0){
             let pulse = SYS - DIA
             cell?.detailTextLabel?.text = "Dátum: \(datum)\nVérnyomás: \(SYS)/\(DIA), pulzusnyomás: \(pulse)"
@@ -136,7 +144,6 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
                 offsetProblemSys = Int(reference[0].sysAlertThreshold)
                 offsetProblemDia = Int(reference[0].diaAlertThreshold)
                 sectionSize = Int(reference[0].sectionSize)
-                print(sectionSize)
             }
         }
         catch{
@@ -165,9 +172,24 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
                     bejegyzes.esemeny = "Vérnyomás mérés"
                     bejegyzes.dia = Int16(diastolic!)
                     bejegyzes.sys = Int16(systolic!)
-                    (UIApplication.shared.delegate as! AppDelegate).saveContext()
-                    self.getData()
-                    self.naploTable.reloadData()
+
+                    if(self.naplo.count != 0){
+                        for i in self.naplo {
+                            print(i.datum!)
+                            print(bejegyzes.datum!)
+                            if(i.datum!.isEqual(to: bejegyzes.datum! as Date)){
+                                print("BUZI")
+                                continue
+                            }else{
+                                print("joska")
+                                (UIApplication.shared.delegate as! AppDelegate).saveContext()
+                                break
+                            }
+                        }
+                    }else{
+                        print("joska")
+                        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+                    }
                 }
             }
         self.healthstore?.execute(sampleQuery)
@@ -270,9 +292,8 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
                 }
                 prevDay = naplo[i].value(forKey: "datum") as! NSDate
             }
-            print(days)
+
             if(days > sectionSize) {
-                print("Haho")
                 //Ujrainicializálás
                 prevDay = naplo[1].value(forKey: "datum") as! NSDate
                 let sections = days / sectionSize
@@ -353,37 +374,52 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
                     print("\(avgSys[i])/\(avgDia[i])")
                 }
                 //}
+                        print(days)
                 if (lastSys >= refSys + offsetProblemSys && lastDia >= refDia + offsetProblemDia){
-                    alertText.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+                    alertText.isHidden = false
+                    alertText.backgroundColor = UIColor.red.withAlphaComponent(0.2)
                     alertText.text = "Mindkét vérnyomásmérték jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!"
                     print("Mindkét vérnyomásmérték jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!")
                 } else if (lastSys < refSys + offsetProblemSys && lastDia >= refDia + offsetProblemDia){
-                    alertText.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+                    alertText.isHidden = false
+                    alertText.backgroundColor = UIColor.red.withAlphaComponent(0.2)
                     alertText.text = "A diasztolés jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!"
                     print("A diasztolés jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!")
                 } else if (lastSys >= refSys + offsetProblemSys && lastDia < refDia + offsetProblemDia){
-                    alertText.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+                    alertText.isHidden = false
+                    alertText.backgroundColor = UIColor.red.withAlphaComponent(0.2)
                     alertText.text = "A szisztolés jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!"
                     print("A szisztolés jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!")
                 } else {
                     print("Nincs a korlátot átlépő kiugró érték")
+                    alertText.backgroundColor = UIColor.green.withAlphaComponent(0.2)
+                    alertText.text = "Minden rendben!"
                 }
+                
                 if (lastSys >= avgSys[0] + offsetProblemSys && lastDia >= avgDia[0] + offsetProblemDia){
-                    alertText.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+                    alertText.isHidden = false
+                    alertText.backgroundColor = UIColor.red.withAlphaComponent(0.2)
                     alertText.text = "Mindkét vérnyomásmérték jóval magasabb az átlagnál, kérem forduljon orvoshoz!"
                     print("A diasztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
                 } else if (lastSys < avgSys[0] + offsetProblemSys && lastDia >= avgDia[0] + offsetProblemDia){
-                    alertText.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+                    alertText.isHidden = false
+                    alertText.backgroundColor = UIColor.red.withAlphaComponent(0.2)
                     alertText.text = "A diasztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!"
                     print("A diasztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
                 } else if (lastSys >= avgSys[0] + offsetProblemSys && lastDia < avgDia[0] + offsetProblemDia){
-                    alertText.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+                    alertText.isHidden = false
+                    alertText.backgroundColor = UIColor.red.withAlphaComponent(0.2)
                     alertText.text = "A szisztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!"
                     print("A szisztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
                 } else {
                     print("Nincs a korlátot átlépő kiugró érték")
+                    alertText.backgroundColor = UIColor.green.withAlphaComponent(0.2)
+                    alertText.text = "Minden rendben!"
                 }
             }
+        }else{
+            alertText.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+            alertText.text = "Nincs elég adat."
         }
     }
     
@@ -401,6 +437,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     //refresh gomb
     @IBAction func refreshData(_ sender: UIBarButtonItem) {
         fetchHealthkit()
+        getData()
         atlag()
         naploTable.reloadData()
     }

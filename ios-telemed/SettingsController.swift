@@ -36,7 +36,7 @@ class SettingsController: UIViewController {
         if (thresholdSys.text?.isEmpty == false){
             do {
                 try  reference[0].sysAlertThreshold = convertToInt16(text: thresholdSys.text!)
-            } catch is Error {
+            } catch {
                 let alert = UIAlertController(title: "Hiba!", message: "Egy mennyiseg nem szam!", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
@@ -45,7 +45,7 @@ class SettingsController: UIViewController {
         if (thresholdDia.text?.isEmpty == false){
             do {
                 try  reference[0].diaAlertThreshold = convertToInt16(text: thresholdDia.text!)
-            } catch is Error {
+            } catch {
                 let alert = UIAlertController(title: "Hiba!", message: "Egy mennyiseg nem szam!", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
@@ -62,7 +62,7 @@ class SettingsController: UIViewController {
                 } else {*/
                 //}
                 
-            } catch is Error {
+            } catch {
                 let alert = UIAlertController(title: "Hiba!", message: "Egy mennyiseg nem szam!", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
