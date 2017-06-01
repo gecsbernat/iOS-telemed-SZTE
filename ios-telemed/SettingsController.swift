@@ -52,9 +52,16 @@ class SettingsController: UIViewController {
             }
         }
         if (sections.text?.isEmpty == false){
-            print("itt még jó")
+           // var test : Int32
             do {
                 try  reference[0].sectionSize = convertToInt32(text: sections.text!)
+               /* if(test > reference[0].sectionSize){
+                    let alert = UIAlertController(title: "Hiba!", message: "Nagyobb a szelet, mint amennyi adat van!", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                } else {*/
+                //}
+                
             } catch is Error {
                 let alert = UIAlertController(title: "Hiba!", message: "Egy mennyiseg nem szam!", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
