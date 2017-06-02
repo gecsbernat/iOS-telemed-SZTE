@@ -19,8 +19,6 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     var naplo : [NaploEntity] = [] //ebben taroljuk a coredata adatot
     var reference : [ReferenceEntity] = []
     var healthstore: HKHealthStore? = nil
-    var readdata:NSSet? = nil
-    var writedata:NSSet? = nil
     var refSys = 120
     var refDia = 80
     var offsetProblemSys = 20
@@ -42,22 +40,6 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         alertText.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
         alertText.text = "Nincs adat."
-
-        if HKHealthStore.isHealthDataAvailable() {
-            refreshBTN.isEnabled = true
-            healthstore = HKHealthStore()
-            let systolic = HKQuantityType.quantityType(forIdentifier: .bloodPressureSystolic)
-            let diastolic = HKQuantityType.quantityType(forIdentifier: .bloodPressureDiastolic)
-            readdata = NSSet(objects: systolic!, diastolic!)
-            writedata = NSSet(objects: systolic!,diastolic!)
-            healthstore?.requestAuthorization(toShare: writedata as? Set<HKSampleType>, read: readdata as? Set<HKObjectType>, completion: {(success, error) in
-                if(!success){
-                    self.refreshBTN.isEnabled = false
-                }
-            })
-        }else{
-            refreshBTN.isEnabled = false
-        }
     }
     
     //mennyi sorbol all a table
@@ -96,11 +78,11 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     //torles balra huzasnal
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let context1 = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         if editingStyle == .delete {
             let bejegyzes = naplo[indexPath.row]
-            context.delete(bejegyzes)
+            context1.delete(bejegyzes)
             
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
             getData()
@@ -111,12 +93,12 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     //adatnyeres a coredata-bol, datum szerint rendezve: legutobbi elol.
     func getData(){
-       let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+       let context2 = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<NaploEntity> = NaploEntity.fetchRequest()
         let sort = NSSortDescriptor(key: "datum", ascending: false)
         fetchRequest.sortDescriptors = [sort]
         do{
-            naplo = try context.fetch(fetchRequest)
+            naplo = try context2.fetch(fetchRequest)
         }
         catch{
             print("Error fetching data.")
@@ -124,14 +106,15 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         getReferences()
     }
+    
     //Referenciaértékek coredata-ból
     func getReferences(){
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let context3 = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<ReferenceEntity> = ReferenceEntity.fetchRequest()
         do{
-            reference = try context.fetch(fetchRequest)
+            reference = try context3.fetch(fetchRequest)
             if (reference == []){
-                let reference = ReferenceEntity(context: context)
+                let reference = ReferenceEntity(context: context3)
                 reference.refSys = Int16(refSys)
                 reference.refDia = Int16(refDia)
                 reference.sysAlertThreshold = Int16(offsetProblemSys)
@@ -149,50 +132,6 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         catch{
             print("Error fetching data.")
         }
-    }
-    
-    //adatkinyerés healthkitből
-    func fetchHealthkit(){
-        let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: true)
-        let type = HKQuantityType.correlationType(forIdentifier: HKCorrelationTypeIdentifier.bloodPressure)
-        
-        let sampleQuery = HKSampleQuery(sampleType: type!, predicate: nil, limit: 0, sortDescriptors: [sortDescriptor]){ (sampleQuery, results, error ) -> Void in
-            let dataLst = results as? [HKCorrelation];
-            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-                for index in 0 ..< dataLst!.count {
-                    let data1 = (dataLst![index].objects(for: HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureSystolic)!)).first as? HKQuantitySample
-                    let data2 = (dataLst![index].objects(for: HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureDiastolic)!)).first as? HKQuantitySample
-                    
-                    let date = data1?.startDate
-                    let systolic = data1?.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
-                    let diastolic = data2?.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
-                    
-                    let bejegyzes = NaploEntity(context: context)
-                    bejegyzes.datum = date! as NSDate?
-                    bejegyzes.esemeny = "Vérnyomás mérés"
-                    bejegyzes.dia = Int16(diastolic!)
-                    bejegyzes.sys = Int16(systolic!)
-
-                    if(self.naplo.count != 0){
-                        for i in self.naplo {
-                            print(i.datum!)
-                            print(bejegyzes.datum!)
-                            if(i.datum!.isEqual(to: bejegyzes.datum! as Date)){
-                                print("BUZI")
-                                continue
-                            }else{
-                                print("joska")
-                                (UIApplication.shared.delegate as! AppDelegate).saveContext()
-                                break
-                            }
-                        }
-                    }else{
-                        print("joska")
-                        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-                    }
-                }
-            }
-        self.healthstore?.execute(sampleQuery)
     }
     
     //export begin
@@ -432,14 +371,6 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
-    }
-    
-    //refresh gomb
-    @IBAction func refreshData(_ sender: UIBarButtonItem) {
-        fetchHealthkit()
-        getData()
-        atlag()
-        naploTable.reloadData()
     }
     
     //betoltes

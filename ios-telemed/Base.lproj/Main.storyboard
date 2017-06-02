@@ -185,7 +185,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qu4-pZ-va8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3584.8000000000002" y="2112.5937031484259"/>
+            <point key="canvasLocation" x="4524" y="2112.5937031484259"/>
         </scene>
         <!--Gyógyszerek-->
         <scene sceneID="eBT-me-8kB">
@@ -352,9 +352,9 @@
                                     <segue destination="1qH-Jc-bgB" kind="show" id="Gk1-uX-IxT"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem enabled="NO" systemItem="refresh" id="njl-6L-JK2">
+                            <barButtonItem systemItem="refresh" id="njl-6L-JK2">
                                 <connections>
-                                    <action selector="refreshData:" destination="oAM-Kj-ZA8" id="QcQ-6F-MGy"/>
+                                    <segue destination="se7-JN-hb3" kind="show" id="mc3-4s-OH8"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="action" id="nUj-fm-GRe">
@@ -514,7 +514,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CsH-Ho-uWS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-140" y="2112.5937031484259"/>
+            <point key="canvasLocation" x="-1079" y="2226"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="W9T-hG-JNA">
@@ -534,6 +534,54 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ObD-Di-8dk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-57" y="-224"/>
+        </scene>
+        <!--Healthkit Adatok-->
+        <scene sceneID="jZa-8U-Sfh">
+            <objects>
+                <viewController title="Healthkit Adatok" id="BdR-7p-NZI" customClass="HealthkitViewController" customModule="ios_telemed" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MmJ-1a-GCJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="NpR-HX-1U6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mO6-3v-i6d">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="yiU-9f-xLc">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adatok importálása Healthkit-ből.." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k0c-12-r9J">
+                                <rect key="frame" x="16" y="235" width="343" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="k0c-12-r9J" firstAttribute="top" secondItem="MmJ-1a-GCJ" secondAttribute="bottom" constant="171" id="R0w-fy-YYw"/>
+                            <constraint firstItem="k0c-12-r9J" firstAttribute="trailing" secondItem="mO6-3v-i6d" secondAttribute="trailingMargin" id="SzP-PW-cUp"/>
+                            <constraint firstItem="k0c-12-r9J" firstAttribute="leading" secondItem="mO6-3v-i6d" secondAttribute="leadingMargin" id="TH8-6j-lW0"/>
+                            <constraint firstItem="yiU-9f-xLc" firstAttribute="centerY" secondItem="mO6-3v-i6d" secondAttribute="centerY" id="WiE-ik-7JY"/>
+                            <constraint firstItem="k0c-12-r9J" firstAttribute="centerX" secondItem="yiU-9f-xLc" secondAttribute="centerX" id="Zp1-wx-610"/>
+                            <constraint firstItem="yiU-9f-xLc" firstAttribute="top" secondItem="k0c-12-r9J" secondAttribute="bottom" constant="48" id="bP5-vK-rOQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Healthkit" id="R6e-PG-WZj">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ygq-38-t5N">
+                            <connections>
+                                <action selector="cancel:" destination="BdR-7p-NZI" id="mCc-aY-iNp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="indicator" destination="yiU-9f-xLc" id="Mzo-cr-Wq5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yCa-ET-VNJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-250.40000000000001" y="2197.1514242878561"/>
         </scene>
         <!--Grafikon-->
         <scene sceneID="wnf-E7-B0T">
@@ -830,6 +878,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vyg-pb-u8R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1930" y="1373"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Qiy-sQ-6f3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="se7-JN-hb3" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cGr-2f-mWZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BdR-7p-NZI" kind="relationship" relationship="rootViewController" id="TSr-Lp-1Gr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="quf-d7-wUC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-250" y="1372"/>
         </scene>
     </scenes>
     <resources>
