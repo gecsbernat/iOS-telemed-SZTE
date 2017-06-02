@@ -23,16 +23,22 @@ class SettingsController: UIViewController {
         case numberFormat
     }
     
-    @IBAction func saveReferences(_ sender: UIBarButtonItem) {
+    func getreferences(){
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<ReferenceEntity> = ReferenceEntity.fetchRequest()
         do{
             reference = try context.fetch(fetchRequest)
-            
         }
         catch{
             print("Error fetching data.")
         }
+        thresholdDia.text = String(reference[0].diaAlertThreshold)
+        thresholdSys.text = String(reference[0].sysAlertThreshold)
+        sections.text = String(reference[0].sectionSize)
+    }
+    
+    @IBAction func saveReferences(_ sender: UIBarButtonItem) {
+
         if (thresholdSys.text?.isEmpty == false){
             do {
                 try  reference[0].sysAlertThreshold = convertToInt16(text: thresholdSys.text!)
@@ -92,6 +98,7 @@ class SettingsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getreferences()
     }
     
     override func didReceiveMemoryWarning() {

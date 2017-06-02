@@ -209,7 +209,11 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         atlagText.text = String("\(db) minta átlaga: \(atlagSYS)/\(atlagDIA), pulzusnyomás: \(atlagPul)")
         
         if(naplo.count > sectionSize){
-            
+            avgDia.removeAll()
+            avgSys.removeAll()
+            dailyDia.removeAll()
+            dailySys.removeAll()
+            dailyCount.removeAll()
             //Napok kigyűjtése
             var days = 0
             var dayCounter = 0
