@@ -752,63 +752,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Diasztolés kiugrás" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="swq-2f-Tgy">
-                                <rect key="frame" x="16" y="168" width="343" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Szisztolés kiugrás" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fnB-Co-HxP">
-                                <rect key="frame" x="16" y="101" width="343" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Szisztolés kiugrás:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNg-kZ-lxz">
-                                <rect key="frame" x="16" y="72" width="343" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diasztolés kiugrás:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SU-nv-6bE">
-                                <rect key="frame" x="16" y="139" width="343" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Napok száma:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ft7-Q3-rug">
-                                <rect key="frame" x="16" y="206" width="343" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hány napos szeletek" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4SV-up-pvZ">
-                                <rect key="frame" x="16" y="235" width="343" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="jSs-l2-R7N">
+                                <rect key="frame" x="16" y="72" width="343" height="200"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Szisztolés kiugrás:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNg-kZ-lxz">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Szisztolés kiugrás" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fnB-Co-HxP">
+                                        <rect key="frame" x="0.0" y="34" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diasztolés kiugrás:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SU-nv-6bE">
+                                        <rect key="frame" x="0.0" y="68" width="343" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Diasztolés kiugrás" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="swq-2f-Tgy">
+                                        <rect key="frame" x="0.0" y="102" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Napok száma:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ft7-Q3-rug">
+                                        <rect key="frame" x="0.0" y="136" width="343" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hány napos szeletek" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4SV-up-pvZ">
+                                        <rect key="frame" x="0.0" y="170" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="swq-2f-Tgy" firstAttribute="trailing" secondItem="ft7-Q3-rug" secondAttribute="trailing" id="0Or-OD-bfv"/>
-                            <constraint firstItem="gNg-kZ-lxz" firstAttribute="leading" secondItem="4S5-t2-v8i" secondAttribute="leadingMargin" id="1Uv-h3-mKG"/>
-                            <constraint firstItem="gNg-kZ-lxz" firstAttribute="trailing" secondItem="4S5-t2-v8i" secondAttribute="trailingMargin" id="5ug-QI-gtn"/>
-                            <constraint firstItem="ft7-Q3-rug" firstAttribute="leading" secondItem="4SV-up-pvZ" secondAttribute="leading" id="EDT-yt-DI6"/>
-                            <constraint firstItem="4SV-up-pvZ" firstAttribute="top" secondItem="ft7-Q3-rug" secondAttribute="bottom" constant="8" symbolic="YES" id="ONK-sR-xgq"/>
-                            <constraint firstItem="ft7-Q3-rug" firstAttribute="trailing" secondItem="4SV-up-pvZ" secondAttribute="trailing" id="Rak-Gw-1lC"/>
-                            <constraint firstItem="6SU-nv-6bE" firstAttribute="leading" secondItem="swq-2f-Tgy" secondAttribute="leading" id="VQs-zR-Pw7"/>
-                            <constraint firstItem="swq-2f-Tgy" firstAttribute="leading" secondItem="ft7-Q3-rug" secondAttribute="leading" id="WsR-ho-F1U"/>
-                            <constraint firstItem="ft7-Q3-rug" firstAttribute="top" secondItem="swq-2f-Tgy" secondAttribute="bottom" constant="8" symbolic="YES" id="byE-Zg-Qlh"/>
-                            <constraint firstItem="6SU-nv-6bE" firstAttribute="top" secondItem="fnB-Co-HxP" secondAttribute="bottom" constant="8" symbolic="YES" id="eSg-W0-wWH"/>
-                            <constraint firstItem="fnB-Co-HxP" firstAttribute="top" secondItem="gNg-kZ-lxz" secondAttribute="bottom" constant="8" symbolic="YES" id="eVq-G3-3cU"/>
-                            <constraint firstItem="gNg-kZ-lxz" firstAttribute="leading" secondItem="fnB-Co-HxP" secondAttribute="leading" id="fit-8T-kC2"/>
-                            <constraint firstItem="fnB-Co-HxP" firstAttribute="leading" secondItem="6SU-nv-6bE" secondAttribute="leading" id="jlb-Ui-uq6"/>
-                            <constraint firstItem="6SU-nv-6bE" firstAttribute="trailing" secondItem="swq-2f-Tgy" secondAttribute="trailing" id="oUP-iW-HkB"/>
-                            <constraint firstItem="gNg-kZ-lxz" firstAttribute="top" secondItem="QMz-RE-4St" secondAttribute="bottom" constant="8" symbolic="YES" id="ooE-gv-iwR"/>
-                            <constraint firstItem="gNg-kZ-lxz" firstAttribute="trailing" secondItem="fnB-Co-HxP" secondAttribute="trailing" id="sN4-xo-Ik1"/>
-                            <constraint firstItem="swq-2f-Tgy" firstAttribute="top" secondItem="6SU-nv-6bE" secondAttribute="bottom" constant="8" symbolic="YES" id="tgo-s0-HfV"/>
-                            <constraint firstItem="fnB-Co-HxP" firstAttribute="trailing" secondItem="6SU-nv-6bE" secondAttribute="trailing" id="u1U-mM-tk6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="jSs-l2-R7N" secondAttribute="trailing" id="WuR-jv-3Ox"/>
+                            <constraint firstItem="jSs-l2-R7N" firstAttribute="leading" secondItem="4S5-t2-v8i" secondAttribute="leadingMargin" id="YOT-Pf-4Tc"/>
+                            <constraint firstItem="jSs-l2-R7N" firstAttribute="top" secondItem="QMz-RE-4St" secondAttribute="bottom" constant="8" symbolic="YES" id="vIY-QO-oK7"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Beállítások" id="tgt-b0-5rp">
