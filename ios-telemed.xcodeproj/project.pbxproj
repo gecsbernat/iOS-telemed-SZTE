@@ -72,7 +72,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3F28DEB51EB1ED1F00483B29 /* NaploViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NaploViewController.swift; sourceTree = "<group>"; };
+		3F28DEB51EB1ED1F00483B29 /* NaploViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NaploViewController.swift; path = "ios-telemed/NaploViewController.swift"; sourceTree = "<group>"; };
 		3F60D9311EB1E5FA00B27E42 /* ios-telemed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-telemed.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F60D9341EB1E5FA00B27E42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F60D9391EB1E5FA00B27E42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -109,6 +109,7 @@
 		3F60D9281EB1E5FA00B27E42 = {
 			isa = PBXGroup;
 			children = (
+				3F28DEB51EB1ED1F00483B29 /* NaploViewController.swift */,
 				3F60D9331EB1E5FA00B27E42 /* ios-telemed */,
 				3F60D9321EB1E5FA00B27E42 /* Products */,
 				71F8E4B91EC21C6500E8C234 /* Frameworks */,
@@ -129,19 +130,18 @@
 				71F8E4B81EC21C6500E8C234 /* ios-telemed.entitlements */,
 				3F60D9341EB1E5FA00B27E42 /* AppDelegate.swift */,
 				71D06CDC1ED46FC60054951C /* BarChartViewController.swift */,
-				3F28DEB51EB1ED1F00483B29 /* NaploViewController.swift */,
 				7117BFAC1EB8FDDE000A7AC9 /* UjBejegyzesViewController.swift */,
+				71D6ECB11EE1645D0077EB22 /* HealthkitViewController.swift */,
 				71F8E4BC1EC21E2700E8C234 /* IdopontokViewController.swift */,
 				71A9407D1EC30F3A001718AD /* UjIdopontViewController.swift */,
 				B2649D6E1EB7952000FF2D8F /* GyogyszerViewController.swift */,
 				B2A95ED61ED4A10300B3BEAA /* UjGyogyszerViewController.swift */,
 				B2D6EE721EDF415E006A6E56 /* SettingsController.swift */,
-				71D6ECB11EE1645D0077EB22 /* HealthkitViewController.swift */,
 				3F60D9381EB1E5FA00B27E42 /* Main.storyboard */,
-				3F60D93E1EB1E5FA00B27E42 /* Assets.xcassets */,
 				3F60D9401EB1E5FA00B27E42 /* LaunchScreen.storyboard */,
-				3F60D9431EB1E5FA00B27E42 /* Info.plist */,
 				3F60D93B1EB1E5FA00B27E42 /* ios_telemed.xcdatamodeld */,
+				3F60D93E1EB1E5FA00B27E42 /* Assets.xcassets */,
+				3F60D9431EB1E5FA00B27E42 /* Info.plist */,
 			);
 			path = "ios-telemed";
 			sourceTree = "<group>";
