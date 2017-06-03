@@ -14,7 +14,7 @@ class IdopontokViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var idopontokTable: UITableView! //tableview
     
     var idopontok: [IdopontEntity] = [] //tomb az adatok tarolasara
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         idopontokTable.dataSource = self
@@ -28,7 +28,7 @@ class IdopontokViewController: UIViewController, UITableViewDelegate, UITableVie
         getData()
         idopontokTable.reloadData()
     }
-
+    
     //mennyi sorbol all a table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return idopontok.count
@@ -88,5 +88,6 @@ class IdopontokViewController: UIViewController, UITableViewDelegate, UITableVie
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
 }
+
