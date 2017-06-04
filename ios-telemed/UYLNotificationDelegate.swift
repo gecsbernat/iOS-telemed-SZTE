@@ -17,7 +17,7 @@ class UYLNotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        
+
         switch response.actionIdentifier {
         case UNNotificationDismissActionIdentifier:
             print("Dismiss Action")
@@ -30,15 +30,21 @@ class UYLNotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
             let naplo = NaploEntity(context: context)
             let dateformatter = DateFormatter()
             dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
-            naplo.esemeny = "Gyógyszer bevétel"
+            naplo.esemeny = response.notification.request.identifier + " nevű gyógyszer bevétel"
             naplo.datum = dateformatter.string(from: Date())
             naplo.dia = 0
             naplo.sys = 0
-            
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
-            print("ok")
-        case "Delete":
-            print("Delete")  
+        case "NO":
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let naplo = NaploEntity(context: context)
+            let dateformatter = DateFormatter()
+            dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
+            naplo.esemeny = "❗️Elmaradt gyógyszerbevétel: " + response.notification.request.identifier
+            naplo.datum = dateformatter.string(from: Date())
+            naplo.dia = 0
+            naplo.sys = 0
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
         default:
             print("Unknown action")
         }

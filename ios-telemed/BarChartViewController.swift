@@ -40,7 +40,7 @@ class BarChartViewController: UIViewController {
             datum = datum.substring(to: index) + "\n" + datum.substring(from: index).substring(to: index2)
             let sys = ertek.value(forKey: "sys") as! Double
             let dia = ertek.value(forKey: "dia") as! Double
-            if(sys != 0.0 && dia != 0.0){
+            if(sys != 0 && dia != 0){
                 idopontok.append(datum)
                 systolic.append(sys)
                 diastolic.append(dia)
