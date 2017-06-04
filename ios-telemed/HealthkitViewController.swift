@@ -14,13 +14,13 @@ class HealthkitViewController: UIViewController {
 
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     var healthstore: HKHealthStore? = nil
-    var naplodata : [NaploEntity] = []
     var readdata:NSSet? = nil
     var writedata:NSSet? = nil
+    let dateformatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getData()
+        dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
         if HKHealthStore.isHealthDataAvailable() {
             healthstore = HKHealthStore()
             let systolic = HKQuantityType.quantityType(forIdentifier: .bloodPressureSystolic)
@@ -45,20 +45,6 @@ class HealthkitViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    //adatnyeres a coredata-bol, datum szerint rendezve: legutobbi elol.
-    func getData(){
-        let context2 = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<NaploEntity> = NaploEntity.fetchRequest()
-        let sort = NSSortDescriptor(key: "datum", ascending: false)
-        fetchRequest.sortDescriptors = [sort]
-        do{
-            naplodata = try context2.fetch(fetchRequest)
-        }
-        catch{
-            print("Error fetching data.")
-        }
-    }
-    
     //adatkinyerés healthkitből
     func fetchHealthkit(){
         indicator.startAnimating()
@@ -73,12 +59,12 @@ class HealthkitViewController: UIViewController {
                 let data1 = (dataLst![index].objects(for: HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureSystolic)!)).first as? HKQuantitySample
                 let data2 = (dataLst![index].objects(for: HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodPressureDiastolic)!)).first as? HKQuantitySample
                 
-                let date = data1?.startDate
+                let date = self.dateformatter.string(from: (data1?.startDate)!)
                 let systolic = data1?.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
                 let diastolic = data2?.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
-                
+
                 let bejegyzes = NaploEntity(context: context4)
-                bejegyzes.datum = date! as NSDate?
+                bejegyzes.datum = date
                 bejegyzes.esemeny = "Vérnyomás mérés"
                 bejegyzes.dia = Int16(diastolic!)
                 bejegyzes.sys = Int16(systolic!)

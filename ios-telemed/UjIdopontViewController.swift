@@ -15,14 +15,12 @@ class UjIdopontViewController: UIViewController {
     @IBOutlet weak var helyszinText: UITextField!
     @IBOutlet weak var idopontText: UILabel!
     @IBOutlet weak var saveCalendar: UISwitch!
-    var date = NSDate()
+    var date: String = ""
+    let dateformatter = DateFormatter()
 
     @IBAction func datePicker(_ sender: UIDatePicker) {
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
-        date = sender.date as NSDate
-        date = date.addingTimeInterval(7200) //fix 2 hour difference
-        idopontText.text = dateformatter.string(from: sender.date)
+        date = dateformatter.string(from: sender.date)
+        idopontText.text = date
     }
     
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
@@ -45,7 +43,7 @@ class UjIdopontViewController: UIViewController {
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
             
             if(saveCalendar.isOn){
-                addEventToCalendar(title: orvosneveText.text!, description: helyszinText.text!, startDate: date as Date, endDate: date as Date)
+                addEventToCalendar(title: orvosneveText.text!, description: helyszinText.text!, startDate: dateformatter.date(from: date)!, endDate: (dateformatter.date(from: date)!).addingTimeInterval(3600))
             }
             dismiss(animated: true, completion: nil)
         }
@@ -83,7 +81,7 @@ class UjIdopontViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        date = date.addingTimeInterval(7200) //fix 2 hour difference
+        dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
     }
     
     override func didReceiveMemoryWarning() {

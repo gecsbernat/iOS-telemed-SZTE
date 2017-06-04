@@ -38,9 +38,7 @@ class IdopontokViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = idopontokTable.dequeueReusableCell(withIdentifier: "idopontCell")
         let bejegyzes = idopontok[indexPath.row]
-        var datum = String(describing: bejegyzes.datum!)
-        let index = datum.index(datum.startIndex, offsetBy: 16)
-        datum = datum.substring(to: index)
+        let datum = bejegyzes.datum!
         cell?.textLabel?.text = bejegyzes.orvosneve! + ", " + bejegyzes.helyszin!
         cell?.detailTextLabel?.text = datum
         return cell!
@@ -73,16 +71,6 @@ class IdopontokViewController: UIViewController, UITableViewDelegate, UITableVie
         catch{
             print("Error fetching data.")
         }
-    }
-    
-    //adatok mentese
-    func saveData(text: String, date: String){
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let idopont = IdopontEntity(context: context)
-        idopont.orvosneve = text
-        idopont.datum = NSDate()
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        idopontok.insert(idopont, at: 0)
     }
     
     override func didReceiveMemoryWarning() {

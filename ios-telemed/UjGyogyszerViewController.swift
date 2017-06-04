@@ -19,19 +19,15 @@ class UjGyogyszerViewController: UIViewController, UIPickerViewDataSource, UIPic
     @IBOutlet weak var medAmountType: UIPickerView!
     @IBOutlet weak var datePicker: UIDatePicker!
     
-    var time = NSDate()
+    let dateformatter = DateFormatter()
     
+    var time: String = ""
     @IBAction func timepicker(_ sender: UIDatePicker) {
-
-        time = sender.date as NSDate
-       // time = time.addingTimeInterval(7200) //fix 2 hour difference
-        
+        time = dateformatter.string(from: sender.date)
     }
-    
     
     var selectedType : String?
     var selectedWhen : String?
-    
     
     enum ConvertError: Error {
         case numberFormat
@@ -104,7 +100,7 @@ class UjGyogyszerViewController: UIViewController, UIPickerViewDataSource, UIPic
             content.body = "\(record.mennyiseg) \(String(describing: selectedType!)) \(String(describing: selectedWhen!))"
             content.sound = UNNotificationSound.default()
             content.badge = 1
-            let triggerDaily = Calendar.current.dateComponents([.hour,.minute], from: time as Date)
+            let triggerDaily = Calendar.current.dateComponents([.hour,.minute], from: dateformatter.date(from: time)!)
             let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
             let identifier = "\(String(describing: medName.text!))"
             let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
@@ -133,6 +129,7 @@ class UjGyogyszerViewController: UIViewController, UIPickerViewDataSource, UIPic
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        dateformatter.dateFormat = "HH:mm"
         medAmountType.dataSource = self;
         medAmountType.delegate = self;
         selectedType = "Tabletta"

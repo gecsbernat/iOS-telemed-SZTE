@@ -44,9 +44,7 @@ class GyogyszerViewController: UIViewController,UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = medTable.dequeueReusableCell(withIdentifier: "MedCell")
         let record = meds[indexPath.row]
-        var datum = String(describing: record.datum!)
-        let index = datum.index(datum.startIndex, offsetBy: 16)
-        datum = datum.substring(to: index)
+        let datum = record.datum!
         cell?.textLabel?.text = record.nev! + ", " + String(describing: record.mennyiseg) + " " + record.mennyisegTipus! + ", " + record.mikor!
         cell?.detailTextLabel?.text = datum
         return cell!
@@ -81,26 +79,4 @@ class GyogyszerViewController: UIViewController,UITableViewDataSource, UITableVi
         }
 
     }
-    
-    func saveMeds(nev: String, mennyiseg: Int16, mennyisegTipus: String, mikor: String, date: String){
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let med = GyogyszerEntity(context: context)
-        med.datum = NSDate()
-        med.mennyiseg = mennyiseg
-        med.mennyisegTipus = mennyisegTipus
-        med.mikor = mikor
-        med.nev = nev
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        meds.insert(med, at: 0)
-    }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }

@@ -17,6 +17,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var atlagText: UILabel!
     @IBOutlet weak var refreshBTN: UIBarButtonItem!
     var naplo : [NaploEntity] = [] //ebben taroljuk a coredata adatot
+    let dateformatter = DateFormatter()
     var reference : [ReferenceEntity] = []
     var healthstore: HKHealthStore? = nil
     var refSys = 120
@@ -34,6 +35,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
         naploTable.dataSource = self
         naploTable.delegate = self
         naploTable.rowHeight = 80
@@ -51,9 +53,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = naploTable.dequeueReusableCell(withIdentifier: "naploTableCell")
         let bejegyzes = naplo[indexPath.row]
-        var datum = String(describing: bejegyzes.datum!)
-        let index = datum.index(datum.startIndex, offsetBy: 19)
-        datum = datum.substring(to: index)
+        let datum = bejegyzes.datum!
         let SYS = bejegyzes.sys
         let DIA = bejegyzes.dia
         if(avgSys.count > 0 && avgDia.count > 0){
@@ -169,14 +169,14 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     //csv string
     func createExportString() -> String {
-        var date: NSDate?
+        var date: String?
         var DIA: Int?
         var SYS: Int?
         var event: String?
         
         var export: String = NSLocalizedString("Datum,Esemeny,SYS,DIA\n", comment: "")
         for ertek in naplo {
-            date = ertek.value(forKey: "datum") as? NSDate!
+            date = ertek.value(forKey: "datum") as! String!
             DIA = ertek.value(forKey: "dia") as? Int!
             SYS = ertek.value(forKey: "sys") as? Int!
             event = ertek.value(forKey: "esemeny") as? String!
@@ -219,7 +219,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
             var dayCounter = 0
             
             //Előző nap, ciklusban kell
-            var prevDay = naplo[0].value(forKey: "datum") as! NSDate
+            var prevDay = dateformatter.date(from: naplo[0].value(forKey: "datum") as! String)
             
             //Utolsó felvett adat, nem tartozik az átlaghoz
             let lastSys = naplo[0].value(forKey: "sys") as! Int
@@ -228,17 +228,16 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
             //Megszámoljuk a napokat
             for i in 1..<naplo.count
             {
-                let order = NSCalendar.current.compare(prevDay as Date, to: (naplo[i].value(forKey: "datum") as! NSDate) as Date,
-                                                       toGranularity: .day)
+                let order = NSCalendar.current.compare(prevDay!, to: dateformatter.date(from: naplo[i].value(forKey: "datum") as! String)!, toGranularity: .day)
                 if((order != .orderedSame) || (i == 1 && order == .orderedSame)){
                     days += 1
                 }
-                prevDay = naplo[i].value(forKey: "datum") as! NSDate
+                prevDay = dateformatter.date(from: naplo[i].value(forKey: "datum") as! String)
             }
 
             if(days > sectionSize) {
                 //Ujrainicializálás
-                prevDay = naplo[1].value(forKey: "datum") as! NSDate
+                prevDay = dateformatter.date(from: naplo[1].value(forKey: "datum") as! String)
                 let sections = days / sectionSize
                 //let last = days % sectionSize
                 
@@ -253,7 +252,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
                 //Kigyűjtöm tömbökbe a napra lebontott mérések összegét
                 for i in 1..<naplo.count
                 {
-                    let order = NSCalendar.current.compare(prevDay as Date, to: (naplo[i].value(forKey: "datum") as! NSDate) as Date,
+                    let order = NSCalendar.current.compare(prevDay!, to: (dateformatter.date(from: naplo[i].value(forKey: "datum") as! String))!,
                                                            toGranularity: .day)
                     if(order != .orderedSame && i != 1){
                         dayCounter += 1
@@ -262,7 +261,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
                     dailyDia[dayCounter] += naplo[i].value(forKey: "dia") as! Int
                     dailyCount[dayCounter] += 1
                     
-                    prevDay = naplo[i].value(forKey: "datum") as! NSDate
+                    prevDay = dateformatter.date(from: naplo[i].value(forKey: "datum") as! String)
                 }
                 
                 //Itt átlagolom
@@ -317,47 +316,57 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
                     print("\(avgSys[i])/\(avgDia[i])")
                 }
                 //}
-                        print(days)
+
                 if (lastSys >= refSys + offsetProblemSys && lastDia >= refDia + offsetProblemDia){
-                    alertText.isHidden = false
-                    alertText.backgroundColor = UIColor.red.withAlphaComponent(0.2)
-                    alertText.text = "Mindkét vérnyomásmérték jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!"
+                    //alertText.backgroundColor = UIColor.red.withAlphaComponent(0.2)
+                    //alertText.text = "Mindkét vérnyomásmérték jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!"
                     print("Mindkét vérnyomásmérték jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!")
+                    //print(1)
+                    writeAlertText(string: "Mindkét vérnyomásmérték jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!", color: UIColor.red.withAlphaComponent(0.2))
                 } else if (lastSys < refSys + offsetProblemSys && lastDia >= refDia + offsetProblemDia){
-                    alertText.isHidden = false
-                    alertText.backgroundColor = UIColor.red.withAlphaComponent(0.2)
-                    alertText.text = "A diasztolés jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!"
+                    //alertText.backgroundColor = UIColor.red.withAlphaComponent(0.2)
+                    //alertText.text = "A diasztolés jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!"
                     print("A diasztolés jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!")
+                    //print(2)
+                    writeAlertText(string: "A diasztolés jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!", color: UIColor.red.withAlphaComponent(0.2))
                 } else if (lastSys >= refSys + offsetProblemSys && lastDia < refDia + offsetProblemDia){
-                    alertText.isHidden = false
-                    alertText.backgroundColor = UIColor.red.withAlphaComponent(0.2)
-                    alertText.text = "A szisztolés jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!"
+                    //alertText.backgroundColor = UIColor.red.withAlphaComponent(0.2)
+                    //alertText.text = "A szisztolés jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!"
                     print("A szisztolés jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!")
+                    //print(3)
+                    writeAlertText(string: "A szisztolés jóval magasabb a referenciaértéknél, kérem forduljon orvoshoz!", color: UIColor.red.withAlphaComponent(0.2))
                 } else {
                     print("Nincs a korlátot átlépő kiugró érték")
-                    alertText.backgroundColor = UIColor.green.withAlphaComponent(0.2)
-                    alertText.text = "Minden rendben!"
+                    //alertText.backgroundColor = UIColor.green.withAlphaComponent(0.2)
+                    //alertText.text = "Minden rendben!"
+                    //print(4)
+                    writeAlertText(string: "Minden rendben!", color: UIColor.green.withAlphaComponent(0.2))
                 }
                 
                 if (lastSys >= avgSys[0] + offsetProblemSys && lastDia >= avgDia[0] + offsetProblemDia){
-                    alertText.isHidden = false
-                    alertText.backgroundColor = UIColor.red.withAlphaComponent(0.2)
-                    alertText.text = "Mindkét vérnyomásmérték jóval magasabb az átlagnál, kérem forduljon orvoshoz!"
-                    print("A diasztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
+                   // alertText.backgroundColor = UIColor.red.withAlphaComponent(0.2)
+                   // alertText.text = "Mindkét vérnyomásmérték jóval magasabb az átlagnál, kérem forduljon orvoshoz!"
+                    print("Mindkét vérnyomásmérték jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
+                    //print(5)
+                    writeAlertText(string: "Mindkét vérnyomásmérték jóval magasabb az átlagnál, kérem forduljon orvoshoz!", color: UIColor.red.withAlphaComponent(0.2))
                 } else if (lastSys < avgSys[0] + offsetProblemSys && lastDia >= avgDia[0] + offsetProblemDia){
-                    alertText.isHidden = false
-                    alertText.backgroundColor = UIColor.red.withAlphaComponent(0.2)
-                    alertText.text = "A diasztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!"
+                    //alertText.backgroundColor = UIColor.red.withAlphaComponent(0.2)
+                    //alertText.text = "A diasztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!"
                     print("A diasztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
+                    //print(6)
+                    writeAlertText(string: "A diasztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!", color: UIColor.red.withAlphaComponent(0.2))
                 } else if (lastSys >= avgSys[0] + offsetProblemSys && lastDia < avgDia[0] + offsetProblemDia){
-                    alertText.isHidden = false
-                    alertText.backgroundColor = UIColor.red.withAlphaComponent(0.2)
-                    alertText.text = "A szisztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!"
+                    //alertText.backgroundColor = UIColor.red.withAlphaComponent(0.2)
+                    //alertText.text = "A szisztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!"
                     print("A szisztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!")
+                   // print(7)
+                    writeAlertText(string: "A szisztolés jóval magasabb az átlagnál, kérem forduljon orvoshoz!", color: UIColor.red.withAlphaComponent(0.2))
                 } else {
                     print("Nincs a korlátot átlépő kiugró érték")
-                    alertText.backgroundColor = UIColor.green.withAlphaComponent(0.2)
-                    alertText.text = "Minden rendben!"
+                    //alertText.backgroundColor = UIColor.green.withAlphaComponent(0.2)
+                    //alertText.text = "Minden rendben!"
+                   // print(8)
+                    writeAlertText(string: "Minden rendben!", color: UIColor.green.withAlphaComponent(0.2))
                 }
             }
         }else{
@@ -387,5 +396,15 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
+    func writeAlertText(string: String, color: UIColor){
+        var prevtext = alertText.text!
+        alertText.text?.removeAll()
+        if(prevtext.characters.count < 20){
+            alertText.text = string
+            alertText.backgroundColor = color
+        }else if(prevtext.characters.count > 40){
+            alertText.text = prevtext + string
+        }
+    }
 }

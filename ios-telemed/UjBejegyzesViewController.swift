@@ -24,12 +24,13 @@ class UjBejegyzesViewController: UIViewController {
     var healthstore: HKHealthStore? = nil
     var readdata:NSSet? = nil
     var writedata:NSSet? = nil
-    
-    var date = NSDate() //date valtozo
+    let dateformatter = DateFormatter()
+    var date: String = "" //date valtozo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        date = date.addingTimeInterval(7200) //fix 2 hour difference
+        dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
+        date = dateformatter.string(from: Date())
         if HKHealthStore.isHealthDataAvailable() {
             saveHealthBTN.isEnabled = true
             healthstore = HKHealthStore()
@@ -46,11 +47,9 @@ class UjBejegyzesViewController: UIViewController {
     }
     
     @IBAction func datePicker(_ sender: UIDatePicker) {
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
-        date = sender.date as NSDate
         //date = date.addingTimeInterval(7200) //fix 2 hour difference
         idopontText.text = dateformatter.string(from: sender.date)
+        date = idopontText.text!
     }
     
     //adatok mentese core data-ba
@@ -132,7 +131,7 @@ class UjBejegyzesViewController: UIViewController {
         let systolicType = HKQuantityType.quantityType(forIdentifier: .bloodPressureSystolic)!
         let diastolicType = HKQuantityType.quantityType(forIdentifier: .bloodPressureDiastolic)!
         
-        let nowDate = date as Date
+        let nowDate = dateformatter.date(from: date)!
         let systolicSample = HKQuantitySample(type: systolicType, quantity: systolicQuantity, start: nowDate, end: nowDate)
         let diastolicSample = HKQuantitySample(type: diastolicType, quantity: diastolicQuantity, start: nowDate, end: nowDate)
         
