@@ -20,6 +20,7 @@ class UjGyogyszerViewController: UIViewController, UIPickerViewDataSource, UIPic
     @IBOutlet weak var datePicker: UIDatePicker!
     
     let dateformatter = DateFormatter()
+    let iconnumber = UIApplication.shared.applicationIconBadgeNumber
     
     var time: String = ""
     @IBAction func timepicker(_ sender: UIDatePicker) {
@@ -130,6 +131,7 @@ class UjGyogyszerViewController: UIViewController, UIPickerViewDataSource, UIPic
     override func viewDidLoad() {
         super.viewDidLoad()
         dateformatter.dateFormat = "HH:mm"
+        time = dateformatter.string(from: Date())
         medAmountType.dataSource = self;
         medAmountType.delegate = self;
         selectedType = "Tabletta"
