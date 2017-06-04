@@ -96,6 +96,12 @@ class UjGyogyszerViewController: UIViewController, UIPickerViewDataSource, UIPic
             //notification
             let center = UNUserNotificationCenter.current()
             let content = UNMutableNotificationContent()
+            let snoozeAction = UNNotificationAction(identifier: "Snooze", title: "Snooze", options: [])
+            let okAction = UNNotificationAction(identifier: "OK", title: "Bevettem", options: [])
+            let deleteAction = UNNotificationAction(identifier: "Delete", title: "Delete", options: [.destructive])
+            let category = UNNotificationCategory(identifier: "UYLReminderCategory", actions: [snoozeAction,okAction,deleteAction], intentIdentifiers: [], options: [])
+            center.setNotificationCategories([category])
+            content.categoryIdentifier = "UYLReminderCategory"
             content.title = "Gyógyszerbevétel időpontja"
             content.subtitle = "Kérem vegye be \(String(describing: medName.text!)) nevű gyógyszerét!"
             content.body = "\(record.mennyiseg) \(String(describing: selectedType!)) \(String(describing: selectedWhen!))"
@@ -106,11 +112,7 @@ class UjGyogyszerViewController: UIViewController, UIPickerViewDataSource, UIPic
             let identifier = "\(String(describing: medName.text!))"
             let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
             center.add(request, withCompletionHandler: { (error) in
-                if error != nil {
-                    print(error!)
-                }else{
-                    print(request)
-                }
+                if error != nil { print(error!) } //else{ print(request) }
             })
             
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
