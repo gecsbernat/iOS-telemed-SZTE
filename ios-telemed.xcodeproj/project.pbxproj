@@ -13,7 +13,6 @@
 		3F60D93D1EB1E5FA00B27E42 /* ios_telemed.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F60D93B1EB1E5FA00B27E42 /* ios_telemed.xcdatamodeld */; };
 		3F60D93F1EB1E5FA00B27E42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F60D93E1EB1E5FA00B27E42 /* Assets.xcassets */; };
 		3F60D9421EB1E5FA00B27E42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F60D9401EB1E5FA00B27E42 /* LaunchScreen.storyboard */; };
-		711562491EE4AC8000B5A7B7 /* UYLNotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711562481EE4AC8000B5A7B7 /* UYLNotificationDelegate.swift */; };
 		7117BFAD1EB8FDDE000A7AC9 /* UjBejegyzesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7117BFAC1EB8FDDE000A7AC9 /* UjBejegyzesViewController.swift */; };
 		711CB4461EE2BF2700DB4D8F /* IdopontokViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711CB4451EE2BF2700DB4D8F /* IdopontokViewController.swift */; };
 		71A9407E1EC30F3A001718AD /* UjIdopontViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A9407D1EC30F3A001718AD /* UjIdopontViewController.swift */; };
@@ -81,7 +80,6 @@
 		3F60D93E1EB1E5FA00B27E42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F60D9411EB1E5FA00B27E42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F60D9431EB1E5FA00B27E42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		711562481EE4AC8000B5A7B7 /* UYLNotificationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UYLNotificationDelegate.swift; sourceTree = "<group>"; };
 		7117BFAC1EB8FDDE000A7AC9 /* UjBejegyzesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UjBejegyzesViewController.swift; sourceTree = "<group>"; };
 		711CB4451EE2BF2700DB4D8F /* IdopontokViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdopontokViewController.swift; sourceTree = "<group>"; };
 		71A9407D1EC30F3A001718AD /* UjIdopontViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UjIdopontViewController.swift; sourceTree = "<group>"; };
@@ -138,7 +136,6 @@
 				711CB4451EE2BF2700DB4D8F /* IdopontokViewController.swift */,
 				B2649D6E1EB7952000FF2D8F /* GyogyszerViewController.swift */,
 				B2A95ED61ED4A10300B3BEAA /* UjGyogyszerViewController.swift */,
-				711562481EE4AC8000B5A7B7 /* UYLNotificationDelegate.swift */,
 				B2D6EE721EDF415E006A6E56 /* SettingsController.swift */,
 				3F60D9381EB1E5FA00B27E42 /* Main.storyboard */,
 				3F60D9401EB1E5FA00B27E42 /* LaunchScreen.storyboard */,
@@ -282,7 +279,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				71D6ECB21EE1645D0077EB22 /* HealthkitViewController.swift in Sources */,
-				711562491EE4AC8000B5A7B7 /* UYLNotificationDelegate.swift in Sources */,
 				3F28DEB61EB1ED1F00483B29 /* NaploViewController.swift in Sources */,
 				711CB4461EE2BF2700DB4D8F /* IdopontokViewController.swift in Sources */,
 				71D06CDD1ED46FC60054951C /* BarChartViewController.swift in Sources */,

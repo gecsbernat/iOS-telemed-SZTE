@@ -15,8 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    let notificationDelegate = UYLNotificationDelegate()
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let center = UNUserNotificationCenter.current()
@@ -34,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        center.delegate = notificationDelegate        
+        center.delegate = self
         UIApplication.shared.applicationIconBadgeNumber = 0
         return true
     }
@@ -55,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -107,6 +106,67 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+}
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        switch response.actionIdentifier {
+        case UNNotificationDismissActionIdentifier:
+            print("Dismiss Action")
+        case UNNotificationDefaultActionIdentifier:
+            let alert = UIAlertController(title: "Gyógyszerbevétel", message: "Bevette a " + response.notification.request.identifier + " nevű gyógyszert?", preferredStyle: .alert)
+            let beaction = UIAlertAction(title: "igen", style: .default, handler: ({
+                (_) in
+                let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+                let naplo = NaploEntity(context: context)
+                let dateformatter = DateFormatter()
+                dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
+                naplo.esemeny = response.notification.request.identifier + " nevű gyógyszer bevétel"
+                naplo.datum = dateformatter.string(from: Date())
+                naplo.dia = 0
+                naplo.sys = 0
+                (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            }))
+            alert.addAction(beaction)
+            let nemaction = UIAlertAction(title: "nem", style: .destructive, handler: ({
+                (_) in
+                let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+                let naplo = NaploEntity(context: context)
+                let dateformatter = DateFormatter()
+                dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
+                naplo.esemeny = "❗️Elmaradt gyógyszerbevétel: " + response.notification.request.identifier
+                naplo.datum = dateformatter.string(from: Date())
+                naplo.dia = 0
+                naplo.sys = 0
+                (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            }))
+            alert.addAction(nemaction)
+            self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+        case "OK" :
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let naplo = NaploEntity(context: context)
+            let dateformatter = DateFormatter()
+            dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
+            naplo.esemeny = response.notification.request.identifier + " nevű gyógyszer bevétel"
+            naplo.datum = dateformatter.string(from: Date())
+            naplo.dia = 0
+            naplo.sys = 0
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        case "NO":
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let naplo = NaploEntity(context: context)
+            let dateformatter = DateFormatter()
+            dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
+            naplo.esemeny = "❗️Elmaradt gyógyszerbevétel: " + response.notification.request.identifier
+            naplo.datum = dateformatter.string(from: Date())
+            naplo.dia = 0
+            naplo.sys = 0
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        default:
+            print("Unknown action")
+        }
+        completionHandler()
+    }
 }
 

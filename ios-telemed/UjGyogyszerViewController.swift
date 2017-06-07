@@ -96,10 +96,9 @@ class UjGyogyszerViewController: UIViewController, UIPickerViewDataSource, UIPic
             //notification
             let center = UNUserNotificationCenter.current()
             let content = UNMutableNotificationContent()
-            let snoozeAction = UNNotificationAction(identifier: "Snooze", title: "Snooze", options: [])
             let okAction = UNNotificationAction(identifier: "OK", title: "Bevettem", options: [])
             let deleteAction = UNNotificationAction(identifier: "NO", title: "Nem veszem be", options: [.destructive])
-            let category = UNNotificationCategory(identifier: "UYLReminderCategory", actions: [snoozeAction,okAction,deleteAction], intentIdentifiers: [], options: [])
+            let category = UNNotificationCategory(identifier: "UYLReminderCategory", actions: [okAction,deleteAction], intentIdentifiers: [], options: [])
             center.setNotificationCategories([category])
             content.categoryIdentifier = "UYLReminderCategory"
             content.title = "Gyógyszerbevétel időpontja"
