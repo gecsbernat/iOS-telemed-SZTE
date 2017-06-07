@@ -81,7 +81,7 @@ class BarChartViewController: UIViewController {
         super.viewDidLoad()
         getData()
         convertdata()
-        linechart.noDataText = "Nincs adat."
+        linechart.noDataText = "Nincs (elég) adat."
         linechart.chartDescription?.text = "Vérnyomás adatok"
         linechart.legend.enabled = true
         linechart.pinchZoomEnabled = false
@@ -93,7 +93,9 @@ class BarChartViewController: UIViewController {
         linechart.xAxis.granularity = 1
         
         if(!naplo.isEmpty){
-            setChart(dataPoints: idopontok, systolic: systolic, diastolic: diastolic)
+            if(!(naplo.count == 1)){
+                setChart(dataPoints: idopontok, systolic: systolic, diastolic: diastolic)
+            }
         }
     }
 }
