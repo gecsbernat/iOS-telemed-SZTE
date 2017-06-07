@@ -115,7 +115,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         case UNNotificationDismissActionIdentifier:
             print("Dismiss Action")
         case UNNotificationDefaultActionIdentifier:
-            let alert = UIAlertController(title: "Gyógyszerbevétel", message: "Bevette a " + response.notification.request.identifier + " nevű gyógyszert?", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Gyógyszerbevétel", message: "Bevette a(z) " + response.notification.request.identifier + " nevű gyógyszert?", preferredStyle: .alert)
             let beaction = UIAlertAction(title: "igen", style: .default, handler: ({
                 (_) in
                 let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
