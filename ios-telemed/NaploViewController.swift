@@ -16,7 +16,15 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var naploTable: UITableView!
     @IBOutlet weak var atlagText: UILabel!
     @IBOutlet weak var refreshBTN: UIBarButtonItem!
+    
+    @IBOutlet weak var segmented: UISegmentedControl!
+    
+    @IBAction func segmentedAction(_ sender: UISegmentedControl) {
+        naploTable.reloadData()
+    }
+    
     var naplo : [NaploEntity] = [] //ebben taroljuk a coredata adatot
+    var naplo2 : [Naplo2Entity] = []
     let dateformatter = DateFormatter()
     var reference : [ReferenceEntity] = []
     var healthstore: HKHealthStore? = nil
@@ -42,36 +50,53 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         alertText.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
         alertText.text = "Nincs adat."
+        print(segmented.selectedSegmentIndex)
     }
     
     //mennyi sorbol all a table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return naplo.count
+        switch segmented.selectedSegmentIndex {
+        case 0 : return naplo.count
+        case 1 : return naplo2.count
+        default : return naplo.count
+        }
     }
     
     //cella beallitasa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = naploTable.dequeueReusableCell(withIdentifier: "naploTableCell")
-        let bejegyzes = naplo[indexPath.row]
-        let datum = bejegyzes.datum!
-        let SYS = bejegyzes.sys
-        let DIA = bejegyzes.dia
-        if(avgSys.count > 0 && avgDia.count > 0){
-            if(Int16(SYS) >= Int16(avgSys[0] + offsetProblemSys) || Int16(DIA) >= Int16(avgDia[0] + offsetProblemDia)){
-                cell?.textLabel?.text = "❗️" + bejegyzes.esemeny!
+        
+        switch segmented.selectedSegmentIndex {
+        case 0:
+            let bejegyzes = naplo[indexPath.row]
+            let datum = bejegyzes.datum!
+            let SYS = bejegyzes.sys
+            let DIA = bejegyzes.dia
+            if(avgSys.count > 0 && avgDia.count > 0){
+                if(Int16(SYS) >= Int16(avgSys[0] + offsetProblemSys) || Int16(DIA) >= Int16(avgDia[0] + offsetProblemDia)){
+                    cell?.textLabel?.text = "❗️" + bejegyzes.esemeny!
+                }else{
+                    cell?.textLabel?.text = bejegyzes.esemeny!
+                }
             }else{
                 cell?.textLabel?.text = bejegyzes.esemeny!
             }
-        }else{
-            cell?.textLabel?.text = bejegyzes.esemeny!
+            
+            if(SYS != 0 && DIA != 0){
+                let pulse = SYS - DIA
+                cell?.detailTextLabel?.text = "Dátum: \(datum)\nVérnyomás: \(SYS)/\(DIA), pulzusnyomás: \(pulse)"
+            }else{
+                cell?.detailTextLabel?.text = "Dátum: \(datum)"
+            }
+        case 1 :
+            let bejegyzes = naplo2[indexPath.row]
+            let datum = bejegyzes.when!
+            cell?.textLabel?.text = bejegyzes.what!
+            cell?.detailTextLabel?.text = "Dátum: \(datum)"
+        default:
+            return cell!
         }
 
-        if(SYS != 0 && DIA != 0){
-            let pulse = SYS - DIA
-            cell?.detailTextLabel?.text = "Dátum: \(datum)\nVérnyomás: \(SYS)/\(DIA), pulzusnyomás: \(pulse)"
-        }else{
-            cell?.detailTextLabel?.text = "Dátum: \(datum)"
-        }
         
         return cell!
     }
@@ -79,30 +104,56 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     //torles balra huzasnal
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         let context1 = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        if editingStyle == .delete {
-            let bejegyzes = naplo[indexPath.row]
-            context1.delete(bejegyzes)
-            
-            (UIApplication.shared.delegate as! AppDelegate).saveContext()
-            getData()
+        switch segmented.selectedSegmentIndex {
+        case 0:
+            if editingStyle == .delete {
+                let bejegyzes = naplo[indexPath.row]
+                context1.delete(bejegyzes)
+                
+                (UIApplication.shared.delegate as! AppDelegate).saveContext()
+                getData()
+            }
+        case 1 :
+            if editingStyle == .delete {
+                let bejegyzes = naplo2[indexPath.row]
+                context1.delete(bejegyzes)
+                
+                (UIApplication.shared.delegate as! AppDelegate).saveContext()
+                getData()
+            }
+        default:
+            break
         }
+
         atlag()
         naploTable.reloadData()
     }
     
     //adatnyeres a coredata-bol, datum szerint rendezve: legutobbi elol.
     func getData(){
-       let context2 = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<NaploEntity> = NaploEntity.fetchRequest()
-        let sort = NSSortDescriptor(key: "datum", ascending: false)
-        fetchRequest.sortDescriptors = [sort]
+       let context1 = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest1: NSFetchRequest<NaploEntity> = NaploEntity.fetchRequest()
+        let sort1 = NSSortDescriptor(key: "datum", ascending: false)
+        fetchRequest1.sortDescriptors = [sort1]
         do{
-            naplo = try context2.fetch(fetchRequest)
+            naplo = try context1.fetch(fetchRequest1)
         }
         catch{
             print("Error fetching data.")
         }
+        
+        let context2 = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest2: NSFetchRequest<Naplo2Entity> = Naplo2Entity.fetchRequest()
+        fetchRequest2.returnsObjectsAsFaults = false
+        let sort2 = NSSortDescriptor(key: "when", ascending: false)
+        fetchRequest2.sortDescriptors = [sort2]
+        do{
+            naplo2 = try context2.fetch(fetchRequest2)
+        }
+        catch{
+            print("Error fetching data.")
+        }
+        
         
         getReferences()
     }
@@ -182,7 +233,13 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
             event = ertek.value(forKey: "esemeny") as? String!
             export += "\(date!),\(String(describing: event!)),\(String(describing: SYS!)),\(String(describing: DIA!))\n"
         }
-       // print("This is what the app will export: \(export)") //debug
+        export += ",,,\n"
+        for ertek2 in naplo2 {
+            date = ertek2.value(forKey: "when") as! String!
+            event = ertek2.value(forKey: "what") as? String!
+            export += "\(date!),\(String(describing: event!)),-,-\n"
+        }
+        print("This is what the app will export: \(export)") //debug
         return export
     }
     
@@ -377,7 +434,7 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     //export gomb
     @IBAction func exportButton(_ sender: UIBarButtonItem) {
-        if(naplo.count != 0){
+        if(naplo.count != 0 || naplo2.count != 0){
             exportDatabase()
         }else{
             let alert = UIAlertController(title: "", message: "Üres a napló.", preferredStyle: UIAlertControllerStyle.alert)
@@ -398,13 +455,10 @@ class NaploViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func writeAlertText(string: String, color: UIColor){
-        var prevtext = alertText.text!
-        alertText.text?.removeAll()
-        if(prevtext.characters.count < 20){
+        let prevtext = alertText.text!
+        if(prevtext == "Nincs adat." || prevtext == "Nincs elég adat." || prevtext == "Minden rendben!"){
             alertText.text = string
             alertText.backgroundColor = color
-        }else if(prevtext.characters.count > 40){
-            alertText.text = prevtext + string
         }
     }
 }

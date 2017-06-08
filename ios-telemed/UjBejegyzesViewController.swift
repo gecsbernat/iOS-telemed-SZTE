@@ -84,24 +84,35 @@ class UjBejegyzesViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }else{
         
-            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-            let naplo = NaploEntity(context: context)
             
-            naplo.esemeny = eventText.text ?? "Ismeretlen"
-            naplo.datum = date
-            naplo.dia = Int16(diaText.text!) ?? 0
-            naplo.sys = Int16(sysText.text!) ?? 0
             
-            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            if(Int16(diaText.text!) == 0){
+                let context1 = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+                let naplo2 = Naplo2Entity(context: context1)
+                naplo2.what = eventText.text ?? "Ismeretlen"
+                naplo2.when = date
+                
+                (UIApplication.shared.delegate as! AppDelegate).saveContext()
+                print("asd")
+                dismiss(animated: true, completion: nil)
+            }else{
+                let context2 = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+                let naplo = NaploEntity(context: context2)
+                naplo.esemeny = eventText.text ?? "Ismeretlen"
+                naplo.datum = date
+                naplo.dia = Int16(diaText.text!) ?? 0
+                naplo.sys = Int16(sysText.text!) ?? 0
+                (UIApplication.shared.delegate as! AppDelegate).saveContext()
             
-            if(saveHealthBTN.isOn){
-                saveBloodPressure(systolic: Double(sysText.text!)!, diastolic: Double(diaText.text!)!)
+                if(saveHealthBTN.isOn){
+                    saveBloodPressure(systolic: Double(sysText.text!)!, diastolic: Double(diaText.text!)!)
+                }
+            
+                if(saveReferenceSwitch.isOn){
+                    saveReference()
+                }
+                dismiss(animated: true, completion: nil)
             }
-            
-            if(saveReferenceSwitch.isOn){
-                saveReference()
-            }
-            dismiss(animated: true, completion: nil)
         }
 
     }

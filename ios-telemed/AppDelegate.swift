@@ -119,49 +119,41 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             let beaction = UIAlertAction(title: "igen", style: .default, handler: ({
                 (_) in
                 let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-                let naplo = NaploEntity(context: context)
+                let naplo = Naplo2Entity(context: context)
                 let dateformatter = DateFormatter()
                 dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
-                naplo.esemeny = response.notification.request.identifier + " nevű gyógyszer bevétel"
-                naplo.datum = dateformatter.string(from: Date())
-                naplo.dia = 0
-                naplo.sys = 0
+                naplo.what = response.notification.request.identifier + " nevű gyógyszer bevétel"
+                naplo.when = dateformatter.string(from: Date())
                 (UIApplication.shared.delegate as! AppDelegate).saveContext()
             }))
             alert.addAction(beaction)
             let nemaction = UIAlertAction(title: "nem", style: .destructive, handler: ({
                 (_) in
                 let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-                let naplo = NaploEntity(context: context)
+                let naplo = Naplo2Entity(context: context)
                 let dateformatter = DateFormatter()
                 dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
-                naplo.esemeny = "❗️Elmaradt gyógyszerbevétel: " + response.notification.request.identifier
-                naplo.datum = dateformatter.string(from: Date())
-                naplo.dia = 0
-                naplo.sys = 0
+                naplo.what = "❗️Elmaradt gyógyszerbevétel: " + response.notification.request.identifier
+                naplo.when = dateformatter.string(from: Date())
                 (UIApplication.shared.delegate as! AppDelegate).saveContext()
             }))
             alert.addAction(nemaction)
             self.window?.rootViewController?.present(alert, animated: true, completion: nil)
         case "OK" :
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-            let naplo = NaploEntity(context: context)
+            let naplo = Naplo2Entity(context: context)
             let dateformatter = DateFormatter()
             dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
-            naplo.esemeny = response.notification.request.identifier + " nevű gyógyszer bevétel"
-            naplo.datum = dateformatter.string(from: Date())
-            naplo.dia = 0
-            naplo.sys = 0
+            naplo.what = response.notification.request.identifier + " nevű gyógyszer bevétel"
+            naplo.when = dateformatter.string(from: Date())
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
         case "NO":
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-            let naplo = NaploEntity(context: context)
+            let naplo = Naplo2Entity(context: context)
             let dateformatter = DateFormatter()
             dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
-            naplo.esemeny = "❗️Elmaradt gyógyszerbevétel: " + response.notification.request.identifier
-            naplo.datum = dateformatter.string(from: Date())
-            naplo.dia = 0
-            naplo.sys = 0
+            naplo.what = "❗️Elmaradt gyógyszerbevétel: " + response.notification.request.identifier
+            naplo.when = dateformatter.string(from: Date())
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
         default:
             print("Unknown action")

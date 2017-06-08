@@ -12,6 +12,10 @@
         <attribute name="helyszin" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="orvosneve" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Naplo2Entity" representedClassName="Naplo2Entity" syncable="YES" codeGenerationType="class">
+        <attribute name="what" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="when" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="NaploEntity" representedClassName="NaploEntity" syncable="YES" codeGenerationType="class">
         <attribute name="datum" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dia" optional="YES" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -35,5 +39,6 @@
         <element name="IdopontEntity" positionX="-54" positionY="-9" width="128" height="90"/>
         <element name="NaploEntity" positionX="-54" positionY="-18" width="128" height="105"/>
         <element name="ReferenceEntity" positionX="-54" positionY="27" width="128" height="120"/>
+        <element name="Naplo2Entity" positionX="-54" positionY="45" width="128" height="75"/>
     </elements>
 </model>

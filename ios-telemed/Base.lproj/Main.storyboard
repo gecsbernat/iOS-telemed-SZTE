@@ -268,7 +268,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k8Z-fM-IRg">
-                                <rect key="frame" x="0.0" y="30" width="375" height="550"/>
+                                <rect key="frame" x="0.0" y="41" width="375" height="514"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="naploTableCell" textLabel="TYw-oz-KzC" detailTextLabel="aZA-Xk-UiV" style="IBUITableViewCellStyleSubtitle" id="CUg-Jw-FhI">
@@ -299,17 +299,17 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXf-sT-p3w">
-                                <rect key="frame" x="0.0" y="580" width="375" height="38"/>
+                                <rect key="frame" x="0.0" y="553" width="375" height="34"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="38" id="Nhc-HQ-VLd"/>
+                                    <constraint firstAttribute="height" constant="34" id="Nhc-HQ-VLd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="EgR-Yv-s6e">
-                                <rect key="frame" x="0.0" y="64" width="375" height="31"/>
+                                <rect key="frame" x="0.0" y="587" width="375" height="31"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="bON-j1-yUR"/>
@@ -318,19 +318,31 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7au-Yc-Oqc">
+                                <rect key="frame" x="16" y="72" width="343" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <segments>
+                                    <segment title="Vérnyomás"/>
+                                    <segment title="Gyógyszerek"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedAction:" destination="oAM-Kj-ZA8" eventType="valueChanged" id="gz9-K6-dQz"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="k8Z-fM-IRg" firstAttribute="leading" secondItem="fu9-Tt-Vn0" secondAttribute="leading" id="2lR-I4-l63"/>
-                            <constraint firstItem="pXf-sT-p3w" firstAttribute="top" secondItem="k8Z-fM-IRg" secondAttribute="bottom" id="9Uh-FN-9ef"/>
+                            <constraint firstItem="pXf-sT-p3w" firstAttribute="top" secondItem="k8Z-fM-IRg" secondAttribute="bottom" constant="-2" id="9Uh-FN-9ef"/>
                             <constraint firstItem="EgR-Yv-s6e" firstAttribute="leading" secondItem="pXf-sT-p3w" secondAttribute="leading" id="GrG-Cg-vsW"/>
-                            <constraint firstItem="k8Z-fM-IRg" firstAttribute="top" secondItem="fu9-Tt-Vn0" secondAttribute="top" constant="30" id="JNX-gC-OPO"/>
+                            <constraint firstItem="k8Z-fM-IRg" firstAttribute="top" secondItem="fu9-Tt-Vn0" secondAttribute="top" constant="41" id="JNX-gC-OPO"/>
                             <constraint firstAttribute="trailing" secondItem="k8Z-fM-IRg" secondAttribute="trailing" id="Jd7-HU-2Dd"/>
                             <constraint firstItem="k8Z-fM-IRg" firstAttribute="trailing" secondItem="pXf-sT-p3w" secondAttribute="trailing" id="Med-c6-y1q"/>
                             <constraint firstItem="k8Z-fM-IRg" firstAttribute="leading" secondItem="pXf-sT-p3w" secondAttribute="leading" id="c5D-1w-phk"/>
                             <constraint firstItem="EgR-Yv-s6e" firstAttribute="trailing" secondItem="pXf-sT-p3w" secondAttribute="trailing" id="eQ2-5y-ZNF"/>
-                            <constraint firstItem="EgR-Yv-s6e" firstAttribute="top" secondItem="cKz-y6-tQX" secondAttribute="bottom" id="gtZ-4A-6aU"/>
-                            <constraint firstItem="pXf-sT-p3w" firstAttribute="bottom" secondItem="NTR-yh-B4c" secondAttribute="top" id="uhD-Zk-6Li"/>
+                            <constraint firstItem="EgR-Yv-s6e" firstAttribute="top" secondItem="cKz-y6-tQX" secondAttribute="bottom" constant="523" id="gtZ-4A-6aU"/>
+                            <constraint firstItem="pXf-sT-p3w" firstAttribute="bottom" secondItem="NTR-yh-B4c" secondAttribute="top" constant="-31" id="uhD-Zk-6Li"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Napló" id="pqH-wg-q7a">
@@ -369,6 +381,7 @@
                         <outlet property="atlagText" destination="pXf-sT-p3w" id="KHs-Yf-xS5"/>
                         <outlet property="naploTable" destination="k8Z-fM-IRg" id="wkM-BL-Dj6"/>
                         <outlet property="refreshBTN" destination="njl-6L-JK2" id="lmT-3v-dcX"/>
+                        <outlet property="segmented" destination="7au-Yc-Oqc" id="8cd-Zs-A6M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RGy-o1-ko8" userLabel="First Responder" sceneMemberID="firstResponder"/>
