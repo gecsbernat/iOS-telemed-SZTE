@@ -302,7 +302,7 @@
                                 <rect key="frame" x="0.0" y="553" width="375" height="34"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="Nhc-HQ-VLd"/>
+                                    <constraint firstAttribute="height" constant="34" id="ssh-Oc-F6V"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
@@ -312,15 +312,14 @@
                                 <rect key="frame" x="0.0" y="587" width="375" height="31"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="bON-j1-yUR"/>
+                                    <constraint firstAttribute="height" constant="31" id="SxR-LV-vij"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7au-Yc-Oqc">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7au-Yc-Oqc">
                                 <rect key="frame" x="16" y="72" width="343" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <segments>
                                     <segment title="Vérnyomás"/>
@@ -333,16 +332,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="k8Z-fM-IRg" firstAttribute="leading" secondItem="fu9-Tt-Vn0" secondAttribute="leading" id="2lR-I4-l63"/>
-                            <constraint firstItem="pXf-sT-p3w" firstAttribute="top" secondItem="k8Z-fM-IRg" secondAttribute="bottom" constant="-2" id="9Uh-FN-9ef"/>
-                            <constraint firstItem="EgR-Yv-s6e" firstAttribute="leading" secondItem="pXf-sT-p3w" secondAttribute="leading" id="GrG-Cg-vsW"/>
-                            <constraint firstItem="k8Z-fM-IRg" firstAttribute="top" secondItem="fu9-Tt-Vn0" secondAttribute="top" constant="41" id="JNX-gC-OPO"/>
-                            <constraint firstAttribute="trailing" secondItem="k8Z-fM-IRg" secondAttribute="trailing" id="Jd7-HU-2Dd"/>
-                            <constraint firstItem="k8Z-fM-IRg" firstAttribute="trailing" secondItem="pXf-sT-p3w" secondAttribute="trailing" id="Med-c6-y1q"/>
-                            <constraint firstItem="k8Z-fM-IRg" firstAttribute="leading" secondItem="pXf-sT-p3w" secondAttribute="leading" id="c5D-1w-phk"/>
-                            <constraint firstItem="EgR-Yv-s6e" firstAttribute="trailing" secondItem="pXf-sT-p3w" secondAttribute="trailing" id="eQ2-5y-ZNF"/>
-                            <constraint firstItem="EgR-Yv-s6e" firstAttribute="top" secondItem="cKz-y6-tQX" secondAttribute="bottom" constant="523" id="gtZ-4A-6aU"/>
-                            <constraint firstItem="pXf-sT-p3w" firstAttribute="bottom" secondItem="NTR-yh-B4c" secondAttribute="top" constant="-31" id="uhD-Zk-6Li"/>
+                            <constraint firstItem="7au-Yc-Oqc" firstAttribute="leading" secondItem="fu9-Tt-Vn0" secondAttribute="leadingMargin" id="BMd-If-Pv2"/>
+                            <constraint firstItem="EgR-Yv-s6e" firstAttribute="top" secondItem="pXf-sT-p3w" secondAttribute="bottom" id="BuE-50-PfL"/>
+                            <constraint firstItem="k8Z-fM-IRg" firstAttribute="centerX" secondItem="7au-Yc-Oqc" secondAttribute="centerX" id="Msy-5o-cFd"/>
+                            <constraint firstItem="pXf-sT-p3w" firstAttribute="leading" secondItem="EgR-Yv-s6e" secondAttribute="leading" id="Wyw-Ju-UYq"/>
+                            <constraint firstItem="k8Z-fM-IRg" firstAttribute="top" secondItem="fu9-Tt-Vn0" secondAttribute="topMargin" constant="41" id="XFa-7V-Rn3"/>
+                            <constraint firstItem="7au-Yc-Oqc" firstAttribute="top" secondItem="cKz-y6-tQX" secondAttribute="bottom" constant="8" symbolic="YES" id="Y6l-by-QWB"/>
+                            <constraint firstItem="k8Z-fM-IRg" firstAttribute="leading" secondItem="pXf-sT-p3w" secondAttribute="leading" id="ifz-xZ-ld6"/>
+                            <constraint firstAttribute="trailing" secondItem="k8Z-fM-IRg" secondAttribute="trailing" id="u7k-Ga-fJC"/>
+                            <constraint firstItem="k8Z-fM-IRg" firstAttribute="leading" secondItem="fu9-Tt-Vn0" secondAttribute="leading" id="ukq-i9-Wva"/>
+                            <constraint firstItem="EgR-Yv-s6e" firstAttribute="top" secondItem="k8Z-fM-IRg" secondAttribute="bottom" constant="32" id="uyh-1u-thK"/>
+                            <constraint firstItem="EgR-Yv-s6e" firstAttribute="bottom" secondItem="NTR-yh-B4c" secondAttribute="top" id="vdx-cY-fl4"/>
+                            <constraint firstItem="pXf-sT-p3w" firstAttribute="trailing" secondItem="EgR-Yv-s6e" secondAttribute="trailing" id="wfX-7f-eiX"/>
+                            <constraint firstItem="k8Z-fM-IRg" firstAttribute="trailing" secondItem="pXf-sT-p3w" secondAttribute="trailing" id="yYf-Ho-gIm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Napló" id="pqH-wg-q7a">
